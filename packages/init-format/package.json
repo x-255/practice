@@ -1,0 +1,11 @@
+{
+  "name": "init-format",
+  "version": "1.0.0",
+  "description": "",
+  "bin": {
+    "initf": "bin/www"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
