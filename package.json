@@ -8,7 +8,10 @@
     "dev": "cd packages/mini-vue && npm run dev"
   },
   "keywords": [],
-  "author": "",
+  "author": {
+    "name": "X贰伍伍",
+    "email": "ouhuangff@163.com"
+  },
   "license": "ISC",
   "devDependencies": {
     "@types/node": "^16.11.6"
