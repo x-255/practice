@@ -1,35 +1,25 @@
 import { defineConfig } from 'rollup'
-import path from 'path'
-import pkg from './package.json'
-import typescript from 'rollup-plugin-typescript2'
+import babel from '@rollup/plugin-babel'
 import nodeResolve from '@rollup/plugin-node-resolve'
-import replace from '@rollup/plugin-replace'
-
-const resolve = (...args) => path.resolve(__dirname, ...args)
+import pkg from './package.json'
 
 export default defineConfig({
-  input: resolve('src/index.ts'),
+  input: 'src/index.js',
   output: [
     {
-      name: pkg.name,
       file: pkg.main,
       format: 'cjs',
-      sourcemap: true,
     },
     {
-      name: pkg.name,
       file: pkg.module,
       format: 'es',
+    },
+    {
+      file: pkg.browser,
+      format: 'iife',
       sourcemap: true,
+      name: 'miniVue',
     },
   ],
-  plugins: [
-    typescript(),
-    nodeResolve({
-      extensions: ['.js', '.ts'],
-    }),
-    replace({
-      'process.env.NODE_ENV': 'development',
-    }),
-  ],
+  plugins: [nodeResolve(), babel()],
 })
