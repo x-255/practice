@@ -7,10 +7,28 @@
     <title>Document</title>
   </head>
   <body>
+    <div id="app"></div>
+    <p id="pp"></p>
+
     <script src="../dist/index.iife.js"></script>
 
     <script>
-      console.log(miniVue)
+      const { reactive, effect } = miniVue
+      const state = reactive({ count: 0, aa: { bb: 'xxxx' } })
+
+      effect(() => {
+        const app = document.querySelector('#app')
+        app.textContent = `count: ${state.count}`
+
+        effect(() => {
+          const pp = document.querySelector('#pp')
+          pp.textContent = state.aa.bb
+        })
+      })
+
+      setTimeout(() => {
+        state.aa.bb = 'yyy'
+      }, 500)
     </script>
   </body>
 </html>
