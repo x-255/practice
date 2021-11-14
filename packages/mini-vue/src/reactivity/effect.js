@@ -1,3 +1,7 @@
+import { runMain } from 'module'
+import { isArray, isInt } from '../shared'
+import { TriggerOpTypes } from './operations'
+
 const targetMap = new WeakMap()
 const effectStack = []
 let activeEffect = null
@@ -48,7 +52,36 @@ export function track(target, key) {
       activeEffect.deps.push(dep)
     }
   }
-  console.log(targetMap)
 }
 
-export function trigger(target, key, newValue, oldValue) {}
+export function trigger(target, type, key, value, oldValue) {
+  const depsMap = targetMap.get(target)
+  if (!depsMap) return
+
+  function run(dep) {
+    if (dep) dep.forEach((effect) => effect())
+  }
+
+  if (key === 'length' && isArray(target)) {
+    depsMap.forEach((dep, key) => {
+      if (key === 'length' || key >= value) {
+        run(dep)
+      }
+    })
+  } else {
+    if (key !== undefined) {
+      run(depsMap.get(key))
+    }
+
+    switch (type) {
+      case TriggerOpTypes.ADD:
+        if (isArray(target) && isInt(key)) {
+          run(depsMap.get('length'))
+        }
+        break
+
+      default:
+        break
+    }
+  }
+}

@@ -14,7 +14,7 @@
 
     <script>
       const { reactive, effect } = miniVue
-      const state = reactive({ count: 0, aa: { bb: 'xxxx' } })
+      /* const state = reactive({ count: 0, aa: { bb: 'xxxx' } })
 
       effect(() => {
         const app = document.querySelector('#app')
@@ -27,8 +27,19 @@
       })
 
       setTimeout(() => {
+        state.count++
         state.aa.bb = 'yyy'
-      }, 500)
+      }, 1000) */
+
+      const state = reactive([1, 2, 3])
+      effect(() => {
+        const app = document.querySelector('#app')
+        app.innerHTML = state
+      })
+
+      setTimeout(() => {
+        state.pop()
+      }, 1000)
     </script>
   </body>
 </html>

@@ -1,6 +1,7 @@
 import { reactive } from './reactive'
 import { hasOwn, isArray, isInt, isObject, isSymbol } from '../shared'
 import { track, trigger } from './effect'
+import { TriggerOpTypes } from './operations'
 
 const createGetter = () => (target, key, receiver) => {
   const value = Reflect.get(target, key, receiver)
@@ -21,14 +22,10 @@ const createSetter = () => (target, key, value, receiver) => {
 
   const res = Reflect.set(target, key, value, receiver)
 
-  if (oldValue !== value) {
-    trigger(target, key, value, oldValue)
-  }
-
   if (!hadKey) {
-    console.log('add')
+    trigger(target, TriggerOpTypes.ADD, key, value)
   } else {
-    console.log('edit')
+    trigger(target, TriggerOpTypes.SET, key, value, oldValue)
   }
 
   return res
