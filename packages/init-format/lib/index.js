@@ -1,6 +1,5 @@
-const fs = require('fs')
+const fs = require('fs/promises')
 const path = require('path')
-const { promisify } = require('util')
 
 const prettierConfig = {
   semi: false,
@@ -14,25 +13,32 @@ const vsConfig = {
   'editor.formatOnSave': true,
 }
 
-const getPath = (file) => path.resolve(process.cwd(), file)
+const stringify = (val) => JSON.stringify(val, null, 2)
 
-const hasFileInCwd = async (file) => {
-  const path = getPath(file)
-  const accessP = promisify(fs.access)
-  let has = await accessP(path, fs.constants.F_OK)
-  return has
+const resolveCwdPath = (...args) => path.resolve(process.cwd(), ...args)
+
+const writeJsonFile = (path, json) => fs.writeFile(path, stringify(json))
+
+function createPritterConfig() {
+  const configPath = resolveCwdPath('.prettierrc')
+  writeJsonFile(configPath, prettierConfig)
 }
 
-const createFile = (file, content) => {
-  hasFileInCwd(file).catch(() => {
-    const pathArr = file.replace(process.cwd() + '/', '').split('/')
-    pathArr.forEach((p, i) => {
-      let path = getPath(pathArr.slice(0, ++i).join('/'))
-      if (i === pathArr.length) fs.writeFileSync(path, content)
-      else fs.mkdirSync(path)
-    })
-  })
+async function createVsConfig() {
+  const dir = resolveCwdPath('.vscode')
+  await fs.access(dir).catch(() => fs.mkdir(dir))
+  const configPath = path.resolve(dir, 'settings.json')
+  let content = vsConfig
+  try {
+    await fs.access(configPath)
+    let oldContent = await fs.readFile(configPath, 'utf-8')
+    if (oldContent) {
+      oldContent = JSON.parse(oldContent)
+      content = { ...oldContent, ...vsConfig }
+    }
+  } catch (err) {}
+  writeJsonFile(configPath, content)
 }
 
-createFile('.prettierrc', JSON.stringify(prettierConfig))
-createFile('.vscode/settings.json', JSON.stringify(vsConfig))
+createPritterConfig()
+createVsConfig()
