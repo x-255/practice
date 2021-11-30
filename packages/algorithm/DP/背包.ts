@@ -2,7 +2,7 @@ const goods = [
   { name: '吉他', weight: 1, cost: 1500 },
   { name: '音响', weight: 4, cost: 3000 },
   { name: '笔记本电脑', weight: 3, cost: 2000 },
-  // { name: 'iphone', weight: 1, cost: 2000 },
+  { name: 'iphone', weight: 1, cost: 2000 },
 ]
 
 /**
@@ -11,28 +11,31 @@ const goods = [
  * @returns 最大价值
  */
 function getMaxCost(arr: typeof goods, maxW: number) {
-  let max = 0
-  const table: number[][] = []
+  const len = arr.length
+  const cell: number[][] = []
 
-  for (let i = 0; i < arr.length; i++) {
-    const { weight, cost } = arr[i]
-    for (let j = 1; j <= maxW; j++) {
-      const prevRow = table[i - 1]
-      const prev = prevRow?.[j] ?? 0
-      const curr = cost + prevRow?.[maxW - j] ?? 0
-      const _max = Math.max(prev, curr)
-
-      if (!table[i]) {
-        table[i] = [0]
-      }
-      table[i][j] = _max
+  for (let i = 0; i < len; i++) {
+    const { weight: w, cost: c } = arr[i]
+    const row = cell[i - 1]
+    if (!cell[i]) {
+      cell[i] = []
     }
-
-    max = Math.max(...table[table.length - 1])
+    for (let j = 0; j < maxW; j++) {
+      const pw = j + 1
+      let max
+      if (w > pw) {
+        max = i === 0 ? 0 : row[j]
+      } else if (w === pw) {
+        max = i === 0 ? c : Math.max(c, row[j])
+      } else {
+        max = i === 0 ? c : Math.max(c + row[j - w] ?? 0, row[j])
+      }
+      cell[i][j] = max
+      if (i === len - 1 && pw === maxW) {
+        return max
+      }
+    }
   }
-  console.log(`table====`, table)
-
-  return max
 }
 
 console.log(getMaxCost(goods, 4))
