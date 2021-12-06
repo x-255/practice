@@ -46,25 +46,43 @@
  */
 
 // @lc code=start
-function sortArray(nums: number[]): number[] {
-  const len = nums.length
-
-  if (len < 2) {
+function sortArray(nums: number[], lo = 0, hi = nums.length - 1): number[] {
+  if (lo >= hi) {
     return nums
   }
-  const m = nums[0],
-    left: number[] = [],
-    right: number[] = []
 
-  for (let i = 1; i < len; i++) {
-    const x = nums[i]
-    if (x < m) {
-      left.push(x)
-    } else {
-      right.push(x)
-    }
-  }
+  const j = partation(nums, lo, hi)
+  sortArray(nums, lo, j - 1)
+  sortArray(nums, j + 1, hi)
 
-  return [...sortArray(left), m, ...sortArray(right)]
+  return nums
 }
+
+function partation(nums: number[], lo: number, hi: number) {
+  const v = nums[lo]
+  let i = lo,
+    j = hi + 1
+
+  while (true) {
+    while (nums[++i] < v) {
+      if (i === hi) break
+    }
+
+    while (nums[--j] > v) {
+      if (j === lo) break
+    }
+
+    if (i >= j) break
+
+    exec(nums, i, j)
+  }
+  exec(nums, lo, j)
+
+  return j
+}
+
+function exec(arr: any[], i: number, j: number) {
+  ;[arr[i], arr[j]] = [arr[j], arr[i]]
+}
+
 // @lc code=end
