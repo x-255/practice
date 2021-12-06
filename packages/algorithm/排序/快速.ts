@@ -16,27 +16,48 @@ const shuffle = ([...arr]: number[]) => {
 
 const createChaoticArr: (x: number) => number[] = compose(shuffle, createArr)
 
-function sort(arr: number[]): number[] {
-  const len = arr.length
-
-  if (len < 2) {
-    return arr
-  }
-  const m = arr[0],
-    left: number[] = [],
-    right: number[] = []
-
-  for (let i = 1; i < len; i++) {
-    const x = arr[i]
-    if (x < m) {
-      left.push(x)
-    } else {
-      right.push(x)
-    }
-  }
-
-  return [...sort(left), m, ...sort(right)]
+const exec = (arr: any[], i: number, j: number) => {
+  ;[arr[i], arr[j]] = [arr[j], arr[i]]
 }
 
-console.log(sort(createChaoticArr(20)))
+function sort(arr: number[], lo = 0, hi = arr.length - 1) {
+  if (hi <= lo) {
+    return
+  }
+
+  const j = partition(arr, lo, hi)
+  sort(arr, lo, j - 1)
+  sort(arr, j + 1, hi)
+}
+
+function partition(arr: number[], lo: number, hi: number) {
+  const v = arr[lo]
+  let i = lo,
+    j = hi + 1
+
+  while (true) {
+    while (arr[++i] < v) {
+      if (i === hi) {
+        break
+      }
+    }
+
+    while (v < arr[--j]) {
+      if (j === lo) {
+        break
+      }
+    }
+
+    if (i >= j) {
+      break
+    }
+
+    exec(arr, i, j)
+  }
+
+  exec(arr, lo, j)
+
+  return j
+}
+
 export {}
