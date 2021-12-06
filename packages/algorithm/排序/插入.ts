@@ -14,10 +14,22 @@ const shuffle = ([...arr]: number[]) => {
   return arr
 }
 
-const createChaoticArr = compose(shuffle, createArr)
+const createChaoticArr: (x: number) => number[] = compose(shuffle, createArr)
 
 const exec = (arr: any[], i: number, j: number) => {
   ;[arr[i], arr[j]] = [arr[j], arr[i]]
+}
+
+function sort([...arr]: number[]): number[] {
+  const len = arr.length
+
+  for (let i = 1; i < len; i++) {
+    for (let j = i; j > 0 && arr[j] < arr[j - 1]; j--) {
+      exec(arr, j, j - 1)
+    }
+  }
+
+  return arr
 }
 
 export {}
