@@ -36,3 +36,5 @@ function binarySearch2(arr: number[], target: number, lo = 0, hi = arr.length - 
     return m
   }
 }
+
+export {}
