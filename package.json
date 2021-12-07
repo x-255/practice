@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev:framework": "cd packages/mini-framework && npm run dev",
-    "dev": "cd packages/mini-vue && npm run dev",
+    "dev:fra": "cd packages/mini-framework && npm run dev",
+    "dev:vue": "cd packages/mini-vue && npm run dev",
+    "dev:alg": "cd packages/algorithm && npm run dev",
     "preinstall": "npx -y only-allow pnpm"
   },
   "keywords": [],
@@ -17,6 +18,7 @@
   "devDependencies": {
     "@types/node": "^16.11.6",
     "only-allow": "^1.0.0",
+    "parcel-bundler": "^1.12.5",
     "rimraf": "^3.0.2",
     "ts-node": "^10.4.0",
     "typescript": "^4.4.4"

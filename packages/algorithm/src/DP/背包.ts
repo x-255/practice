@@ -37,5 +37,3 @@ function getMaxCost(arr: typeof goods, maxW: number) {
     }
   }
 }
-
-console.log(getMaxCost(goods, 4))

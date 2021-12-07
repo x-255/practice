@@ -1,7 +1,5 @@
-const createArr = (n: number) => [...Array(n).keys()]
-
 // 循环版
-function binarySearch(arr: number[], target: number) {
+export function binarySearch(arr: number[], target: number) {
   let lo = 0,
     hi = arr.length - 1
 
@@ -36,5 +34,3 @@ function binarySearch2(arr: number[], target: number, lo = 0, hi = arr.length - 
     return m
   }
 }
-
-export {}
