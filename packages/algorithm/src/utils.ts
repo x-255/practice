@@ -1,11 +1,13 @@
-type Last<T = any[]> = T extends [...infer I, infer L] ? L : never
+type Compose<T extends AnyFuncion[]> = ReturnType<
+  (...fns: T) => T extends [...AnyFuncion[], infer L] ? L : AnyFuncion
+>
 
-export const compose = <T extends Function>(...fns: Function[]) =>
+export const compose = <T extends AnyFuncion[]>(...fns: readonly [...T]) =>
   fns.reduce(
     (pre, fn) =>
       (...args: any[]) =>
-        pre(fn(...args)) as Last<typeof fns>,
-  ) as T
+        pre(fn(...args)),
+  ) as Compose<T>
 
 export const createArr = (n: number) => [...Array(n).keys()]
 
@@ -18,7 +20,7 @@ export const shuffle = ([...arr]: number[]) => {
   return arr
 }
 
-export const createChaoticArr = compose<typeof createArr>(shuffle, createArr)
+export const createChaoticArr = compose(shuffle, createArr)
 
 export const exec = (arr: any[], i: number, j: number) => {
   ;[arr[i], arr[j]] = [arr[j], arr[i]]
