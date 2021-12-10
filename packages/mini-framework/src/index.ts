@@ -3,7 +3,7 @@ import type { VNode } from 'snabbdom'
 import { IVNode } from './elements'
 import { access } from 'fs'
 
-export type Methods = Record<string, AnyFuncion>
+export type Methods = Record<string, AnyFunction>
 interface ComponentProps {
   template: (props: AnyObject) => IVNode
   methods: Methods

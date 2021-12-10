@@ -1,13 +1,19 @@
-type Compose<T extends AnyFuncion[]> = ReturnType<
-  (...fns: T) => T extends [...AnyFuncion[], infer L] ? L : AnyFuncion
->
+type Compose = <T extends AnyFunction[]>(
+  ...fns: T
+) => T extends [infer L, ...infer M, infer F]
+  ? F extends AnyFunction
+    ? L extends AnyFunction
+      ? (...args: Parameters<F>) => ReturnType<L>
+      : never
+    : never
+  : T[0]
 
-export const compose = <T extends AnyFuncion[]>(...fns: readonly [...T]) =>
+export const compose: Compose = (...fns) =>
   fns.reduce(
     (pre, fn) =>
       (...args: any[]) =>
         pre(fn(...args)),
-  ) as Compose<T>
+  ) as any
 
 export const createArr = (n: number) => [...Array(n).keys()]
 
