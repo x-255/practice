@@ -6,11 +6,11 @@
  * https://leetcode-cn.com/problems/design-linked-list/description/
  *
  * algorithms
- * Medium (32.46%)
- * Likes:    326
+ * Medium (32.45%)
+ * Likes:    327
  * Dislikes: 0
- * Total Accepted:    74.7K
- * Total Submissions: 230.1K
+ * Total Accepted:    75.8K
+ * Total Submissions: 233K
  * Testcase Example:  '["MyLinkedList","addAtHead","addAtTail","addAtIndex","get","deleteAtIndex","get"]\n' +
   '[[],[1],[3],[1,2],[1],[1],[1]]'
  *
@@ -55,74 +55,79 @@
 
 // @lc code=start
 class Node {
-  public next: Node | null = null
-  public prev: Node | null = null
-  public constructor(public value: number) {}
+  constructor(
+    public value: number,
+    public next: Node | null = null,
+    public prev: Node | null = null,
+  ) {}
 }
 class MyLinkedList {
   private root = new Node(-1)
   private size = 0
-  private tail: Node | null = null
 
   private _get(index: number): Node | null {
-    let temp = this.root
+    if (index < 0 || index > this.size) {
+      return null
+    }
 
-    while (index--) {
-      if (!temp.next) {
+    let temp: Node | null = this.root
+
+    while (index-- >= 0) {
+      if (!temp) {
         return null
       }
       temp = temp.next
     }
-
     return temp
   }
 
   get(index: number): number {
-    return index < 0 || index > this.size ? -1 : this._get(index)!.value
+    const node = this._get(index)
+    return node?.value ?? -1
   }
 
   addAtHead(val: number): void {
     const old = this.root.next
-    const cur = new Node(val)
-    cur.prev = this.root
-    cur.next = old
-    old && (old.prev = cur)
-    this.root.next = cur
-    this.size++
-    if (!this.tail) {
-      this.tail = cur
+    const h = new Node(val, old, this.root)
+    this.root.next = h
+    if (old) {
+      old.prev = h
     }
+    this.size++
   }
 
   addAtTail(val: number): void {
-    const old = this._get(this.size)!
-    const tail = new Node(val)
-    old.next = tail
-    tail.prev = old
+    const old = this._get(this.size - 1) ?? this.root
+    const t = new Node(val, null, old)
+    old.next = t
     this.size++
   }
 
   addAtIndex(index: number, val: number): void {
-    if (index < 0) {
-      this.addAtHead(val)
+    const { size } = this
+    if (index === size) {
+      return this.addAtTail(val)
+    } else if (index > size) {
       return
+    } else if (index < 0) {
+      return this.addAtHead(val)
     }
 
-    const next = this._get(index)
-    if (next) {
-      const cur = new Node(val)
-      cur.next = next
-      cur.prev = next.prev
-      next.prev!.next = cur
-      this.size++
-    }
+    const n = this._get(index)!
+    const p = n.prev!
+    const c = new Node(val, n, p)
+    n.prev = c
+    p.next = c
+    this.size++
   }
 
   deleteAtIndex(index: number): void {
-    if (index >= 0 && index <= this.size) {
-      const del = this._get(index)!
-      del.prev!.next = del.next
-      del.prev = del.prev
+    const c = this._get(index)
+    if (c) {
+      const p = c.prev!
+      const n = c.next
+      p.next = n
+      n && (n.prev = p)
       this.size--
     }
   }
@@ -138,12 +143,3 @@ class MyLinkedList {
  * obj.deleteAtIndex(index)
  */
 // @lc code=end
-
-const linkedList = new MyLinkedList()
-linkedList.addAtHead(1)
-linkedList.addAtTail(3)
-// linkedList.addAtIndex(1, 2) //链表变为1-> 2-> 3
-// linkedList.get(1) //返回2
-// linkedList.deleteAtIndex(1) //现在链表是1-> 3
-// linkedList.get(1)
-console.log(linkedList)
