@@ -143,3 +143,4 @@ class MyLinkedList {
  * obj.deleteAtIndex(index)
  */
 // @lc code=end
+export {}
