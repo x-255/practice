@@ -62,13 +62,14 @@
  * }
  */
 
-//@ts-nocheck
+// @ts-ignore
 function levelOrder(root: Node | null): number[][] {
   if (!root) {
     return []
   }
 
   const res: number[][] = []
+  // @ts-ignore
   let queue: Node[] = [root]
 
   while (queue.length) {
@@ -87,3 +88,4 @@ function levelOrder(root: Node | null): number[][] {
   return res
 }
 // @lc code=end
+export {}
