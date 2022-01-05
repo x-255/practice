@@ -1,3 +1,3 @@
-type AnyObject = Record<string | number | symbol, any>
+type AnyObject = Record<keyof any, any>
 
 type AnyFunction = (...args: any[]) => any

@@ -9,11 +9,11 @@ type Compose = <T extends AnyFunction[]>(
   : T[0]
 
 export const compose: Compose = (...fns) =>
-  fns.reduce(
-    (pre, fn) =>
-      (...args: any[]) =>
-        pre(fn(...args)),
-  ) as any
+    fns.reduce(
+      (pre, fn) =>
+        (...args: any[]) =>
+          pre(fn(...args)),
+    ) as any
 
 export const createArr = (n: number) => [...Array(n).keys()]
 
