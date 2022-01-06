@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev:fra": "cd packages/mini-framework && npm run dev",
-    "dev:vue": "cd packages/mini-vue && npm run dev",
-    "dev:alg": "cd packages/algorithm && npm run dev",
+    "dev:fra": "cd packages/mini-framework && npm run dev 8011",
+    "dev:vue": "cd packages/mini-vue && npm run dev 8022",
+    "dev:alg": "cd packages/algorithm && npm run dev 8033",
     "preinstall": "npx -y only-allow pnpm"
   },
   "keywords": [],
