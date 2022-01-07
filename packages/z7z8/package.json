@@ -1,0 +1,12 @@
+{
+  "name": "@practice/z7z8",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "parcel index.html --port"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

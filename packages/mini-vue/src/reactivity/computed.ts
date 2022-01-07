@@ -53,8 +53,8 @@ class ComputedRefImpl<T> {
   get value() {
     track(this, TrackOpTypes.GET, 'value')
     if (this._dirty) {
-      this._dirty = false
       this._value = this.effect()
+      this._dirty = false
     }
     return this._value
   }
