@@ -1,5 +1,5 @@
 interface Debounced {
-  (fn: AnyFunction, wait: number, immediate: boolean): void
+  (...args: any[]): any
   cancel(): void
 }
 
