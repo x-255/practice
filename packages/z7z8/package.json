@@ -4,9 +4,17 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "parcel index.html --port"
+    "dev": "parcel index.html --port",
+    "test:promise": "tsc src/promise.ts -m commonjs && promises-aplus-tests src/promise.js"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.16.7",
+    "@babel/plugin-transform-runtime": "^7.16.7",
+    "@babel/preset-env": "^7.16.7",
+    "@practice/z7z8": "workspace:^1.0.0",
+    "promises-aplus-tests": "^2.1.2"
+  }
 }

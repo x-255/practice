@@ -1,10 +1,12 @@
+export {}
+
 interface Debounced {
   (...args: any[]): any
   cancel(): void
 }
 
 function debounce(fn: AnyFunction, wait = 1000, immediate = false) {
-  let timer: number | undefined
+  let timer: number | null = null
 
   function debounced(this: any, ...args: any[]) {
     const run = fn.bind(this, args)
@@ -13,13 +15,18 @@ function debounce(fn: AnyFunction, wait = 1000, immediate = false) {
       run()
     }
 
-    clearTimeout(timer)
+    if (timer) {
+      clearTimeout(timer)
+    }
+
     timer = window.setTimeout(run, wait)
   }
 
   ;(debounced as Debounced).cancel = () => {
-    clearTimeout(timer)
-    timer = undefined
+    if (timer) {
+      clearTimeout(timer)
+      timer = null
+    }
   }
 
   return debounced as Debounced
