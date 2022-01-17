@@ -4,11 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "preinstall": "npx -y only-allow pnpm",
+    "gen": "zx scripts/gen/index.mjs",
     "dev:fra": "cd packages/mini-framework && npm run dev 8011",
     "dev:vue": "cd packages/mini-vue && npm run dev 8022",
     "dev:alg": "cd packages/algorithm && npm run dev 8033",
-    "dev:zz": "cd packages/z7z8 && npm run dev 8078",
-    "preinstall": "npx -y only-allow pnpm"
+    "dev:ax": "cd packages/mini-axios && npm run dev 8044",
+    "dev:zz": "cd packages/z7z8 && npm run dev 8078"
   },
   "keywords": [],
   "author": {
@@ -17,13 +19,17 @@
   },
   "license": "ISC",
   "devDependencies": {
-    "@practice/z7z8": "workspace:^1.0.0",
+    "@babel/core": "^7.16.7",
+    "@babel/plugin-transform-runtime": "^7.16.8",
+    "@babel/preset-env": "^7.16.8",
     "@types/node": "^16.11.6",
+    "inquirer": "^8.2.0",
     "only-allow": "^1.0.0",
     "parcel-bundler": "^1.12.5",
     "promises-aplus-tests": "^2.1.2",
     "rimraf": "^3.0.2",
     "ts-node": "^10.4.0",
-    "typescript": "^4.4.4"
+    "typescript": "^4.4.4",
+    "zx": "^4.3.0"
   }
 }

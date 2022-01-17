@@ -1,5 +1,5 @@
 {
-  "name": "@practice/algorithm",
+  "name": "@practice/mini-axios",
   "version": "1.0.0",
   "description": "",
   "main": "index.ts",
@@ -12,7 +12,6 @@
   "devDependencies": {
     "@babel/core": "^7.16.7",
     "@babel/plugin-transform-runtime": "^7.16.8",
-    "@babel/preset-env": "^7.16.8",
-    "promises-aplus-tests": "^2.1.2"
+    "@babel/preset-env": "^7.16.8"
   }
 }
