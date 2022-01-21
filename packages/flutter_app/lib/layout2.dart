@@ -1,3 +1,7 @@
+/*
+ * @Description: Flutter 布局基础教程
+ * @LastEditTime: 2022-01-21 11:13:23
+ */
 import 'package:flutter/material.dart';
 
 class BlueBox extends StatelessWidget {
@@ -57,8 +61,8 @@ class RowBox extends StatelessWidget {
   }
 }
 
-class McFlutter extends StatelessWidget {
-  const McFlutter({Key? key}) : super(key: key);
+class MyMcFlutter extends StatelessWidget {
+  const MyMcFlutter({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -139,6 +143,71 @@ class McFlutter extends StatelessWidget {
         padding: const EdgeInsets.all(20.0),
         width: 400,
       ),
+    );
+  }
+}
+
+class McFlutter extends StatelessWidget {
+  const McFlutter({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+        children: [
+          _header(context),
+          const SizedBox(
+            height: 8,
+          ),
+          _contact(),
+          const SizedBox(
+            height: 16,
+          ),
+          _icons()
+        ],
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.stretch);
+  }
+
+  Widget _header(BuildContext ctx) {
+    return Row(
+      children: [
+        const Padding(
+            child: Icon(
+              Icons.account_circle,
+              size: 50,
+            ),
+            padding: EdgeInsets.all(8)),
+        Column(
+          children: [
+            Text(
+              'Flutter McFlutter',
+              style: Theme.of(ctx).textTheme.headline5,
+            ),
+            const Text('Experienced App Developer')
+          ],
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+        )
+      ],
+    );
+  }
+
+  Widget _contact() {
+    return Row(
+      children: const [Text('123 Main Street'), Text('(415) 555-0198')],
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    );
+  }
+
+  Widget _icons() {
+    return Row(
+      children: const [
+        Icon(Icons.accessibility),
+        Icon(Icons.timer),
+        Icon(Icons.phone_android),
+        Icon(Icons.phone_iphone),
+      ],
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
     );
   }
 }

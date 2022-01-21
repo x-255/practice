@@ -3,8 +3,7 @@
 // found in the LICENSE file.
 
 import 'package:flutter/material.dart';
-import 'package:flutter_app/layout.dart';
-import 'package:flutter_app/layout2.dart';
+import 'package:flutter_app/state.dart';
 
 void main() => runApp(const App());
 
@@ -17,7 +16,7 @@ class App extends StatelessWidget {
         title: 'Startup Name Generator',
         home: Scaffold(
           appBar: AppBar(title: const Text('flutter app')),
-          body: const McFlutter(),
+          body: const TapboxBParent(),
         ));
   }
 }
