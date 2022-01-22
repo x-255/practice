@@ -16,7 +16,7 @@ class App extends StatelessWidget {
         title: 'Startup Name Generator',
         home: Scaffold(
           appBar: AppBar(title: const Text('flutter app')),
-          body: const TapboxBParent(),
+          body: const TapboxCParent(),
         ));
   }
 }
