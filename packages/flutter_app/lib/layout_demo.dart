@@ -1,6 +1,6 @@
 /*
  * @Description: 布局+交互
- * @LastEditTime: 2022-01-21 16:31:06
+ * @LastEditTime: 2022-01-24 10:41:18
  */
 
 import 'package:flutter/material.dart';
@@ -37,14 +37,7 @@ class LayoutDemo extends StatelessWidget {
               )
             ],
           )),
-          Icon(
-            Icons.star_border,
-            color: hex2color('#f34532'),
-          ),
-          Text(
-            '41',
-            style: TextStyle(color: Colors.redAccent[600]),
-          )
+          const FavoriteWidget()
         ],
       ),
     );
@@ -98,3 +91,46 @@ Column _createIconCol(
         )
       ],
     );
+
+class FavoriteWidget extends StatefulWidget {
+  const FavoriteWidget({Key? key}) : super(key: key);
+
+  @override
+  _FavoriteWidgetState createState() => _FavoriteWidgetState();
+}
+
+class _FavoriteWidgetState extends State<FavoriteWidget> {
+  bool _isFavorited = false;
+  int _favoriteCount = 41;
+
+  void _handleChangeFavorited() {
+    setState(() {
+      _isFavorited = !_isFavorited;
+
+      if (_isFavorited) {
+        _favoriteCount++;
+      } else {
+        _favoriteCount--;
+      }
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        IconButton(
+          icon: _isFavorited
+              ? const Icon(Icons.star)
+              : const Icon(Icons.star_border),
+          color: hex2color('#f34532'),
+          onPressed: _handleChangeFavorited,
+        ),
+        Text(
+          '$_favoriteCount',
+          style: TextStyle(color: Colors.redAccent[600]),
+        )
+      ],
+    );
+  }
+}
