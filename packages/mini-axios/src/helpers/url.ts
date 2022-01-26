@@ -1,4 +1,4 @@
-import { isArray, isDate, isObject } from './utils'
+import { isArray, isDate, isPlainObject } from './utils'
 
 /**
  * 转码URL中?后的字符串，去掉特殊符号
@@ -35,7 +35,7 @@ export function bulidURL(url: string, params?: any) {
     } else {
       if (isDate(val)) {
         val = val.toISOString()
-      } else if (isObject(val)) {
+      } else if (isPlainObject(val)) {
         val = JSON.stringify(val)
       }
 
@@ -60,9 +60,3 @@ export function bulidURL(url: string, params?: any) {
 
   return url
 }
-
-console.log(
-  bulidURL('/get?foo=bar', {
-    bar: 'baz',
-  }),
-)

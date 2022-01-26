@@ -1,7 +1,26 @@
-export const isObject = (val: unknown): val is AnyObject => val !== null && typeof val === 'object'
+const objectToString = Object.prototype.toString
 
-const toString = Object.prototype.toString.call
+export const isObject = (val: unknown): val is AnyObject =>
+  val !== null && typeof val === 'object'
+
+export const isPlainObject = (val: unknown): val is object =>
+  objectToString.call(val) === '[object Object]'
+
+export const isString = (val: unknown): val is string => typeof val === 'string'
 
 export const isDate = (val: unknown): val is Date => val instanceof Date
 
 export const isArray = Array.isArray
+
+export const CONTENT_TYPE = 'Content-Type'
+
+export const isContentType = (val: unknown) =>
+  isString(val) && val.toUpperCase() === CONTENT_TYPE.toUpperCase()
+
+/** 将原始对象的可枚举属性依次合并到目标对象上 */
+export const extend = <T, U>(to: T, from: U) => {
+  for (const key in from) {
+    ;(to as T & U)[key] = from[key] as any
+  }
+  return to as T & U
+}
