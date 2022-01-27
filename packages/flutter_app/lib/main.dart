@@ -3,6 +3,7 @@
 // found in the LICENSE file.
 
 import 'package:flutter/material.dart';
+import 'package:flutter_app/http.dart';
 
 void main() => runApp(const App());
 
@@ -45,7 +46,7 @@ class App extends StatelessWidget {
         title: 'Startup Name Generator',
         home: Scaffold(
           appBar: AppBar(title: const Text('flutter app')),
-          body: const Text('x'),
+          body: const MyHttp2(),
         ));
   }
 }
