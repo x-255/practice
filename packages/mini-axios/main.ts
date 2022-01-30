@@ -3,40 +3,39 @@ import axios, { AxiosError } from './src'
 const url = (path: string) =>
   'https://www.fastmock.site/mock/c93969f677e66693cb4e1fd6b84b20a7/mock' + path
 
-axios
-  .get(url('/get'), {
-    headers: {
-      'response-status': 500,
-    },
-  })
-  .catch((err) => {
-    console.log('err===')
-    console.dir(err)
-  })
+/* axios.interceptors.request.use((config) => {
+  config.headers.test += '1'
+  return config
+})
+axios.interceptors.request.use((config) => {
+  config.headers.test += '2'
+  return config
+})
+axios.interceptors.request.use((config) => {
+  console.log(`config====`, config)
+  config.headers.test += '3'
+  return config
+})
+
+axios.interceptors.response.use((res) => {
+  res.data.data += '1'
+  return res
+})
+let interceptor = axios.interceptors.response.use((res) => {
+  res.data.data += '2'
+  return res
+})
+axios.interceptors.response.use((res) => {
+  res.data.data += '3'
+  return res
+})
+
+axios.interceptors.response.eject(interceptor) */
 
 axios
-  .get(url('/get'), {
-    params: {
-      a: 111,
-      b: 'bbb',
-      c: [1, 2],
-    },
+  .post(url('/post'), {
+    headers: { test: 'test' },
   })
-  .then((gr) => {
-    console.log(`gr====`, gr)
-  })
-
-axios
-  .post(
-    url('/post'),
-    {
-      a: 1,
-      b: [3, 4],
-    },
-    {
-      method: 'post',
-    },
-  )
-  .then((pr) => {
-    console.log(`pr====`, pr)
+  .then((res) => {
+    console.log(res.data)
   })
