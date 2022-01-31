@@ -1,4 +1,4 @@
-import { isArray, isDate, isPlainObject } from './utils'
+import { isDate, isObject, isURLSearchParams } from './utils'
 
 /**
  * 转码URL中?后的字符串，去掉特殊符号
@@ -15,47 +15,67 @@ const encode = (val: string) =>
     .replace(/%5B/gi, '[')
     .replace(/%5D/gi, ']')
 
-export function bulidURL(url: string, params?: any) {
+export function bulidURL(
+  url: string,
+  params?: any,
+  paramsSerializer?: (params: any) => string,
+) {
+  // 如果params为空，直接返回原始url
   if (!params) {
     return url
   }
 
-  const parts: string[] = []
+  // 如果url中有哈希标记，则直接返回原始url
+  if (url.includes('#')) {
+    const markIndex = url.indexOf('#')
+    url = url.slice(0, markIndex)
+    return url
+  }
 
-  Object.entries(params).forEach(([key, val]) => {
-    if (val == null) {
-      return
-    }
+  let serializedParams
+  if (paramsSerializer) {
+    serializedParams = paramsSerializer(params)
+  } else if (isURLSearchParams(params)) {
+    serializedParams = params.toString()
+  } else {
+    // 定义键值对数组，用于最后拼接url，将params中的键值对进行处理最终放入parts中，
+    // parts最后应该为['key=value','a=1','b=2','c=3',...]
+    const parts: string[] = []
 
-    let values: string[]
-
-    if (isArray(val)) {
-      values = val
-      key += '[]'
-    } else {
-      if (isDate(val)) {
-        val = val.toISOString()
-      } else if (isPlainObject(val)) {
-        val = JSON.stringify(val)
+    // 遍历params中的键值对
+    Object.keys(params).forEach((key) => {
+      let val = params[key]
+      // 如果有为null或undefined的值，不处理直接跳出循环
+      if (val === null || typeof val === 'undefined') {
+        return
       }
-
-      values = [val as string]
-    }
-
-    values.forEach((val) => {
-      parts.push(`${encode(key)}=${encode(val)}`)
+      let values: string[]
+      // 如果值为数组，则将该值赋给临时数组变量values，用于下面遍历处理
+      if (Array.isArray(val)) {
+        values = val
+        key += '[]'
+      } else {
+        // 如果值不是数组，则强行将其变为数组进行处理
+        values = [val]
+      }
+      values.forEach((val) => {
+        if (isDate(val)) {
+          val = val.toISOString()
+        } else if (isObject(val)) {
+          val = JSON.stringify(val)
+        }
+        parts.push(`${encode(key)}=${encode(val)}`)
+      })
     })
-  })
-
-  let serializedParams = parts.join('&')
+    // 将parts用'&'拼接
+    serializedParams = parts.join('&')
+  }
 
   if (serializedParams) {
-    const hashIndex = url.indexOf('#')
-    if (hashIndex !== -1) {
-      url = url.slice(0, hashIndex)
-    }
-
-    url += (url.indexOf('?') === -1 ? '?' : '&') + serializedParams
+    // 判断原始url中是否有已存在的参数，即判断是否有'?',
+    // 如果有，则将处理后的键值对加'&'拼接在后面，
+    // 如果没有，则将处理后的键值对加'?'拼接在后面
+    url += (url.includes('?') ? '&' : '?') + serializedParams
   }
 
   return url

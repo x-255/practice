@@ -1,6 +1,9 @@
-import { bulidURL, transformRequest, transformResponse } from '../helpers'
-import { flattenHeaders, processHeaders } from '../helpers/headers'
+import { bulidURL } from '../helpers'
+import { combineURLs } from '../helpers/combineURLs'
+import { flattenHeaders } from '../helpers/headers'
+import isAbsoluteURL from '../helpers/utils'
 import { AxiosRequestConfig, AxiosResponse } from '../types'
+import { transform } from './transform'
 import xhr from './xhr'
 
 export function dispatchRequest(config: AxiosRequestConfig) {
@@ -9,29 +12,26 @@ export function dispatchRequest(config: AxiosRequestConfig) {
 }
 
 function processConfig(config: AxiosRequestConfig) {
+  const { data, headers, method, transformRequest } = config
   config.url = transformUrl(config)
-  const headers = transformHeaders(config)
-  config.data = transformRequestData(config)
-  config.headers = flattenHeaders(headers, config.method!)
+  config.data = transform(data, headers, transformRequest)
+  config.headers = flattenHeaders(headers, method!)
 }
 
 function transformUrl(config: AxiosRequestConfig) {
-  const { url, params } = config
-  return bulidURL(url!, params)
-}
-
-function transformRequestData(config: AxiosRequestConfig) {
-  const { data = null } = config
-  return transformRequest(data)
-}
-
-function transformHeaders(config: AxiosRequestConfig) {
-  const { headers = {}, data } = config
-  return processHeaders(headers, data)
+  let { url, params, baseURL, paramsSerializer } = config
+  if (baseURL && !isAbsoluteURL(url!)) {
+    url = combineURLs(baseURL, url)
+  }
+  return bulidURL(url!, params, paramsSerializer)
 }
 
 function transformResponseData(res: AxiosResponse) {
-  res.data = transformResponse(res.data)
-
+  const {
+    data,
+    headers,
+    config: { transformResponse },
+  } = res
+  res.data = transform(data, headers, transformResponse)
   return res
 }

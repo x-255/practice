@@ -3,39 +3,20 @@ import axios, { AxiosError } from './src'
 const url = (path: string) =>
   'https://www.fastmock.site/mock/c93969f677e66693cb4e1fd6b84b20a7/mock' + path
 
-/* axios.interceptors.request.use((config) => {
-  config.headers.test += '1'
-  return config
-})
-axios.interceptors.request.use((config) => {
-  config.headers.test += '2'
-  return config
-})
-axios.interceptors.request.use((config) => {
-  console.log(`config====`, config)
-  config.headers.test += '3'
-  return config
+const instance1 = axios.create({
+  baseURL:
+    'https://www.fastmock.site/mock/c93969f677e66693cb4e1fd6b84b20a7/mock',
+  headers: {
+    NLRX: 'Hello NLRX',
+  },
 })
 
-axios.interceptors.response.use((res) => {
-  res.data.data += '1'
-  return res
-})
-let interceptor = axios.interceptors.response.use((res) => {
-  res.data.data += '2'
-  return res
-})
-axios.interceptors.response.use((res) => {
-  res.data.data += '3'
-  return res
+const instance2 = axios.create({
+  headers: {
+    test: '123',
+  },
 })
 
-axios.interceptors.response.eject(interceptor) */
+instance1.get('/get', { params: { a: 1, b: 2 } })
 
-axios
-  .post(url('/post'), {
-    headers: { test: 'test' },
-  })
-  .then((res) => {
-    console.log(res.data)
-  })
+instance2.post(url('/post'))
