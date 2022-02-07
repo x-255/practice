@@ -3,7 +3,7 @@
 // found in the LICENSE file.
 
 import 'package:flutter/material.dart';
-import 'package:flutter_app/http.dart';
+import 'package:flutter_app/keep_alive.dart';
 
 void main() => runApp(const App());
 
@@ -43,10 +43,9 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'Startup Name Generator',
-        home: Scaffold(
-          appBar: AppBar(title: const Text('flutter app')),
-          body: const MyHttp2(),
-        ));
+      title: 'flutter demo',
+      theme: ThemeData(primarySwatch: Colors.blue),
+      home: const KeepAliveDemo(),
+    );
   }
 }
