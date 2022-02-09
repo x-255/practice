@@ -1,4 +1,5 @@
 {
   "editor.formatOnSave": true,
-  "commentTranslate.multiLineMerge": true
+  "commentTranslate.multiLineMerge": true,
+  "commentTranslate.source": "Baidu"
 }

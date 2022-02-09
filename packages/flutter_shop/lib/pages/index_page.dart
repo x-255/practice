@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_shop/pages/cart_page.dart';
 import 'package:flutter_shop/pages/category_page.dart';
 import 'package:flutter_shop/pages/home_page.dart';
@@ -22,7 +23,7 @@ class _IndexPageState extends State<IndexPage> {
         icon: Icon(CupertinoIcons.profile_circled), label: '会员中心'),
   ];
 
-  final List tabBodies = const [
+  final List tabBodies = [
     HomePage(),
     CategoryPage(),
     CartPage(),
@@ -40,6 +41,19 @@ class _IndexPageState extends State<IndexPage> {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    
+    ScreenUtil.init(
+      BoxConstraints(
+        maxWidth: size.width,
+        maxHeight: size.height
+      ),
+      designSize: const Size(750, 1334),
+      context: context,
+      minTextAdapt: true,
+      orientation: Orientation.portrait
+    );
+    
     return Scaffold(
         backgroundColor: const Color.fromRGBO(244, 245, 245, 1.0),
         bottomNavigationBar: BottomNavigationBar(
