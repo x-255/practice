@@ -1,12 +1,19 @@
+import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_shop/pages/index_page.dart';
+import 'package:flutter_shop/routers/application.dart';
+import 'package:flutter_shop/routers/routes.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  MyApp({Key? key}) : super(key: key) {
+    final router = FluroRouter();
+    Routes.configureRoutes(router);
+    Application.router = router;
+  }
 
   // This widget is the root of your application.
   @override
@@ -17,6 +24,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: ThemeData(primaryColor: Colors.pink),
         home: const IndexPage(),
+        onGenerateRoute: Application.router.generator,
       ),
     );
   }

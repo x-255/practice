@@ -32,7 +32,7 @@ class _IndexPageState extends State<IndexPage> {
     MemberPage(),
   ];
 
-  int currentIndex = 0;
+  int currentIndex = 1;
   dynamic currentPage;
 
   @override
