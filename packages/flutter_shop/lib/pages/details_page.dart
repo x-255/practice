@@ -6,6 +6,8 @@ class DetailsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(child: Text('商品ID为：${goodsId}'));
+    return Center(
+      child: Container(child: Text('商品ID为：${goodsId}')),
+    );
   }
 }

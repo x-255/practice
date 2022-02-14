@@ -149,6 +149,12 @@ class CategoryGoodsList extends StatefulWidget {
 class _CategoryGoodsListState extends State<CategoryGoodsList> {
   List<CategoryListData> list = [];
 
+  void _getGoodList() async {
+    var params = {'categoryId': '4', 'categorySubId': "", 'page': 1};
+    var res = await get('getMallGoods', params);
+    list = List.from(res).map((val) => CategoryListData.fromJson(val)).toList();
+  }
+
   @override
   void initState() {
     _getGoodList();
@@ -157,14 +163,74 @@ class _CategoryGoodsListState extends State<CategoryGoodsList> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Text('商品列表'),
+    return SizedBox(
+        width: ScreenUtil().setWidth(570),
+        height: ScreenUtil().setHeight(1000),
+        child: ListView.builder(
+          itemCount: list.length,
+          itemBuilder: (context, index) {
+            return _listWidget(index);
+          },
+        ));
+  }
+
+  Widget _goodsImage(index) {
+    return SizedBox(
+      width: ScreenUtil().setWidth(200),
+      child: Image.network(list[index].image),
     );
   }
 
-  void _getGoodList() async {
-    var params = {'categoryId': '4', 'categorySubId': "", 'page': 1};
-    var res = await get('getMallGoods', params);
-    list = List.from(res).map((val) => CategoryListData.fromJson(val)).toList();
+  Widget _goodsName(index) {
+    return Container(
+      padding: const EdgeInsets.all(5.0),
+      width: ScreenUtil().setWidth(370),
+      child: Text(
+        list[index].goodsName,
+        maxLines: 2,
+        overflow: TextOverflow.ellipsis,
+        style: TextStyle(fontSize: ScreenUtil().setSp(28)),
+      ),
+    );
+  }
+
+  Widget _goodsPrice(index) {
+    return Container(
+        margin: const EdgeInsets.only(top: 20.0),
+        width: ScreenUtil().setWidth(370),
+        child: Row(children: <Widget>[
+          Text(
+            '价格:￥${list[index].presentPrice}',
+            style:
+                TextStyle(color: Colors.pink, fontSize: ScreenUtil().setSp(30)),
+          ),
+          Text(
+            '￥${list[index].oriPrice}',
+            style: const TextStyle(
+                color: Colors.black26, decoration: TextDecoration.lineThrough),
+          )
+        ]));
+  }
+
+  Widget _listWidget(int index) {
+    return InkWell(
+        onTap: () {
+          print('index====${list[index]}');
+        },
+        child: Container(
+          padding: const EdgeInsets.only(top: 5.0, bottom: 5.0),
+          decoration: const BoxDecoration(
+              color: Colors.white,
+              border: Border(
+                  bottom: BorderSide(width: 1.0, color: Colors.black12))),
+          child: Row(
+            children: <Widget>[
+              _goodsImage(index),
+              Column(
+                children: <Widget>[_goodsName(index), _goodsPrice(index)],
+              )
+            ],
+          ),
+        ));
   }
 }

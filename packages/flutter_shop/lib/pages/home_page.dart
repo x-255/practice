@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_shop/api/method.dart';
+import 'package:flutter_shop/routers/application.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -75,6 +76,10 @@ class SwiperDiy extends StatelessWidget {
         itemCount: list.length,
         pagination: SwiperPagination(),
         autoplay: true,
+        onTap: (i) {
+          Application.router
+              .navigateTo(context, "/detail?id=${list[i]['goodsId']}");
+        },
       ),
     );
   }
