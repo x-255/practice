@@ -4,6 +4,7 @@ import 'package:flutter_shop/api/method.dart';
 import 'package:flutter_shop/model/category.dart';
 import 'package:flutter_shop/model/categoryGoodsList.dart';
 import 'package:flutter_shop/provide/child_category.dart';
+import 'package:flutter_shop/routers/application.dart';
 import 'package:provider/provider.dart';
 
 class CategoryPage extends StatefulWidget {
@@ -152,7 +153,10 @@ class _CategoryGoodsListState extends State<CategoryGoodsList> {
   void _getGoodList() async {
     var params = {'categoryId': '4', 'categorySubId': "", 'page': 1};
     var res = await get('getMallGoods', params);
-    list = List.from(res).map((val) => CategoryListData.fromJson(val)).toList();
+    setState(() {
+      list =
+          List.from(res).map((val) => CategoryListData.fromJson(val)).toList();
+    });
   }
 
   @override
@@ -215,7 +219,9 @@ class _CategoryGoodsListState extends State<CategoryGoodsList> {
   Widget _listWidget(int index) {
     return InkWell(
         onTap: () {
-          print('index====${list[index]}');
+          final category = list[index];
+          Application.router
+              .navigateTo(context, '/detail?id=${category.goodsId}');
         },
         child: Container(
           padding: const EdgeInsets.only(top: 5.0, bottom: 5.0),

@@ -56,4 +56,17 @@ class CategoryListData {
     data['goodsId'] = goodsId;
     return data;
   }
+
+  @override
+  String toString() {
+    return '''
+CategoryListData: {
+  image: $image,
+  oriPrice: $oriPrice,
+  presentPrice: $presentPrice,
+  goodsName: $goodsName,
+  goodsId: $goodsId,
+}
+''';
+  }
 }

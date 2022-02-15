@@ -69,4 +69,16 @@ class BxMallSubDto {
     json['comments'] = comments;
     return json;
   }
+
+  @override
+  String toString() {
+    return '''
+BxMallSubDto: {
+  mallSubId: $mallSubId,
+  mallCategoryId: $mallCategoryId,
+  mallSubName: $mallSubName,
+  comments: $comments,
+}
+''';
+  }
 }

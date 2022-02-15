@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers: [Provider(create: (_) => CartProvide())],
+      providers: [ChangeNotifierProvider(create: (_) => CartProvide())],
       child: Container(
         child: MaterialApp(
           title: '百姓生活+',
