@@ -16,12 +16,18 @@ const { name, tool } = await inquirer.prompt([
       console.log(chalk.yellow('name 不能为空'))
     },
   },
-  { type: 'list', name: 'tool', message: '请输入打包工具', choices: ['parcel'] },
+  {
+    type: 'list',
+    name: 'tool',
+    message: '请输入打包工具',
+    choices: ['parcel'],
+  },
 ])
 
-const packageDir = path.resolve(__dirname, '../../packages/', name)
-await $`mkdir ${packageDir}`
+const packageDir = path.resolve(__dirname, '../../packages/')
 cd(packageDir)
+await $`mkdir ${name}`
+cd(name)
 
 if (tool === 'parcel') {
   runCreator(ParcelCreator, name)

@@ -24,12 +24,12 @@ class DetailsModel {
   @override
   String toString() {
     return '''
-      DetailsModel: {
-        goodsId: $goodsId,
-        goodsName: $goodsName,
-        price: $price,
-        images: $images,
-      }
-    ''';
+DetailsModel: {
+  goodsId: $goodsId,
+  goodsName: $goodsName,
+  price: $price,
+  images: $images,
+}
+''';
   }
 }

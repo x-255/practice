@@ -10,7 +10,8 @@
     "dev:vue": "cd packages/mini-vue && npm run dev 8022",
     "dev:alg": "cd packages/algorithm && npm run dev 8033",
     "dev:ax": "cd packages/mini-axios && npm run dev 8044",
-    "dev:zz": "cd packages/z7z8 && npm run dev 8078"
+    "dev:zz": "cd packages/z7z8 && npm run dev 8078",
+    "dev:fp": "cd packages/fp-in-js && npm run dev 8382"
   },
   "keywords": [],
   "author": {

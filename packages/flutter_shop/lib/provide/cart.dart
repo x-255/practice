@@ -8,7 +8,7 @@ class CartProvide with ChangeNotifier {
   final _key = 'cartInfo';
   List<CartInfoMode> list = [];
 
-  void save(goodsId, goodsName, int count, price, images) {
+  void add({goodsId, goodsName, int count = 1, price, images}) {
     bool isHave = false;
 
     for (var item in list) {

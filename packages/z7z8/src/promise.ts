@@ -21,7 +21,8 @@ const enum Status {
   REJECTED = 'rejected',
 }
 
-const isObject = (val: unknown): val is AnyObject => val !== null && typeof val === 'object'
+const isObject = (val: unknown): val is AnyObject =>
+  val !== null && typeof val === 'object'
 const isFunc = (val: unknown): val is AnyFunction => typeof val === 'function'
 const isPromise = (val: unknown): val is MyPromise<any> =>
   (isObject(val) || isFunc(val)) && isFunc(val.then)
@@ -147,7 +148,9 @@ function resolvePromise<T>(
   reject: Reject,
 ) {
   if (x === promise2) {
-    const e = new TypeError('TypeError: Chaining cycle detected for promise #<MyPromise>')
+    const e = new TypeError(
+      'TypeError: Chaining cycle detected for promise #<MyPromise>',
+    )
     e.stack = ''
     return reject(e)
   }
@@ -185,30 +188,7 @@ function resolvePromise<T>(
   }
 }
 
-/* ------------------------------------------------------------------ */
-const p1 = new Promise<number>((resolve, reject) => {
-  setTimeout(() => {
-    reject(1)
-  }, 1000)
-})
-const p2 = new MyPromise<string>((resolve, reject) => {
-  resolve('2')
-})
-const p3 = new MyPromise<number>((resolve, reject) => {
-  setTimeout(() => {
-    resolve(3)
-  }, 3000)
-})
-
-MyPromise.all([p1, p2, p3])
-  .then((r) => {
-    console.log(r)
-  })
-  .catch((err) => {
-    console.log(`err====`, err)
-  })
-/* ------------------------------------------------------------------ */
-
+// 测试promise是否符合规范需要的声明
 // @ts-expect-error
 MyPromise.deferred = function () {
   Promise
