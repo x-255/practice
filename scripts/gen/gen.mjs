@@ -1,6 +1,7 @@
 import 'zx/globals'
 
-const getRandomInt = (min, max) => Math.floor(Math.random() * (max - min + 1) + min)
+const getRandomInt = (min, max) =>
+  Math.floor(Math.random() * (max - min + 1) + min)
 const portRange = [8000, 9000]
 
 export class GenCreator {
@@ -24,7 +25,6 @@ function addScripts(creator) {
     ...pkgObj.scripts,
     ...creator.scripts,
   }
-  console.log(111111)
   fs.writeFileSync(pkgPath, JSON.stringify(pkgObj, null, 2))
 }
 
