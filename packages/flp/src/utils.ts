@@ -116,3 +116,6 @@ export const when =
   (predicate: AnyFunction, fn: AnyFunction) =>
   (...args) =>
     predicate(...args) ? fn(...args) : undefined
+
+export const compose2 = (fn2: AnyFunction, fn1: AnyFunction) => (origValue) =>
+  fn2(fn1(origValue))
