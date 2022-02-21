@@ -1,20 +1,20 @@
 /** 创建偏函数 */
 export const partial =
-  (fn: AnyFunction, ...presetArgs) =>
+  (fn, ...presetArgs) =>
   (...laterArgs) =>
     fn(...presetArgs, ...laterArgs)
 
-export const partialRight = (fn: AnyFunction, ...presetArgs) =>
-  reverseArgs(partial(reverseArgs(fn), ...presetArgs))
+export const partialRight = (fn, ...presetArgs) =>
+  reverseArgs(partial(reverseArgs(fn), ...presetArgs.reverse()))
 
 /** 反转参数 */
 export const reverseArgs =
-  (fn: AnyFunction) =>
+  (fn) =>
   (...args) =>
     fn(...args.reverse())
 
 /** 柯里化 */
-export function curry(fn: AnyFunction, arity = fn.length) {
+export function curry(fn, arity = fn.length) {
   function nextCurried(prevArgs: any[]) {
     return function curried(nextArg) {
       const args = [...prevArgs, nextArg]
@@ -31,7 +31,7 @@ export function curry(fn: AnyFunction, arity = fn.length) {
 }
 
 /** 松散柯里化 */
-export function looseCurry(fn: AnyFunction, arity = fn.length) {
+export function looseCurry(fn, arity = fn.length) {
   return (function nextCurried(prevArgs: any[]) {
     return function curried(...nextArgs) {
       const args = prevArgs.concat(nextArgs)
@@ -47,7 +47,7 @@ export function looseCurry(fn: AnyFunction, arity = fn.length) {
 
 /** 反柯里化 */
 export const uncurry =
-  (fn: AnyFunction) =>
+  (fn) =>
   (...args) =>
     args.reduce((ret, arg) => ret(arg), fn)
 
@@ -60,21 +60,21 @@ export const identity = (v) => v
 export const constant = (v) => () => v
 
 /** 扩展参数 */
-export const spreadArgs = (fn: AnyFunction) => (argsArr) => fn(...argsArr)
+export const spreadArgs = (fn) => (argsArr) => fn(...argsArr)
 
 /** 聚集参数 */
 export const gatherArgs =
-  (fn: AnyFunction) =>
+  (fn) =>
   (...argsArr) =>
     fn(argsArr)
 
 /** 命名实参偏应用 */
 export const partialProps =
-  (fn: AnyFunction, presetArgsObj: AnyObject) => (laterArgsObj: AnyObject) =>
+  (fn, presetArgsObj: AnyObject) => (laterArgsObj: AnyObject) =>
     fn(Object.assign({}, presetArgsObj, laterArgsObj))
 
 /** 命名实参柯里化 */
-export function curryProps(fn: AnyFunction, arity = 1) {
+export function curryProps(fn, arity = 1) {
   return (function nextCurried(prevArgsObj: AnyObject) {
     return function curried(nextArgObj) {
       const [key] = Object.keys(nextArgObj)
@@ -108,14 +108,27 @@ export function spreadArgProps(
 }
 
 export const not =
-  (predicate: AnyFunction) =>
+  (predicate) =>
   (...args) =>
     !predicate(...args)
 
 export const when =
-  (predicate: AnyFunction, fn: AnyFunction) =>
+  (predicate, fn) =>
   (...args) =>
     predicate(...args) ? fn(...args) : undefined
 
-export const compose2 = (fn2: AnyFunction, fn1: AnyFunction) => (origValue) =>
-  fn2(fn1(origValue))
+export const compose2 = (fn2, fn1) => (origValue) => fn2(fn1(origValue))
+
+export function compose(...fns) {
+  const [fn1, fn2, ...rest] = fns.reverse()
+
+  const composed = (...args) => fn2(fn1(...args))
+
+  if (rest.length === 0) {
+    return composed
+  }
+
+  return compose(...rest.reverse(), composed)
+}
+
+export const pipe = reverseArgs(compose)
