@@ -2,7 +2,7 @@
  * @Description:闭包 vs 对象
  * @Author: 贰伍伍
  * @Email: ouhuangff@163.com
- * @LastEditTime: 2022-02-21 17:13:37
+ * @LastEditTime: 2022-02-22 10:22:48
  */
 
 /* function trackEvent(evt, keypresses = []) {
@@ -13,7 +13,7 @@ var keypresses = trackEvent('newEvent1')
 
 keypresses = trackEvent('newEvent2', keypresses) */
 
-function trackEvent(evt, keypresses = () => [] as any[]) {
+function trackEvent(evt: any, keypresses = () => [] as any[]) {
   return function newKeypresses() {
     return [...keypresses(), evt]
   }
@@ -26,17 +26,17 @@ keypresses = trackEvent('newEvent2', keypresses)
 // console.log(keypresses())
 
 function trackEvent1(
-  evt,
+  evt: any,
   keypresses = {
     list: () => [] as any[],
-    forEach(fn) {},
+    forEach(fn: any) {},
   }
 ) {
   return {
     list() {
       return [...keypresses.list(), evt]
     },
-    forEach(fn) {
+    forEach(fn: any) {
       keypresses.forEach(fn)
       fn(evt)
     },

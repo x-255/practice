@@ -2,7 +2,7 @@
  * @Description:第 3 章：管理函数的输入
  * @Author: 贰伍伍
  * @Email: ouhuangff@163.com
- * @LastEditTime: 2022-02-20 21:35:45
+ * @LastEditTime: 2022-02-22 10:10:36
  */
 
 import {
@@ -23,7 +23,7 @@ import {
 
 export {}
 
-function ajax(url, data, callback) {
+function ajax(url: any, data: any, callback: any) {
   const res = { url, data }
   console.log(JSON.stringify(res))
   callback && callback(res)
@@ -34,20 +34,20 @@ function ajax(url, data, callback) {
 // const getCurrUser = partial(getPerson, 'user')
 // getCurrUser('cccb')
 
-const add = (a, b) => a + b
+const add = (a: any, b: any) => a + b
 
 const arr = [1, 2, 3, 4].map(partial(add, 3))
 // console.log(arr)
 
 const cacheResult = reverseArgs(
-  partial(reverseArgs(ajax), (res) => {
+  partial(reverseArgs(ajax), (res: any) => {
     console.log(`res====`, res)
   })
 )
 
 // cacheResult('/ccc', 'ddd')
 
-const cacheResult2 = partialRight(ajax, (obj) => {
+const cacheResult2 = partialRight(ajax, (obj: any) => {
   console.log(`obj====`, obj)
 })
 
@@ -62,7 +62,7 @@ const curriedAjax = curry(ajax)
 const arr2 = [1, 2, 3, 4].map(curry(add)(1))
 // console.log(arr)
 
-function sum(...args) {
+function sum(...args: any[]) {
   var sum = 0
   for (let i = 0; i < args.length; i++) {
     sum += args[i]
@@ -103,7 +103,7 @@ const f2 = partialProps(foo, { y: 2 })
 
 // f2({ z: 3, x: 1 })
 
-function output(txt) {
+function output(txt: any) {
   console.log(txt)
 }
 

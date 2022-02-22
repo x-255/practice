@@ -2,12 +2,20 @@
  * @Description:组合函数
  * @Author: 贰伍伍
  * @Email: ouhuangff@163.com
- * @LastEditTime: 2022-02-21 14:20:37
+ * @LastEditTime: 2022-02-22 10:22:36
  */
 
-import { compose, compose2, partial, partialRight, pipe } from './utils'
+import {
+  compose,
+  compose2,
+  makeObjProp,
+  partial,
+  partialRight,
+  pipe,
+  prop,
+} from './utils'
 
-function words(str) {
+function words(str: any) {
   return String(str)
     .toLowerCase()
     .split(/\s|\b/)
@@ -16,7 +24,7 @@ function words(str) {
     })
 }
 
-function unique(list) {
+function unique(list: any[]) {
   const uniqList: any[] = []
 
   for (let i = 0; i < list.length; i++) {
@@ -29,7 +37,7 @@ function unique(list) {
   return uniqList
 }
 
-function skipShortWords(list) {
+function skipShortWords(list: any[]) {
   const filteredList: any[] = []
 
   for (let i = 0; i < list.length; i++) {
@@ -41,7 +49,7 @@ function skipShortWords(list) {
   return filteredList
 }
 
-function skipLongWords(list) {
+function skipLongWords(list: any[]) {
   const filteredList: any[] = []
 
   for (let i = 0; i < list.length; i++) {
@@ -88,15 +96,7 @@ const shorterWords3 = filterWords3(skipLongWords)
 
 /* -------------------------------------------------------------------------- */
 
-const prop = (name, obj) => obj[name]
-function setProp(name, obj, value) {
-  const o = Object.assign({}, obj)
-  o[name] = value
-  return o
-}
-const makeObjProp = (name, value) => setProp(name, {}, value)
-
-function ajax(url, data?, cb?) {
+function ajax(url: any, data?: any, cb?: any) {
   switch (url) {
     case 'http://some.api/order':
       cb?.({ personId: 123 })
@@ -109,7 +109,7 @@ function ajax(url, data?, cb?) {
   }
 }
 
-function output(txt) {
+function output(txt: any) {
   console.log(txt)
 }
 
