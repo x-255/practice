@@ -265,6 +265,99 @@ BinaryTree.map = function map(mapperFn: AnyFunction, node: any) {
   }
 }
 
+BinaryTree.reduce = function reduce(
+  reduceFn: AnyFunction,
+  initialValue?: any,
+  node?: any
+): any {
+  if (arguments.length < 3) {
+    node = initialValue
+  }
+
+  if (node) {
+    let result
+
+    if (arguments.length < 3) {
+      if (node.left) {
+        result = reduce(reduceFn, node.left)
+      } else {
+        return node.right ? reduce(reduceFn, node, node.right) : node
+      }
+    } else {
+      result = node.left
+        ? reduce(reduceFn, initialValue, node.left)
+        : initialValue
+    }
+
+    result = reduceFn(result, node)
+
+    if (node.right) {
+      result = reduce(reduceFn, result, node.right)
+    }
+
+    return result
+  }
+
+  return initialValue
+}
+
+BinaryTree.filter = function filter(predicateFn: AnyFunction, node: any): any {
+  if (node) {
+    let newNode
+    let newLeft = node.left ? filter(predicateFn, node.left) : undefined
+    let newRight = node.right ? filter(predicateFn, node.right) : undefined
+
+    if (predicateFn(node)) {
+      newNode = BinaryTree(node.value, node.parent, newLeft, newRight)
+      if (newLeft) {
+        newLeft.parent = newNode
+      }
+      if (newRight) {
+        newRight.parent = newNode
+      }
+    } else {
+      if (newLeft) {
+        if (newRight) {
+          newNode = BinaryTree(undefined, node.parent, newLeft, newRight)
+          newLeft.parent = newRight.parent = newNode
+
+          if (newRight.left) {
+            let minRightNode = newRight
+            while (minRightNode.left) {
+              minRightNode = minRightNode.left
+            }
+
+            newNode.value = minRightNode.value
+
+            if (minRightNode.right) {
+              minRightNode.parent.left = minRightNode.right
+              minRightNode.right.parent = minRightNode.parent
+            } else {
+              minRightNode.parent.left = undefined
+            }
+
+            minRightNode.right = minRightNode.parent = undefined
+          } else {
+            newNode.value = newRight.value
+            newNode.right = newRight.right
+            if (newRight.right) {
+              newRight.right.parent = newNode
+            }
+          }
+        } else {
+          return newLeft
+        }
+      } else {
+        return newRight
+      }
+    }
+
+    return newNode
+  }
+}
+
+const logBinaryTree = (tree: any) => BinaryTree.forEach(console.log, tree)
+
 const banana = BinaryTree('banana')
 const apple = (banana.left = BinaryTree('apple', banana))
 const cherry = (banana.right = BinaryTree('cherry', banana))
@@ -274,10 +367,38 @@ const cantelope = (cherry.left = BinaryTree('cantelope', cherry))
 const cucumber = (cherry.right = BinaryTree('cucumber', cherry))
 const grape = (cucumber.right = BinaryTree('grape', cucumber))
 
-// BinaryTree.forEach((node: any) => console.log(node.value), cherry)
-var BANANA = BinaryTree.map(
+// logBinaryTree(cherry)
+
+const BANANA = BinaryTree.map(
   (node: any) => BinaryTree(node.value.toUpperCase()),
   banana
 )
+// logBinaryTree(BANANA)
 
-BinaryTree.forEach((node: any) => console.log(node.value), BANANA)
+const bar = BinaryTree.reduce(
+  (result: any, node: any) => result.concat(node.value),
+  [],
+  banana
+)
+// logBinaryTree(bar)
+
+const vegetables = [
+  'asparagus',
+  'avocado',
+  'brocolli',
+  'carrot',
+  'celery',
+  'corn',
+  'cucumber',
+  'lettuce',
+  'potato',
+  'squash',
+  'zucchini',
+]
+
+const whatToBuy = BinaryTree.filter(
+  // 将蔬菜从农产品清单中过滤出来
+  (node: any) => vegetables.indexOf(node.value) != -1,
+  banana
+)
+logBinaryTree(whatToBuy)
