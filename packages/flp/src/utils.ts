@@ -163,6 +163,24 @@ export const makeObjProp = (name: any, value: any) => setProp(name, {}, value)
 
 export const guard = (fn: any) => (arg: any) => arg != null ? fn(arg) : arg
 
+/* ------------------------------- transducing ------------------------------ */
+
+export const listCombination = (list: any[], val: any) => list.concat([val])
+
+export const mapReducer =
+  (mapperFn: AnyFunction, combinationFn: AnyFunction) =>
+  (list: any[], val: any) =>
+    combinationFn(list, mapperFn(val))
+
+export const filterReducer =
+  (predicateFn: AnyFunction, combinationFn: AnyFunction) =>
+  (list: any[], val: any) =>
+    predicateFn(val) ? combinationFn(list, val) : list
+
+export const transduceMap = curry(mapReducer)
+
+export const transduceFilter = curry(filterReducer)
+
 /* -------------------------------------------------------------------------- */
 export function output(val: any) {
   console.log(val)

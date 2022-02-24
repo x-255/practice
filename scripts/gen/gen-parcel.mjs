@@ -23,7 +23,10 @@ export class ParcelCreator extends GenCreator {
       license: 'ISC',
     }
 
-    fs.writeFileSync(path.resolve(this.path, 'package.json'), JSON.stringify(json, null, 2))
+    fs.writeFileSync(
+      path.resolve(this.path, 'package.json'),
+      JSON.stringify(json, null, 2)
+    )
   }
 
   async createFiles() {
@@ -37,6 +40,7 @@ export class ParcelCreator extends GenCreator {
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="../../favicon.ico" type="image/x-icon" />
     <title>Z7Z8</title>
   </head>
   <body>
@@ -44,7 +48,7 @@ export class ParcelCreator extends GenCreator {
 
     <script src="./src/index.ts"></script>
   </body>
-</html>`,
+</html>`
     )
 
     await $`mkdir src`

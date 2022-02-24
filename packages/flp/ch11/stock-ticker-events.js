@@ -4,37 +4,29 @@
 
 const server = connectToServer()
 
-function addStockName(stock) {
-  return setProp('name', stock, stock.id)
-}
-function formatSign(val) {
-  if (Number(val) > 0) {
-    return `+${val}`
-  }
-  return val
-}
-function formatCurrency(val) {
-  return `$${val}`
-}
-function transformObservable(mapperFn, obsv) {
-  return obsv.map(mapperFn)
-}
+const addStockName = (stock) => setProp('name', stock, stock.id)
+
+const formatSign = (val) => (Number(val) > 0 ? `+${val}` : val)
+
+const formatCurrency = (val) => `$${val}`
+
+const transformObservable = (mapperFn, obsv) => obsv.map(mapperFn)
 
 function formatStockNumbers(stock) {
-  var updateTuples = [
+  const updateTuples = [
     ['price', formatPrice(stock.price)],
-    ['change', formatChange(stock.change)],
+    ['change', formatCurrency(stock.change)],
   ]
 
-  return reduce(function formatter(stock, [propName, val]) {
-    return setProp(propName, stock, val)
-  })(stock)(updateTuples)
+  return reduce((stock, [key, val]) => setProp(key, stock, val))(stock)(
+    updateTuples
+  )
 }
 
-var formatDecimal = unboundMethod('toFixed')(2)
-var formatPrice = pipe(formatDecimal, formatCurrency)
-var formatChange = pipe(formatDecimal, formatSign)
-var processNewStock = pipe(addStockName, formatStockNumbers)
+const formatDecimal = unboundMethod('toFixed')(2)
+const formatPrice = compose(formatSign, formatDecimal)
+const formatChange = compose(formatCurrency, formatDecimal)
+const processNewStock = compose(formatStockNumbers, addStockName)
 
 var makeObservableFromEvent = curry(Rx.Observable.fromEvent, 2)(server)
 
