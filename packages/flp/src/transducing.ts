@@ -2,7 +2,7 @@
  * @Description:transducing
  * @Author: 贰伍伍
  * @Email: ouhuangff@163.com
- * @LastEditTime: 2022-02-24 17:31:28
+ * @LastEditTime: 2022-02-24 22:14:28
  */
 
 import {
@@ -61,12 +61,53 @@ const transducer1 = compose(
   (combinationFn: any) => filterReducer(isShortEnough, combinationFn)
 )
 
-const reducer = mapReducer(
-  strUppercase,
-  filterReducer(isLongEnough, filterReducer(isShortEnough, listCombination))
-)
-const w4 = words.reduce(reducer, [])
-// console.log(w4)
+const w3 = words.reduce(transducer(strConcat), '')
+// console.log(w3)
 
-const w5 = words.reduce(transducer(strConcat), '')
-console.log(w5)
+const transducer2 = (combinationFn: any) =>
+  mapReducer(
+    strUppercase,
+    filterReducer(isLongEnough, filterReducer(isShortEnough, combinationFn))
+  )
+
+const transducer3 = (combinationFn: any) => (list: any, val: any) => {
+  if (isShortEnough(val)) {
+    if (isLongEnough(val)) {
+      return combinationFn(list, strUppercase(val))
+    } else {
+      return list
+    }
+  } else {
+    return list
+  }
+}
+
+const reducer1 = transducer3(listCombination)
+// console.log(words.reduce(reducer1, []))
+
+const reducer2 = transducer3(strConcat)
+// console.log(words.reduce(reducer2, ''))
+
+const reducer11 = (list: any[], val: any) => {
+  if (isShortEnough(val)) {
+    if (isLongEnough(val)) {
+      return list.concat([strUppercase(val)])
+    } else {
+      return list
+    }
+  } else {
+    return list
+  }
+}
+
+const reducer22 = (str1: any, str2: any) => {
+  if (isShortEnough(str2)) {
+    if (isLongEnough(str2)) {
+      return str1 + strUppercase(str2)
+    } else {
+      return str1
+    }
+  } else {
+    return str1
+  }
+}
