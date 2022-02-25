@@ -2,7 +2,7 @@
  * @Description:柯里化（curry） 练习
  * @Author: 贰伍伍
  * @Email: ouhuangff@163.com
- * @LastEditTime: 2022-02-25 16:36:02
+ * @LastEditTime: 2022-02-25 23:45:07
  */
 
 import { filter, invoker, map, reduce, split, test } from 'ramda'
@@ -34,6 +34,11 @@ expect(
 // 练习 2
 //==============
 // 通过局部调用（partial apply）移除所有参数
+
+// var filterQs = function(xs) {
+//   return filter(function(x){ return match(/q/i, x);  }, xs);
+// };
+
 const filterQs = filter(test(/q/i))
 expect(
   filterQs,
@@ -50,12 +55,20 @@ function _keepHighest(x: number, y: number) {
   return x >= y ? x : y
 }
 
+// 重构这段代码:
+// var max = function(xs) {
+//   return reduce(function(acc, x){
+//     return _keepHighest(acc, x);
+//   }, -Infinity, xs);
+// };
+
 const max = reduce(_keepHighest, -Infinity)
 expect(max, 5234, [323, 523, 554, 123, 5234])
 
 // 彩蛋 1:
 // ============
 // 包裹数组的 `slice` 函数使之成为 curry 函数
+// //[1,2,3].slice(0, 2)
 const slice = invoker(2, 'slice')
 expect(slice(1)(3), ['b', 'c'], ['a', 'b', 'c'])
 

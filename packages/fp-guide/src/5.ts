@@ -2,7 +2,7 @@
  * @Description:代码组合（compose） 练习
  * @Author: 贰伍伍
  * @Email: ouhuangff@163.com
- * @LastEditTime: 2022-02-25 17:36:27
+ * @LastEditTime: 2022-02-25 23:47:45
  */
 
 import {
@@ -17,6 +17,9 @@ import {
   toLower,
   join,
   filter,
+  __,
+  sortBy,
+  concat,
 } from 'ramda'
 import accounting from 'accounting'
 import { expect } from './test'
@@ -60,6 +63,12 @@ const CARS: Car[] = [
 // 练习 1:
 // ============
 // 使用 _.compose() 重写下面这个函数。提示：_.prop() 是 curry 函数
+
+// var isLastInStock = function(cars) {
+//   var last_car = _.last(cars);
+//   return _.prop('in_stock', last_car);
+// };
+
 const isLastInStock = compose<Car[][], Car, boolean>(prop('in_stock'), last)
 expect(isLastInStock, false, CARS)
 
@@ -76,9 +85,7 @@ function _average(xs: number[]) {
   return reduce(add, 0, xs) / xs.length
 } // <- 无须改动
 
-const dollar_values_mapper = (c: Car) => c.dollar_value
-
-const averageDollarValue = compose(_average, map(dollar_values_mapper))
+const averageDollarValue = compose(_average, map(prop('dollar_value')))
 expect(averageDollarValue, 790700, CARS)
 
 // 练习 4:
@@ -106,11 +113,37 @@ expect(
 // 彩蛋 1:
 // ============
 // 使用 compose 重构 availablePrices
+
+// var availablePrices = function(cars) {
+//   var available_cars = _.filter(_.prop('in_stock'), cars);
+//   return available_cars.map(function(x){
+//     return accounting.formatMoney(x.dollar_value);
+//   }).join(', ');
+// };
+
 const availablePrices = compose<Car[][], Car[], string[], string>(
   join(', '),
   map(
     compose<Car[], number, string>(accounting.formatMoney, prop('dollar_value'))
   ),
-  filter<Car>(prop<'in_stock', boolean>('in_stock'))
+  filter<Car>(prop('in_stock'))
 )
 expect(availablePrices, '$700,000.00, $1,850,000.00', CARS)
+
+// 彩蛋 2:
+// ============
+// 重构使之成为 pointfree 函数。提示：可以使用 _.flip()
+
+// var fastestCar = function(cars) {
+//   var sorted = _.sortBy(function(car){ return car.horsepower }, cars);
+//   var fastest = _.last(sorted);
+//   return fastest.name + ' is the fastest';
+// };
+
+const fastestCar = compose<Car[][], Car[], Car, string, string>(
+  concat(__, ' is the fastest'),
+  prop('name'),
+  last,
+  sortBy(prop('horsepower'))
+)
+expect(fastestCar, 'Aston Martin One-77 is the fastest', CARS)
