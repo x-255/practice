@@ -2,7 +2,7 @@
  * @Description:transducing
  * @Author: 贰伍伍
  * @Email: ouhuangff@163.com
- * @LastEditTime: 2022-02-24 22:14:28
+ * @LastEditTime: 2022-02-25 13:10:08
  */
 
 import {
@@ -12,14 +12,15 @@ import {
   filterReducer,
   listCombination,
   mapReducer,
+  transduce,
 } from './utils'
-
-function isLongEnough(str: any) {
-  return str.length >= 5
-}
 
 function isShortEnough(str: any) {
   return str.length <= 10
+}
+
+function isLongEnough(str: any) {
+  return str.length >= 5
 }
 
 function strUppercase(str: any) {
@@ -30,13 +31,16 @@ function strConcat(str1: any, str2: any) {
   return str1 + str2
 }
 
-const strUppercaseReducer = transduceMap(strUppercase)(listCombination)
+const words = ['You', 'have', 'written', 'something', 'very', 'interesting']
+// const words = ['written']
+
+/* const strUppercaseReducer = transduceMap(strUppercase)(listCombination)
 
 const isLongEnoughReducer = transduceFilter(isLongEnough)(listCombination)
 
 const isShortEnoughReducer = transduceFilter(isShortEnough)(listCombination)
 
-const words = ['You', 'have', 'written', 'something', 'very', 'interesting']
+
 
 const w1 = words
   .reduce(strUppercaseReducer, [])
@@ -44,70 +48,54 @@ const w1 = words
   .reduce(isShortEnoughReducer, [])
   .reduce(strConcat, '')
 
-// console.log(w1)
+console.log(w1) */
 
-const transducer = compose(
+/* const transducer = compose(
   transduceMap(strUppercase),
   transduceFilter(isLongEnough),
   transduceFilter(isShortEnough)
 )
 
 const w2 = words.reduce(transducer(listCombination), [])
-// console.log(w2)
+console.log(w2) */
 
-const transducer1 = compose(
+/* const transducer = compose(
   (combinationFn: any) => mapReducer(strUppercase, combinationFn),
   (combinationFn: any) => filterReducer(isLongEnough, combinationFn),
   (combinationFn: any) => filterReducer(isShortEnough, combinationFn)
 )
 
-const w3 = words.reduce(transducer(strConcat), '')
-// console.log(w3)
+const w3 = words.reduce(transducer(listCombination), [])
+console.log(w3) */
 
-const transducer2 = (combinationFn: any) =>
+/* const transducer = (combinationFn: any) =>
   mapReducer(
     strUppercase,
     filterReducer(isLongEnough, filterReducer(isShortEnough, combinationFn))
   )
+const w4 = words.reduce(transducer(listCombination), [])
+console.log(w4) */
 
-const transducer3 = (combinationFn: any) => (list: any, val: any) => {
-  if (isShortEnough(val)) {
-    if (isLongEnough(val)) {
-      return combinationFn(list, strUppercase(val))
-    } else {
-      return list
-    }
-  } else {
-    return list
-  }
+/* const transducer = (combinationFn: any) => (list: any[], val: any) => {
+  val = strUppercase(val)
+  return isLongEnough(val)
+    ? isShortEnough(val)
+      ? combinationFn(list, val)
+      : list
+    : list
 }
 
-const reducer1 = transducer3(listCombination)
-// console.log(words.reduce(reducer1, []))
+const w5 = words.reduce(transducer(listCombination), [])
+console.log(w5) */
 
-const reducer2 = transducer3(strConcat)
-// console.log(words.reduce(reducer2, ''))
+/* const transducer = compose(
+  transduceMap(strUppercase),
+  transduceFilter(isLongEnough),
+  transduceFilter(isShortEnough)
+)
 
-const reducer11 = (list: any[], val: any) => {
-  if (isShortEnough(val)) {
-    if (isLongEnough(val)) {
-      return list.concat([strUppercase(val)])
-    } else {
-      return list
-    }
-  } else {
-    return list
-  }
-}
+const w6 = transduce(transducer, listCombination, [], words)
+console.log(w6)
 
-const reducer22 = (str1: any, str2: any) => {
-  if (isShortEnough(str2)) {
-    if (isLongEnough(str2)) {
-      return str1 + strUppercase(str2)
-    } else {
-      return str1
-    }
-  } else {
-    return str1
-  }
-}
+const w7 = transduce(transducer, strConcat, '', words)
+console.log(w7) */

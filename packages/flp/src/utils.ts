@@ -181,6 +181,16 @@ export const transduceMap = curry(mapReducer)
 
 export const transduceFilter = curry(filterReducer)
 
+export function transduce(
+  transducer: any,
+  combinationFn: any,
+  initialValue: any,
+  list: any[]
+) {
+  const reducer = transducer(combinationFn)
+  return list.reduce(reducer, initialValue)
+}
+
 /* -------------------------------------------------------------------------- */
 export function output(val: any) {
   console.log(val)
