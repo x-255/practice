@@ -11,8 +11,9 @@
     "dev:alg": "cd packages/algorithm && npm run dev 8033",
     "dev:ax": "cd packages/mini-axios && npm run dev 8044",
     "dev:zz": "cd packages/z7z8 && npm run dev 8078",
-    "dev:fp": "cd packages/fp-in-js && npm run dev 8382",
-    "dev:flp": "cd packages/flp && npm run dev 8041"
+    "dev:fpjs": "cd packages/fp-in-js && npm run dev 8382",
+    "dev:flp": "cd packages/flp && npm run dev 8041",
+    "dev:fpg": "cd packages/fp-guide && npm run dev 8125"
   },
   "keywords": [],
   "author": {

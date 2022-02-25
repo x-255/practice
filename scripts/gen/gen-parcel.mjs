@@ -41,7 +41,7 @@ export class ParcelCreator extends GenCreator {
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="shortcut icon" href="../../favicon.ico" type="image/x-icon" />
-    <title>Z7Z8</title>
+    <title>${this.name}</title>
   </head>
   <body>
     <div id="app"></div>
