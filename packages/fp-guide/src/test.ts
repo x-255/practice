@@ -1,3 +1,5 @@
+import { curry } from 'ramda'
+
 type Expect = <T, U>(f: (...args: T[]) => U, result: U, ...args: T[]) => boolean
 
 export const expect: Expect = (f, result, ...args) => {
@@ -12,3 +14,8 @@ export const expect: Expect = (f, result, ...args) => {
 
   return isExpect
 }
+
+export const trace = curry(function trace<T>(tag: string, x: T) {
+  console.log(tag, x)
+  return x
+})
