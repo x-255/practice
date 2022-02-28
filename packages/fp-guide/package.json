@@ -17,6 +17,7 @@
     "@types/ramda": "^0.27.65"
   },
   "dependencies": {
+    "@babel/runtime": "^7.17.2",
     "accounting": "^0.4.1",
     "ramda": "^0.28.0"
   }
