@@ -2,14 +2,29 @@
  * @Description:强大的容器
  * @Author: 贰伍伍
  * @Email: ouhuangff@163.com
- * @LastEditTime: 2022-02-28 23:47:16
+ * @LastEditTime: 2022-03-02 23:53:56
  */
 
-import { add, compose, concat, curry, invoker, match, prop } from 'ramda'
+import {
+  add,
+  compose,
+  concat,
+  curry,
+  filter,
+  head,
+  identical,
+  identity,
+  invoker,
+  last,
+  match,
+  prop,
+  split,
+  equals,
+} from 'ramda'
 import moment from 'moment'
 import { trace } from './test'
 
-type FunctorMapCb<V, R> = (value: V) => R
+type FunctorMapCb<R, V = any> = (value: V) => R
 type Nothing = null | undefined
 
 interface Functor<T> {
@@ -18,7 +33,7 @@ interface Functor<T> {
 }
 
 const map = curry(function map<U, T>(
-  f: FunctorMapCb<any, U>,
+  f: FunctorMapCb<T>,
   any_functor_at_all: Functor<T>
 ) {
   return any_functor_at_all.map(f)
@@ -26,7 +41,7 @@ const map = curry(function map<U, T>(
 
 const maybe = curry(function maybe<U, T>(
   x: U,
-  f: FunctorMapCb<any, U>,
+  f: FunctorMapCb<T>,
   m: Maybe<T>
 ) {
   return m.isNothing() ? x : f(m._value)
@@ -39,7 +54,7 @@ class Identity<T> {
     return new Identity(x)
   }
 
-  map<U>(f: FunctorMapCb<T, U>) {
+  map<U>(f: FunctorMapCb<U>) {
     return Identity.of(f(this._value))
   }
 }
@@ -72,7 +87,7 @@ class Maybe<T> {
     f: FunctorMapCb<V, U>
   ): T extends Nothing ? Maybe<null> : Maybe<U> {
     return Maybe.of(
-      this.isNothing() ? null : f(this._value as unknown as V)
+      this.isNothing() ? null : f(this._value as unknown as U)
     ) as any
   }
 }
@@ -160,7 +175,7 @@ class Right<T> {
     return new Right(x)
   }
 
-  map<U>(f: FunctorMapCb<T, U>) {
+  map<U>(f: FunctorMapCb<U>) {
     return Right.of(f(this._value))
   }
 }
@@ -185,14 +200,74 @@ const fortune = compose<[number], any, any, string>(
   add(1)
 )
 
+// const zoltar = compose<[{ birthdate: string }], any, any, void>(
+//   map(console.log),
+//   map(fortune),
+//   getAge(moment())
+// )
+
+const either = curry(function either<T, E>(
+  f: FunctorMapCb<T>,
+  g: FunctorMapCb<T>,
+  e: Left<E> | Right<E>
+) {
+  switch (e.constructor) {
+    case Left:
+      return f(e._value)
+    case Right:
+      return g(e._value)
+  }
+})
+
 const zoltar = compose<[{ birthdate: string }], any, any, void>(
-  map(console.log),
-  map(fortune),
+  console.log,
+  either(identity, fortune),
   getAge(moment())
 )
 
-let z1 = zoltar({ birthdate: '2005-12-12' })
-console.log(`z1====`, z1)
+// let z1 = zoltar({ birthdate: '2005-12-12' })
+// console.log(`z1====`, z1)
 
-let z2 = zoltar({ birthdate: 'balloons!' })
-console.log(`z2====`, z2)
+// let z2 = zoltar({ birthdate: 'balloons!' })
+// console.log(`z2====`, z2)
+
+class IO<T> {
+  constructor(public _value: (...args: any[]) => T) {}
+
+  static of<U>(x: U) {
+    return new IO(() => x)
+  }
+
+  map<U>(f: FunctorMapCb<U, T>) {
+    return new IO(() => compose(f, this._value))
+  }
+}
+
+var url = new IO(function () {
+  return window.location.href
+})
+
+//  toPairs =  String -> [[String]]
+var toPairs = compose(map(split('=')), split('&'))
+
+//  params :: String -> [[String]]
+var params = compose(toPairs, last, split('?'))
+
+//  findParam :: String -> IO Maybe [String]
+var findParam = function (key: string) {
+  return map(
+    // @ts-ignore
+    compose<[IO<string>, any, any, Maybe<string>]>(
+      Maybe.of,
+      filter(compose<[string], any, any>(equals(key), head)),
+      params
+    ),
+    url
+  )
+}
+
+////// 非纯调用代码: main.js ///////
+
+// 调用 __value() 来运行它！
+let f1 = findParam('searchTerm')._value()
+console.log(f1())
