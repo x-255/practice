@@ -1,13 +1,29 @@
-import 'package:flutter_demo/demos/count.dart';
+import 'package:flutter_demo/demos/bindings.dart';
+import 'package:flutter_demo/demos/middleware.dart';
 import 'package:flutter_demo/main.dart';
 import 'package:get/get.dart';
 
 class Routes {
   static const initial = '/';
-  static const count = '/count';
+  static const bind1 = '/bind1';
+  static const bind2 = '/bind2';
+  static const md1 = '/page1';
+  static const md2 = '/page2';
 
   static final routes = [
     GetPage(name: initial, page: () => MyHome()),
-    GetPage(name: count, page: () => CountDemo()),
+    GetPage(
+        name: bind1,
+        page: () => BindingDemo1(),
+        binding: BindingsBuilder(() {
+          Get.lazyPut(() => BindingController1());
+        })),
+    GetPage(
+        name: bind2,
+        page: () => BindingDemo2(),
+        binding: BindingsBuilder.put(() => BindingController2())),
+    GetPage(
+        name: '$md1/:id', page: () => MdDemo1(), middlewares: [Md1(), Md2()]),
+    GetPage(name: md2, page: () => MdDemo2()),
   ];
 }

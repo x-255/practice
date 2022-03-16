@@ -1,22 +1,35 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_demo/demos/bindings.dart';
+import 'package:flutter_demo/demos/connect.dart';
 import 'package:flutter_demo/demos/count.dart';
+import 'package:flutter_demo/demos/local_state.dart';
+import 'package:flutter_demo/demos/middleware.dart';
 import 'package:flutter_demo/demos/pages.dart';
+import 'package:flutter_demo/demos/theme.dart';
+import 'package:flutter_demo/demos/tr.dart';
+import 'package:flutter_demo/demos/user.dart';
 import 'package:flutter_demo/router/router.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 void main() {
+  // AutoSizeUtil.setStandard(360,isAutoTextSize: true);
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
+  final zh = const Locale('zh', 'CN');
+
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
       initialRoute: Routes.initial,
       getPages: Routes.routes,
+      translations: Messages(),
+      locale: zh,
+      fallbackLocale: zh,
     );
   }
 }
@@ -35,6 +48,6 @@ class MyHome extends StatelessWidget {
         minTextAdapt: true,
         orientation: Orientation.portrait);
 
-    return Page1();
+    return BindingDemo();
   }
 }

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class Page1 extends StatelessWidget {
-  const Page1({Key? key}) : super(key: key);
+class PageDemo1 extends StatelessWidget {
+  const PageDemo1({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -10,7 +10,7 @@ class Page1 extends StatelessWidget {
       body: Center(
         child: ElevatedButton(
           onPressed: () async {
-            final data = await Get.to(Page2());
+            final data = await Get.to(PageDemo2());
             print(data);
           },
           child: Text('222'),
@@ -20,8 +20,8 @@ class Page1 extends StatelessWidget {
   }
 }
 
-class Page2 extends StatelessWidget {
-  const Page2({Key? key}) : super(key: key);
+class PageDemo2 extends StatelessWidget {
+  const PageDemo2({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

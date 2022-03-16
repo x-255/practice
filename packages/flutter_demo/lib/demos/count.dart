@@ -70,3 +70,83 @@ class _C extends GetxController {
     update([_id]);
   }
 }
+
+class CountDemo3 extends StatelessWidget {
+  CountDemo3({Key? key}) : super(key: key);
+
+  final _c = _C1();
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            CountDemo4(),
+            CountDemo5(),
+            ElevatedButton(
+              child: Text('demo6'),
+              onPressed: () {
+                Get.to(CountDemo6());
+              },
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class CountDemo4 extends StatelessWidget {
+  CountDemo4({Key? key}) : super(key: key);
+
+  final _c = Get.put(_C1(), tag: 'demo4');
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      child: Obx(() => Text('${_c.value}')),
+      onPressed: () {
+        _c.add();
+      },
+    );
+  }
+}
+
+class CountDemo5 extends StatelessWidget {
+  CountDemo5({Key? key}) : super(key: key);
+
+  final _c = Get.put(_C1(), tag: 'demo5');
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      child: Obx(() => Text('${_c.value}')),
+      onPressed: () {
+        _c.add();
+      },
+    );
+  }
+}
+
+class CountDemo6 extends StatelessWidget {
+  CountDemo6({Key? key}) : super(key: key);
+
+  final _c = Get.find<_C1>(tag: 'demo5');
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(child: Obx(() => Text('${_c.value}'))),
+    );
+  }
+}
+
+class _C1 extends GetxController {
+  var value = 0.obs;
+
+  void add() {
+    value++;
+  }
+}
