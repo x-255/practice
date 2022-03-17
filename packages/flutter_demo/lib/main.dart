@@ -1,9 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_demo/components/base/button.dart';
+import 'package:flutter_demo/components/base/form.dart';
+import 'package:flutter_demo/components/base/icon.dart';
+import 'package:flutter_demo/components/base/image.dart';
+import 'package:flutter_demo/components/base/switch_checkbox.dart';
+import 'package:flutter_demo/components/base/text.dart';
+import 'package:flutter_demo/components/base/textField.dart';
 import 'package:flutter_demo/demos/bindings.dart';
 import 'package:flutter_demo/demos/connect.dart';
 import 'package:flutter_demo/demos/count.dart';
 import 'package:flutter_demo/demos/local_state.dart';
 import 'package:flutter_demo/demos/middleware.dart';
+import 'package:flutter_demo/demos/modal.dart';
 import 'package:flutter_demo/demos/pages.dart';
 import 'package:flutter_demo/demos/theme.dart';
 import 'package:flutter_demo/demos/tr.dart';
@@ -25,6 +33,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
       initialRoute: Routes.initial,
       getPages: Routes.routes,
       translations: Messages(),
@@ -48,6 +57,6 @@ class MyHome extends StatelessWidget {
         minTextAdapt: true,
         orientation: Orientation.portrait);
 
-    return BindingDemo();
+    return FormDemo();
   }
 }

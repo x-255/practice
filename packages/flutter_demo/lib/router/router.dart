@@ -15,12 +15,14 @@ class Routes {
     GetPage(
         name: bind1,
         page: () => BindingDemo1(),
+        transition: Transition.rightToLeftWithFade,
         binding: BindingsBuilder(() {
           Get.lazyPut(() => BindingController1());
         })),
     GetPage(
         name: bind2,
         page: () => BindingDemo2(),
+        transition: Transition.fade,
         binding: BindingsBuilder.put(() => BindingController2())),
     GetPage(
         name: '$md1/:id', page: () => MdDemo1(), middlewares: [Md1(), Md2()]),
