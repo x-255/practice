@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_demo/components/flexCenter.dart';
+import 'package:flutter_demo/components/flex_center.dart';
 
 class IconDemo extends StatelessWidget {
   const IconDemo({Key? key}) : super(key: key);

@@ -11,7 +11,7 @@ class Routes {
   static const md2 = '/page2';
 
   static final routes = [
-    GetPage(name: initial, page: () => MyHome()),
+    GetPage(name: initial, page: () => const MyHome()),
     GetPage(
         name: bind1,
         page: () => BindingDemo1(),
@@ -26,6 +26,6 @@ class Routes {
         binding: BindingsBuilder.put(() => BindingController2())),
     GetPage(
         name: '$md1/:id', page: () => MdDemo1(), middlewares: [Md1(), Md2()]),
-    GetPage(name: md2, page: () => MdDemo2()),
+    GetPage(name: md2, page: () => const MdDemo2()),
   ];
 }

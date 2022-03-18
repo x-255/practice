@@ -3,9 +3,15 @@ import 'package:flutter_demo/components/base/button.dart';
 import 'package:flutter_demo/components/base/form.dart';
 import 'package:flutter_demo/components/base/icon.dart';
 import 'package:flutter_demo/components/base/image.dart';
+import 'package:flutter_demo/components/base/progress.dart';
 import 'package:flutter_demo/components/base/switch_checkbox.dart';
 import 'package:flutter_demo/components/base/text.dart';
-import 'package:flutter_demo/components/base/textField.dart';
+import 'package:flutter_demo/components/base/text_field.dart';
+import 'package:flutter_demo/components/container/fitted_box.dart';
+import 'package:flutter_demo/components/container/scaffold.dart';
+import 'package:flutter_demo/components/layout/layout_builder.dart';
+import 'package:flutter_demo/components/layout/stack.dart';
+import 'package:flutter_demo/components/container/transform.dart';
 import 'package:flutter_demo/demos/bindings.dart';
 import 'package:flutter_demo/demos/connect.dart';
 import 'package:flutter_demo/demos/count.dart';
@@ -57,6 +63,6 @@ class MyHome extends StatelessWidget {
         minTextAdapt: true,
         orientation: Orientation.portrait);
 
-    return FormDemo();
+    return ScaffoldDemo();
   }
 }

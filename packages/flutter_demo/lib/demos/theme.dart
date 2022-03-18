@@ -9,7 +9,7 @@ class ThemeDemo extends StatelessWidget {
     return Scaffold(
       body: Center(
           child: ElevatedButton(
-        child: Text('change theme'),
+        child: const Text('change theme'),
         onPressed: () {
           Get.changeTheme(
               Get.isDarkMode ? ThemeData.light() : ThemeData.dark());

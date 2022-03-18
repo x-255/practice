@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_demo/components/flexCenter.dart';
 
 class ImageDemo extends StatelessWidget {
-  ImageDemo({Key? key}) : super(key: key);
+  const ImageDemo({Key? key}) : super(key: key);
 
-  final img = NetworkImage(
+  final img = const NetworkImage(
       "https://avatars2.githubusercontent.com/u/20411648?s=460&v=4");
 
   @override
@@ -72,7 +71,7 @@ class ImageDemo extends StatelessWidget {
           return Row(
             children: <Widget>[
               Padding(
-                padding: EdgeInsets.all(16.0),
+                padding: const EdgeInsets.all(16.0),
                 child: SizedBox(
                   width: 100,
                   child: e,

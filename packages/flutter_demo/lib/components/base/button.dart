@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_demo/components/flexCenter.dart';
+import 'package:flutter_demo/components/flex_center.dart';
 
 class ButtonDemo extends StatelessWidget {
   const ButtonDemo({Key? key}) : super(key: key);
@@ -17,28 +17,28 @@ class ButtonDemo extends StatelessWidget {
   }
 
   Widget _btn1() => ElevatedButton(
-        child: Text('ElevatedButton'),
+        child: const Text('ElevatedButton'),
         onPressed: () {
           print('ElevatedButton');
         },
       );
 
   Widget _btn2() => TextButton(
-        child: Text('TextButton'),
+        child: const Text('TextButton'),
         onPressed: () {
           print('TextButton');
         },
       );
 
   Widget _btn3() => OutlinedButton(
-        child: Text('OutlinedButton'),
+        child: const Text('OutlinedButton'),
         onPressed: () {
           print('OutlinedButton');
         },
       );
 
   Widget _btn4() => IconButton(
-        icon: Icon(Icons.ac_unit_outlined),
+        icon: const Icon(Icons.ac_unit_outlined),
         onPressed: () {
           print('IconButton');
         },

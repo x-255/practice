@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_demo/components/flexCenter.dart';
+import 'package:flutter_demo/components/flex_center.dart';
 import 'package:get/get.dart';
 
 class LocalState extends StatelessWidget {
@@ -7,7 +7,7 @@ class LocalState extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return _ValueBuilder();
+    return const _ValueBuilder();
   }
 }
 
@@ -26,9 +26,9 @@ class _ValueBuilder extends StatelessWidget {
           onDispose: () => print("Widget unmounted"),
         ),
         ElevatedButton(
-          child: Text('obv'),
+          child: const Text('obv'),
           onPressed: () {
-            Get.to(_ObxValue());
+            Get.to(const _ObxValue());
           },
         )
       ]),
@@ -45,7 +45,7 @@ class _ObxValue extends StatelessWidget {
       body: Center(
           child: ObxValue<RxInt>(
               (count) => TextButton(
-                    child: Text('${count}'),
+                    child: Text('$count'),
                     onPressed: () {
                       count++;
                     },

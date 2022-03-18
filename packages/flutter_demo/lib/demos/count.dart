@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class CountDemo extends StatelessWidget {
@@ -27,7 +26,7 @@ class CountDemo extends StatelessWidget {
                 onPressed: () {
                   Get.to(CountDemo2());
                 },
-                child: Text('EEE'))
+                child: const Text('EEE'))
           ],
         ),
       ),
@@ -72,9 +71,7 @@ class _C extends GetxController {
 }
 
 class CountDemo3 extends StatelessWidget {
-  CountDemo3({Key? key}) : super(key: key);
-
-  final _c = _C1();
+  const CountDemo3({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -86,7 +83,7 @@ class CountDemo3 extends StatelessWidget {
             CountDemo4(),
             CountDemo5(),
             ElevatedButton(
-              child: Text('demo6'),
+              child: const Text('demo6'),
               onPressed: () {
                 Get.to(CountDemo6());
               },

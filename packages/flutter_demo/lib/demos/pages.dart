@@ -10,10 +10,10 @@ class PageDemo1 extends StatelessWidget {
       body: Center(
         child: ElevatedButton(
           onPressed: () async {
-            final data = await Get.to(PageDemo2());
+            final data = await Get.to(const PageDemo2());
             print(data);
           },
-          child: Text('222'),
+          child: const Text('222'),
         ),
       ),
     );
@@ -32,7 +32,7 @@ class PageDemo2 extends StatelessWidget {
           onPressed: () {
             Get.back(result: {'aa': 'a', 'bb': 99});
           },
-          child: Text('back'),
+          child: const Text('back'),
         ),
       ),
     );

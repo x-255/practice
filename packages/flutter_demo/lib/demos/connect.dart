@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -22,16 +20,16 @@ class ConnectDemo extends StatelessWidget {
           children: [
             Obx(() => Text('get pet: ${_c.pet.value.name}')),
             TextButton(
-              child: Text('get'),
+              child: const Text('get'),
               onPressed: () {
                 _c.getPet();
               },
             ),
             TextButton(
-              child: Text('post'),
+              child: const Text('post'),
               onPressed: () async {
                 final res = await _p.addPet('ttt');
-                print('res====${res}');
+                print('res====$res');
               },
             ),
           ],
@@ -65,7 +63,6 @@ class _Pet {
 
   @override
   String toString() {
-    // TODO: implement toString
     return 'Pet: {id: $id, name: $name, status: $status}';
   }
 }
@@ -78,7 +75,7 @@ class _PetProvider extends GetConnect {
   }
 
   Future getPet(int petId) =>
-      get('/pet/${petId}').then((res) => _Pet.fromJson(res.body['data']));
+      get('/pet/$petId').then((res) => _Pet.fromJson(res.body['data']));
 
   Future addPet(String name) => post('/pet', {'name': name, 'status': 'sold'})
       .then((res) => res.body['data']);
@@ -95,7 +92,7 @@ class _PetController extends GetxController {
         pet(res);
       }
     }).catchError((err) {
-      print('err====${err}');
+      print('err====$err');
     });
   }
 }

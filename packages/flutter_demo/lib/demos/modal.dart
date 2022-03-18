@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_demo/components/flexCenter.dart';
+import 'package:flutter_demo/components/flex_center.dart';
 import 'package:get/get.dart';
 
 class ModalDemo extends StatelessWidget {
@@ -61,15 +61,15 @@ class ModalDemo extends StatelessWidget {
                 child: Wrap(
                   children: <Widget>[
                     ListTile(
-                        leading: Icon(Icons.music_note),
-                        title: Text('Music'),
+                        leading: const Icon(Icons.music_note),
+                        title: const Text('Music'),
                         onTap: () {
                           state('Music');
                           Get.back();
                         }),
                     ListTile(
-                      leading: Icon(Icons.videocam),
-                      title: Text('Video'),
+                      leading: const Icon(Icons.videocam),
+                      title: const Text('Video'),
                       onTap: () {
                         state('Video');
                         Get.back();

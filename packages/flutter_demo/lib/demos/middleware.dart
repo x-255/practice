@@ -10,7 +10,7 @@ class MdDemo extends StatelessWidget {
     return Scaffold(
       body: Center(
         child: TextButton(
-          child: Text('md1'),
+          child: const Text('md1'),
           onPressed: () {
             Get.toNamed('${Routes.md1}/123?aa=111&bb=222');
           },
@@ -27,7 +27,7 @@ class MdDemo1 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: Center(child: Text('111')),
     );
   }
@@ -38,7 +38,7 @@ class MdDemo2 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: Center(child: Text('222')),
     );
   }
@@ -46,33 +46,29 @@ class MdDemo2 extends StatelessWidget {
 
 class Md1 extends GetMiddleware {
   @override
-  // TODO: implement priority
   int? get priority => 2;
 
   @override
   RouteSettings? redirect(String? route) {
     print(111);
-    // TODO: implement redirect
+    return null;
     // return RouteSettings(name: Routes.md2);
   }
 }
 
 class Md2 extends GetMiddleware {
   @override
-  // TODO: implement priority
   int? get priority => 1;
 
   @override
   RouteSettings? redirect(String? route) {
     print(222);
-    // TODO: implement redirect
     return super.redirect(route);
   }
 
   @override
   GetPageBuilder? onPageBuildStart(GetPageBuilder? page) {
     print('bbb');
-    // TODO: implement onPageBuildStart
     return super.onPageBuildStart(page);
   }
 }
