@@ -1,12 +1,97 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+
+class _Con extends GetxController {
+  var navIdx = 0.obs;
+}
 
 class ScaffoldDemo extends StatelessWidget {
-  const ScaffoldDemo({Key? key}) : super(key: key);
+  ScaffoldDemo({Key? key}) : super(key: key);
+
+  final _con = Get.put(_Con());
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: const Text('app name'),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.share),
+            onPressed: () {
+              print('share');
+            },
+          )
+        ],
+      ),
+      bottomNavigationBar: Obx(
+        () => BottomNavigationBar(
+          items: const [
+            BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.business), label: 'Business'),
+            BottomNavigationBarItem(icon: Icon(Icons.school), label: 'School'),
+          ],
+          currentIndex: _con.navIdx.value,
+          fixedColor: Colors.blue,
+          onTap: _con.navIdx,
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: const Icon(Icons.arrow_upward),
+        onPressed: () {},
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+      drawer: const MyDrawer(),
+    );
+  }
+}
+
+class MyDrawer extends StatelessWidget {
+  const MyDrawer({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Drawer(
+      child: MediaQuery.removePadding(
+        context: context,
+        removeTop: true,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Padding(
+                  padding: EdgeInsets.all(38.w),
+                  child: ClipOval(
+                    child: Image.network(
+                      'https://picsum.photos/id/582/200/200',
+                      width: 80.w,
+                    ),
+                  ),
+                ),
+                const Text(
+                  'abc',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+            Expanded(
+              child: ListView(children: const <Widget>[
+                ListTile(
+                  leading: Icon(Icons.add),
+                  title: Text('Add account'),
+                ),
+                ListTile(
+                  leading: Icon(Icons.settings),
+                  title: Text('Manage accounts'),
+                ),
+              ]),
+            )
+          ],
+        ),
+      ),
     );
   }
 }
