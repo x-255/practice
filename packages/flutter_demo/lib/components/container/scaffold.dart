@@ -2,8 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-class _Con extends GetxController {
+class _Con extends GetxController with GetSingleTickerProviderStateMixin {
   var navIdx = 0.obs;
+  final tabs = ['home', 'business', 'schol'];
+  late TabController tabCon;
+
+  @override
+  void onInit() {
+    super.onInit();
+    tabCon = TabController(length: tabs.length, vsync: this);
+
+    ever(navIdx, (int i) {
+      tabCon.animateTo(i);
+    });
+  }
 }
 
 class ScaffoldDemo extends StatelessWidget {
@@ -44,6 +56,18 @@ class ScaffoldDemo extends StatelessWidget {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       drawer: const MyDrawer(),
+      body: TabBarView(
+        controller: _con.tabCon,
+        children: _con.tabs
+            .map((e) => Container(
+                  alignment: Alignment.center,
+                  child: Text(
+                    e,
+                    textScaleFactor: 5,
+                  ),
+                ))
+            .toList(),
+      ),
     );
   }
 }
