@@ -12,6 +12,11 @@ import 'package:flutter_demo/components/container/scaffold.dart';
 import 'package:flutter_demo/components/layout/layout_builder.dart';
 import 'package:flutter_demo/components/layout/stack.dart';
 import 'package:flutter_demo/components/container/transform.dart';
+import 'package:flutter_demo/components/scrollable/animated_list.dart';
+import 'package:flutter_demo/components/scrollable/grid_view.dart';
+import 'package:flutter_demo/components/scrollable/list_view.dart';
+import 'package:flutter_demo/components/scrollable/scroll_controller.dart';
+import 'package:flutter_demo/components/scrollable/single_child_scroll_view.dart';
 import 'package:flutter_demo/demos/bindings.dart';
 import 'package:flutter_demo/demos/connect.dart';
 import 'package:flutter_demo/demos/count.dart';
@@ -63,6 +68,6 @@ class MyHome extends StatelessWidget {
         minTextAdapt: true,
         orientation: Orientation.portrait);
 
-    return ScaffoldDemo();
+    return GridViewDemo();
   }
 }

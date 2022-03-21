@@ -8,7 +8,7 @@
 ├── packages
 │   ├── global.d.ts
 │   ├── algorithm # 算法学习
-│   ├── flutter_app # flutter学习
+│   ├── flutter_demo # flutter学习
 │   ├── flutter_shop # flutter防一个小商城
 │   ├── fp-in-js # 函数式编程互动练习 [Functional Programming in Javascript](http://reactivex.io/learnrx/)
 │   ├── init-format # 创建格式化配置脚本

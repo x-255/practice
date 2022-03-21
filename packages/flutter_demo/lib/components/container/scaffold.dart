@@ -59,12 +59,15 @@ class ScaffoldDemo extends StatelessWidget {
       body: TabBarView(
         controller: _con.tabCon,
         children: _con.tabs
-            .map((e) => Container(
-                  alignment: Alignment.center,
-                  child: Text(
-                    e,
-                    textScaleFactor: 5,
-                  ),
+            .map((e) => ListView(
+                  // 存储滚动位置
+                  key: PageStorageKey(e),
+                  children: List.generate(
+                      50,
+                      (index) => Padding(
+                            padding: EdgeInsets.all(10),
+                            child: Text('$e $index'),
+                          )),
                 ))
             .toList(),
       ),
