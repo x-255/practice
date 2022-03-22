@@ -1,5 +1,5 @@
-import 'package:flutter_demo/demos/bindings.dart';
-import 'package:flutter_demo/demos/middleware.dart';
+import 'package:flutter_demo/getx/bindings.dart';
+import 'package:flutter_demo/getx/middleware.dart';
 import 'package:flutter_demo/main.dart';
 import 'package:get/get.dart';
 
