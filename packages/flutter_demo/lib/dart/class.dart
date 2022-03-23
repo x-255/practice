@@ -59,10 +59,20 @@ void main() {
 
   /* print((Meta() as dynamic).run2); */
 
-  var u1 = User(1, 1);
+  /* var u1 = User(1, 1);
   var u2 = User(2, 2);
   var u3 = User(1, 3);
   print(u1);
   print(u2 + 8);
-  print(u1 == u3);
+  print(u1 == u3); */
+
+  var u1 = User(1);
+  var u2 = User(1);
+  var u3 = User(3);
+
+  var s = <User>{};
+  s.add(u1);
+  s.add(u2);
+  s.add(u3);
+  print(s);
 }

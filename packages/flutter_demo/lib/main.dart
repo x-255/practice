@@ -4,7 +4,7 @@ import 'package:flutter_demo/getx/tr.dart';
 import 'package:flutter_demo/router/router.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:flutter_demo/dart/class.dart' as classes;
+import 'package:flutter_demo/dart/stream.dart' as d;
 
 void main() {
   runApp(const MyApp());
@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    classes.main();
+    d.main();
 
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
