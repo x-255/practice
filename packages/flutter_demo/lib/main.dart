@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // d.main();
+    d.main();
 
     /* return GetMaterialApp(
       debugShowCheckedModeBanner: false,
