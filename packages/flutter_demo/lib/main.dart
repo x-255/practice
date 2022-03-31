@@ -3,6 +3,7 @@ import 'package:flutter_demo/components/base/unit.dart';
 import 'package:flutter_demo/dart/stream.dart' as d;
 import 'package:flutter_demo/getx/get_pages.dart';
 import 'package:flutter_demo/getx/tr.dart';
+import 'package:flutter_demo/lifecycle/widgets_binding_observer.dart';
 import 'package:flutter_demo/router/router.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    d.main();
+    // d.main();
 
     /* return GetMaterialApp(
       debugShowCheckedModeBanner: false,
@@ -31,13 +32,17 @@ class MyApp extends StatelessWidget {
 
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: '/p1',
+      // initialRoute: '/p1',
       getPages: GetRouter.routes,
+      translations: Messages(),
+      locale: zh,
       builder: (_, child) {
         return Scaffold(
+          appBar: AppBar(),
           body: child,
         );
       },
+      home: WidgetsBindingObserverDemo(),
     );
   }
 }
