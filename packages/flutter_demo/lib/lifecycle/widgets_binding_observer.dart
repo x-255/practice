@@ -71,7 +71,6 @@ class _Controller extends GetxController with WidgetsBindingObserver {
 
   @override
   void onInit() {
-    print(123123);
     super.onInit();
     WidgetsBinding.instance?.addObserver(this);
   }
