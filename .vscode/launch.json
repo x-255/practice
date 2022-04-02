@@ -5,14 +5,16 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "ts-node",
-      "type": "node",
+      "name": "flutter_shop",
+      "type": "dart",
       "request": "launch",
-      "args": ["${relativeFile}"],
-      "runtimeArgs": ["-r", "ts-node/register"],
-      "cwd": "${workspaceRoot}",
-      "protocol": "inspector",
-      "internalConsoleOptions": "openOnSessionStart"
+      "program": "packages/flutter_shop/lib/main.dart"
+    },
+    {
+      "name": "flutter_demo",
+      "type": "dart",
+      "request": "launch",
+      "program": "packages/flutter_demo/lib/main.dart"
     }
   ]
 }

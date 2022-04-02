@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_demo/components/base/unit.dart';
+import 'package:flutter_demo/components/hoc_fasibility/hoc1.dart';
 import 'package:flutter_demo/getx/get_pages.dart';
 import 'package:flutter_demo/getx/tr.dart';
 import 'package:flutter_demo/lifecycle/widgets_binding_observer.dart';
@@ -42,7 +43,7 @@ class MyApp extends StatelessWidget {
           body: child,
         );
       },
-      home: WidgetsBindingObserverDemo(),
+      home: Hoc1(),
     );
   }
 }
