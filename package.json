@@ -13,7 +13,8 @@
     "dev:zz": "cd packages/z7z8 && npm run dev 8078",
     "dev:fpjs": "cd packages/fp-in-js && npm run dev 8382",
     "dev:flp": "cd packages/flp && npm run dev 8041",
-    "dev:fpg": "cd packages/fp-guide && npm run dev 8125"
+    "dev:fpg": "cd packages/fp-guide && npm run dev 8125",
+    "dev:pii": "cd packages/mini-pinia && npm run dev 8344"
   },
   "keywords": [],
   "author": {
