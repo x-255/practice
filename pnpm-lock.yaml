@@ -169,11 +169,16 @@ importers:
       '@babel/core': ^7.16.7
       '@babel/plugin-transform-runtime': ^7.16.8
       '@babel/preset-env': ^7.16.8
+      '@types/ramda': ^0.27.65
       promises-aplus-tests: ^2.1.2
+      ramda: ^0.28.0
+    dependencies:
+      ramda: registry.npmmirror.com/ramda/0.28.0
     devDependencies:
       '@babel/core': registry.npmmirror.com/@babel/core/7.16.7
       '@babel/plugin-transform-runtime': registry.npmmirror.com/@babel/plugin-transform-runtime/7.16.8_@babel+core@7.16.7
       '@babel/preset-env': registry.npmmirror.com/@babel/preset-env/7.16.8_@babel+core@7.16.7
+      '@types/ramda': registry.npmmirror.com/@types/ramda/0.27.65
       promises-aplus-tests: registry.npmmirror.com/promises-aplus-tests/2.1.2
 
 packages:
@@ -892,7 +897,7 @@ packages:
     version: 3.0.0
     dependencies:
       browserslist: registry.npmmirror.com/browserslist/4.17.5
-      caniuse-lite: registry.npmmirror.com/caniuse-lite/1.0.30001272
+      caniuse-lite: registry.npmmirror.com/caniuse-lite/1.0.30001332
       lodash.memoize: registry.nlark.com/lodash.memoize/4.1.2
       lodash.uniq: registry.nlark.com/lodash.uniq/4.5.0
     dev: true
@@ -8305,7 +8310,7 @@ packages:
     engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
     hasBin: true
     dependencies:
-      caniuse-lite: registry.npmmirror.com/caniuse-lite/1.0.30001272
+      caniuse-lite: registry.npmmirror.com/caniuse-lite/1.0.30001332
       electron-to-chromium: registry.npmmirror.com/electron-to-chromium/1.3.884
       escalade: registry.nlark.com/escalade/3.1.1
       node-releases: registry.npmmirror.com/node-releases/2.0.1
@@ -8319,7 +8324,7 @@ packages:
     engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
     hasBin: true
     dependencies:
-      caniuse-lite: registry.npmmirror.com/caniuse-lite/1.0.30001298
+      caniuse-lite: registry.npmmirror.com/caniuse-lite/1.0.30001332
       electron-to-chromium: registry.npmmirror.com/electron-to-chromium/1.4.40
       escalade: registry.npmmirror.com/escalade/3.1.1
       node-releases: registry.npmmirror.com/node-releases/2.0.1
@@ -8403,16 +8408,10 @@ packages:
     engines: {node: '>=10'}
     dev: true
 
-  registry.npmmirror.com/caniuse-lite/1.0.30001272:
-    resolution: {integrity: sha1-jpeQ/5lenrbh9MRc0H3aqHzduxQ=, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/caniuse-lite/download/caniuse-lite-1.0.30001272.tgz}
+  registry.npmmirror.com/caniuse-lite/1.0.30001332:
+    resolution: {integrity: sha512-10T30NYOEQtN6C11YGg411yebhvpnC6Z102+B95eAsN0oB6KUs01ivE8u+G6FMIRtIrVlYXhL+LUwQ3/hXwDWw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/caniuse-lite/-/caniuse-lite-1.0.30001332.tgz}
     name: caniuse-lite
-    version: 1.0.30001272
-    dev: true
-
-  registry.npmmirror.com/caniuse-lite/1.0.30001298:
-    resolution: {integrity: sha512-AcKqikjMLlvghZL/vfTHorlQsLDhGRalYf1+GmWCf5SCMziSGjRYQW/JEksj14NaYHIR6KIhrFAy0HV5C25UzQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/caniuse-lite/-/caniuse-lite-1.0.30001298.tgz}
-    name: caniuse-lite
-    version: 1.0.30001298
+    version: 1.0.30001332
     dev: true
 
   registry.npmmirror.com/chalk/1.1.3:
