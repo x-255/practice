@@ -63,7 +63,7 @@ function longestPalindrome(s: string): string {
     res = ''
   for (let i = 0; i < len; i++) {
     for (let j = len; j > i; j--) {
-      let str = s.substring(i, j)
+      let str = s.slice(i, j)
       if (isPalindrome(str)) {
         if (str.length > res.length) {
           res = str
