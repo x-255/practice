@@ -1,37 +1,38 @@
 /*
  * @Description:两数之和 类型体操
- * @Author: 贰伍伍
- * @Email: ouhuangff@163.com
- * @LastEditTime: 2022-04-20 00:26:35
+ * @LastEditTime: 2022-04-29 11:09:14
  */
-type ToArr<
-  N extends number,
-  Arr extends number[] = []
-> = Arr['length'] extends N ? Arr : ToArr<N, [...Arr, 0]>
-
-type Add<A extends number, B extends number> = [
-  ...ToArr<A>,
-  ...ToArr<B>
-]['length']
+type ToArr<T extends number, A extends any[] = []> = A['length'] extends T
+  ? A
+  : ToArr<T, [...A, 0]>
 
 type Sub<A extends number, B extends number> = ToArr<A> extends [
   ...ToArr<B>,
-  ...infer Diff
+  ...infer O
 ]
-  ? Diff['length']
+  ? O['length']
   : never
 
-type Tail<T> = T extends [infer Head, ...infer Tail] ? Tail : []
+type Tail<A extends any[]> = A extends [infer H, ...infer T] ? T : []
 
-/* 判断数组中有没有两个数的和等于目标数字的 */
-type TwoSum<N extends number[], T extends number> = N['length'] extends 0
+type TwoSum<T extends number[], U extends number> = T extends []
   ? false
-  : Sub<T, N[0]> extends Tail<N>[number]
+  : [Sub<U, T[0]>] extends [never]
+  ? false
+  : Sub<U, T[0]> extends Tail<T>[number]
   ? true
-  : TwoSum<Tail<N>, T>
+  : TwoSum<Tail<T>, U>
 
-type Case = [
-  TwoSum<[1, 2, 3, 4], 5>,
-  TwoSum<[1, 2, 3, 4], 7>,
-  TwoSum<[1, 2, 3, 4], 11>
+type cases = [
+  TwoSum<[3, 3], 6>, // true
+  TwoSum<[3, 2, 4], 6>, // true
+  TwoSum<[2, 7, 11, 15], 15>, // false
+  TwoSum<[2, 7, 11, 15], 9>, // true
+  TwoSum<[1, 2, 3], 0>, // false
+  TwoSum<[1, 2, 3], 1>, // false
+  TwoSum<[1, 2, 3], 2>, // false
+  TwoSum<[1, 2, 3], 3>, // true
+  TwoSum<[1, 2, 3], 4>, // true
+  TwoSum<[1, 2, 3], 5>, // true
+  TwoSum<[1, 2, 3], 6> // false
 ]
