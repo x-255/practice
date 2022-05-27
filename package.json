@@ -14,7 +14,8 @@
     "dev:fpjs": "cd packages/fp-in-js && npm run dev 8382",
     "dev:flp": "cd packages/flp && npm run dev 8041",
     "dev:fpg": "cd packages/fp-guide && npm run dev 8125",
-    "dev:pii": "cd packages/mini-pinia && npm run dev 8344"
+    "dev:pii": "cd packages/mini-pinia && npm run dev 8344",
+    "dev:anjs": "cd packages/angularjs_learn && npm run dev 8334"
   },
   "keywords": [],
   "author": {
