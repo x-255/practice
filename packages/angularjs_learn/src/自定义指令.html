@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="../../../favicon.ico" type="image/x-icon" />
+    <title>angularjs_learn</title>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.min.js"
+      integrity="sha512-KZmyTq3PLx9EZl0RHShHQuXtrvdJ+m35tuOiwlcZfs/rE7NZv29ygNA8SFCkMXTnYZQK2OX0Gm2qKGfvWEtRXA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+  </head>
+  <body>
+    <div ng-app="app" ng-controller="ctrl">
+      <h2>{{aa}}</h2>
+      <my-dir pa="{{aa}}" pa2="aa" p-fn="fn(aa)"></my-dir>
+    </div>
+
+    <script>
+      const app = angular.module('app', [])
+      app.controller('ctrl', ($scope) => {
+        $scope.aa = 0
+        $scope.fn = (aa) => {
+          console.log(`aa====`, aa)
+        }
+      })
+      app.directive('myDir', () => {
+        return {
+          replace: true,
+          scope: {
+            pa: '@',
+            pa2: '=',
+            pFn: '&',
+          },
+          template: `
+            <div>
+              <input ng-model="pa" type="text" />
+              <input ng-model="pa2" type="text" />
+              <button ng-click="pFn({aa:111})">fn</button>
+            </div>
+          `,
+          link(scope, el, attrs) {
+            el.children().css('color', 'red')
+          },
+        }
+      })
+    </script>
+  </body>
+</html>

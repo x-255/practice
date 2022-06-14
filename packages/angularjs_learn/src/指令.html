@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="../../../favicon.ico" type="image/x-icon" />
+    <title>angularjs_learn</title>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.min.js"
+      integrity="sha512-KZmyTq3PLx9EZl0RHShHQuXtrvdJ+m35tuOiwlcZfs/rE7NZv29ygNA8SFCkMXTnYZQK2OX0Gm2qKGfvWEtRXA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+  </head>
+  <body>
+    <div ng-app ng-init="s='';arr=[1, 2, 3]">
+      <p>s: {{s}}</p>
+      <input type="text" ng-model="s" />
+
+      <ul>
+        <li ng-repeat="x in arr">{{x}}</li>
+      </ul>
+
+      <select ng-model="type">
+        <option value="1">a</option>
+        <option value="2">b</option>
+        <option value="3">c</option>
+      </select>
+
+      <div ng-switch="type">
+        <p ng-switch-when="1">selected A</p>
+        <p ng-switch-when="2">selected B</p>
+        <p ng-switch-when="3">selected C</p>
+        <p ng-switch-default>no selected</p>
+      </div>
+    </div>
+  </body>
+</html>

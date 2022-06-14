@@ -4,29 +4,29 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="shortcut icon" href="../../favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="../../../favicon.ico" type="image/x-icon" />
     <title>angularjs_learn</title>
-    <style>
-      a {
-        display: block;
-        margin-bottom: 10px;
-      }
-    </style>
-  </head>
-  <body>
-    <a href="./src/表达式.html">表达式</a>
-    <a href="./src/指令.html">指令</a>
-    <a href="./src/控制器.html">控制器</a>
-    <a href="./src/过滤器.html">过滤器</a>
-    <a href="./src/http.html">http.html</a>
-    <a href="./src/事件.html">事件.html</a>
-    <a href="./src/自定义指令.html">自定义指令.html</a>
-
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.min.js"
       integrity="sha512-KZmyTq3PLx9EZl0RHShHQuXtrvdJ+m35tuOiwlcZfs/rE7NZv29ygNA8SFCkMXTnYZQK2OX0Gm2qKGfvWEtRXA=="
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     ></script>
+  </head>
+  <body>
+    <div ng-app="app" ng-controller="ctrl">
+      {{person.firstName + " " + person.lastName}}
+    </div>
+
+    <script>
+      function ctrl($scope) {
+        $scope.person = {
+          firstName: 'John',
+          lastName: 'Doe',
+        }
+      }
+
+      angular.module('app', []).controller('ctrl', ctrl)
+    </script>
   </body>
 </html>

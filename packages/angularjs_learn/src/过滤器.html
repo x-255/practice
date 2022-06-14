@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="../../../favicon.ico" type="image/x-icon" />
+    <title>angularjs_learn</title>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.min.js"
+      integrity="sha512-KZmyTq3PLx9EZl0RHShHQuXtrvdJ+m35tuOiwlcZfs/rE7NZv29ygNA8SFCkMXTnYZQK2OX0Gm2qKGfvWEtRXA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+  </head>
+  <body>
+    <div ng-app="app" ng-controller="ctrl">
+      <p>大写： {{data.a | uppercase}}</p>
+      <p>小写： {{data.b | lowercase}}</p>
+      <p>货币格式： {{data.c | currency}}</p>
+      <p>货币格式： {{data.d | currency}}</p>
+      <p>根据某个表达式排列数组：</p>
+      <ul>
+        <li ng-repeat="row in data.e | orderBy: 'n'">{{row.n}}</li>
+      </ul>
+    </div>
+
+    <script>
+      function ctrl($scope) {
+        $scope.data = {
+          a: 'zczHJxc',
+          b: 'BNdsaMBDS',
+          c: 123456789,
+          d: '981293192.1',
+          e: [{ n: 1 }, { n: 3 }, { n: 6 }, { n: 2 }, { n: 3 }],
+        }
+      }
+
+      angular.module('app', []).controller('ctrl', ctrl)
+    </script>
+  </body>
+</html>

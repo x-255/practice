@@ -4,23 +4,24 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="shortcut icon" href="../../favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="../../../favicon.ico" type="image/x-icon" />
     <title>angularjs_learn</title>
-    <style>
-      a {
-        display: block;
-        margin-bottom: 10px;
-      }
-    </style>
   </head>
   <body>
-    <a href="./src/表达式.html">表达式</a>
-    <a href="./src/指令.html">指令</a>
-    <a href="./src/控制器.html">控制器</a>
-    <a href="./src/过滤器.html">过滤器</a>
-    <a href="./src/http.html">http.html</a>
-    <a href="./src/事件.html">事件.html</a>
-    <a href="./src/自定义指令.html">自定义指令.html</a>
+    <div ng-app ng-init="n=1;s='zxczc';obj={a:11};arr=[1, 2, 3]">
+      <h3>Number:</h3>
+      <p>{{n}}</p>
+      <p ng-bind="n"></p>
+
+      <h3>String:</h3>
+      <p>{{s}}</p>
+
+      <h3>Object:</h3>
+      <p>{{obj.a}}</p>
+
+      <h3>Array:</h3>
+      <p>{{arr[1]}}</p>
+    </div>
 
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.min.js"
