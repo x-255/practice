@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="../../../favicon.ico" type="image/x-icon" />
+    <title>angularjs_learn</title>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.min.js"
+      integrity="sha512-KZmyTq3PLx9EZl0RHShHQuXtrvdJ+m35tuOiwlcZfs/rE7NZv29ygNA8SFCkMXTnYZQK2OX0Gm2qKGfvWEtRXA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+  </head>
+  <body>
+    <div ng-app="app" ng-controller="ctrl">
+      <p>{{ name }}</p>
+      <p>{{ c }}</p>
+    </div>
+
+    <script>
+      function ctrl($scope, $timeout, $interval) {
+        $scope.name = 'xxx'
+
+        /* setTimeout(() => {
+          // $scope.name = 'yyy'
+          // $scope.$apply() // 手动触发脏查询
+
+          $scope.$apply(() => {
+            $scope.name = 'zzz'
+          })
+        }, 800) */
+
+        $timeout(() => {
+          $scope.name = 'jjj'
+        }, 800)
+
+        $scope.$watch('name', (val, oldVal) => {
+          console.log(`val====`, val)
+          console.log(`oldVal====`, oldVal)
+        })
+
+        $scope.c = 0
+
+        const timer = $interval(() => {
+          $scope.c++
+          if ($scope.c === 5) {
+            $interval.cancel(timer)
+          }
+        }, 800)
+      }
+
+      angular.module('app', []).controller('ctrl', ctrl)
+    </script>
+  </body>
+</html>

@@ -18,14 +18,28 @@
 
     <script>
       function ctrl($scope, $http) {
+        const BASE_URL =
+          'https://www.fastmock.site/mock/c93969f677e66693cb4e1fd6b84b20a7/mock'
+
         $http
-          .get('https://jsonplaceholder.typicode.com/todos/1')
+          .get(`${BASE_URL}/get`, { params: { name: 'xxx' } })
           .then((res) => {
-            console.log(res)
+            console.log(res.data)
           })
+          .catch((err) => {
+            console.log(`err====`, err)
+          })
+
+        $http({
+          url: `${BASE_URL}/post`,
+          method: 'post',
+          data: { xxx: 'uuu' },
+        }).then((res) => {
+          console.log(`res====`, res.data)
+        })
       }
 
-      angular.module('app', []).controller('ctrl', ctrl)
+      angular.module('app', []).controller('ctrl', ['$scope', '$http', ctrl])
     </script>
   </body>
 </html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-CN" ng-app="app">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="../../../favicon.ico" type="image/x-icon" />
+    <title>angularjs_learn</title>
+    <style>
+      .active {
+        color: red;
+      }
+    </style>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.min.js"
+      integrity="sha512-KZmyTq3PLx9EZl0RHShHQuXtrvdJ+m35tuOiwlcZfs/rE7NZv29ygNA8SFCkMXTnYZQK2OX0Gm2qKGfvWEtRXA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/1.0.30/angular-ui-router.min.js"
+      integrity="sha512-HdDqpFK+5KwK5gZTuViiNt6aw/dBc3d0pUArax73z0fYN8UXiSozGNTo3MFx4pwbBPldf5gaMUq/EqposBQyWQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+  </head>
+  <body>
+    <div>
+      <a ui-sref="home" ui-sref-active="active">home</a>
+      <a ui-sref="about" ui-sref-active="active">about</a>
+      <a ui-sref="items" ui-sref-active="active">items</a>
+      <ui-view></ui-view>
+    </div>
+
+    <script>
+      // angular.module(name, dep) 定义模块
+      // angular.module(name) 获取模块
+
+      const app = angular.module('app', ['ui.router'])
+      app.config([
+        '$stateProvider',
+        '$urlRouterProvider',
+        ($stateProvider, $urlRouterProvider) => {
+          $stateProvider
+            .state('home', {
+              url: '/home',
+              template: `<h1>home</h1>`,
+            })
+            .state('about', {
+              url: '/about',
+              template: `<h1>about</h1>`,
+            })
+            .state('items', {
+              url: '/items',
+              templateUrl: './items.html',
+              controller: [
+                '$scope',
+                '$state',
+                function ($scope, $state) {
+                  $scope.goHome = () => {
+                    $state.go('home')
+                  }
+                },
+              ],
+            })
+            .state('items.i1', {
+              url: '/i1',
+              template: `<div>
+                  <h2>item1</h2>
+                  <button ng-click="goHome()">go home</button>
+                </div>`,
+            })
+            .state('items.i2', {
+              url: '/i2',
+              template: `<h2>item2</h2>`,
+            })
+            .state('items.i3', {
+              url: '/i3',
+              template: `<h2>item3</h2>`,
+            })
+
+          $urlRouterProvider.otherwise('home')
+        },
+      ])
+    </script>
+  </body>
+</html>
