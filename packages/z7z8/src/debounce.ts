@@ -9,7 +9,7 @@ function debounce(fn: AnyFunction, wait = 1000, immediate = false) {
   let timer: number | null = null
 
   function debounced(this: any, ...args: any[]) {
-    const run = fn.bind(this, args)
+    const run = fn.bind(this, ...args)
 
     if (!timer && immediate) {
       run()
