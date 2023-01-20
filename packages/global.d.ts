@@ -1,3 +1,3 @@
-type AnyObject = Record<keyof any, any>
+type AnyObject = Record<PropertyKey, any>
 
 type AnyFunction = (...args: any[]) => any

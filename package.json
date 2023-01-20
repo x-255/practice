@@ -15,7 +15,8 @@
     "dev:flp": "cd packages/flp && npm run dev 8041",
     "dev:fpg": "cd packages/fp-guide && npm run dev 8125",
     "dev:pii": "cd packages/mini-pinia && npm run dev 8344",
-    "dev:anjs": "cd packages/angularjs_learn && npm run dev 8334"
+    "dev:anjs": "cd packages/angularjs_learn && npm run dev 8334",
+    "dev:vs": "cd packages/vue设计与实现 && npm run dev 8084"
   },
   "keywords": [],
   "author": {
