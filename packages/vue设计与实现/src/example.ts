@@ -3,12 +3,21 @@ import { reactive, effect } from './lib/effect'
 const data = reactive({
   foo: 'foo',
   bar: 1,
+  ok: true,
 })
 
+// @ts-ignore
+window.data = data
+
 effect(() => {
-  document.body.innerText = data.foo
+  console.log(123)
+  document.body.innerText = data.ok ? data.foo : 'not'
 })
 
 setTimeout(() => {
-  data.foo = '999'
+  data.ok = false
 }, 1000)
+
+setTimeout(() => {
+  data.foo = 'false'
+}, 2000)
