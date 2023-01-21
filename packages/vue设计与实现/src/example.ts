@@ -9,13 +9,6 @@ const data = reactive({
 // @ts-ignore
 window.data = data
 
-let temp1, temp2
 effect(() => {
-  console.log('e1')
-
-  effect(function f2() {
-    console.log('e2')
-    temp1 = data.bar
-  })
-  temp2 = data.foo
+  data.bar++
 })

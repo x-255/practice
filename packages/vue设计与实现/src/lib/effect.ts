@@ -35,11 +35,19 @@ function trigger(target: AnyObject, key: PropertyKey) {
   const depsMap = bucket.get(target)
 
   if (depsMap) {
-    const deps = depsMap.get(key)
+    const effects = depsMap.get(key)
 
-    if (!deps) return
+    if (!effects) return
 
-    const effectsToRun = new Set(deps)
+    const effectsToRun = new Set<EffectFn>()
+
+    effects &&
+      effects.forEach((effect) => {
+        if (effect !== activeEffect) {
+          effectsToRun.add(effect)
+        }
+      })
+
     effectsToRun.forEach((effect) => effect())
   }
 }
