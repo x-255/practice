@@ -9,15 +9,13 @@ const data = reactive({
 // @ts-ignore
 window.data = data
 
+let temp1, temp2
 effect(() => {
-  console.log(123)
-  document.body.innerText = data.ok ? data.foo : 'not'
+  console.log('e1')
+
+  effect(function f2() {
+    console.log('e2')
+    temp1 = data.bar
+  })
+  temp2 = data.foo
 })
-
-setTimeout(() => {
-  data.ok = false
-}, 1000)
-
-setTimeout(() => {
-  data.foo = 'false'
-}, 2000)

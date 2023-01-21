@@ -8,8 +8,12 @@ interface EffectFn {
   deps: Set<AnyFunction>[]
 }
 
-const bucket = new WeakMap<AnyObject, Map<PropertyKey, Set<AnyFunction>>>()
 let activeEffect: EffectFn
+const bucket = new WeakMap<AnyObject, Map<PropertyKey, Set<AnyFunction>>>()
+const effectStack: EffectFn[] = []
+
+// @ts-ignore
+window.bucket = bucket
 
 function track(target: AnyObject, key: PropertyKey) {
   if (!activeEffect) return
@@ -35,8 +39,8 @@ function trigger(target: AnyObject, key: PropertyKey) {
 
     if (!deps) return
 
-    const effectToRun = new Set(deps)
-    effectToRun.forEach((effect) => effect())
+    const effectsToRun = new Set(deps)
+    effectsToRun.forEach((effect) => effect())
   }
 }
 
@@ -68,8 +72,11 @@ export function reactive<T extends AnyObject>(target: T): T {
 export function effect(fn: AnyFunction, options: EffectOptions = {}) {
   const effectFn: EffectFn = () => {
     activeEffect = effectFn
+    effectStack.push(effectFn)
     cleanup(effectFn)
     fn()
+    effectStack.pop()
+    activeEffect = effectStack[effectStack.length - 1]
   }
 
   effectFn.deps = []
