@@ -1,19 +1,52 @@
 interface EffectOptions {
   lazy?: boolean
-  scheduler?(): void
+  scheduler?(effectFn: EffectFn): void
 }
 
 interface EffectFn {
   (): any
   deps: Set<AnyFunction>[]
+  options: EffectOptions
 }
 
 let activeEffect: EffectFn
-const bucket = new WeakMap<AnyObject, Map<PropertyKey, Set<AnyFunction>>>()
+const bucket = new WeakMap<AnyObject, Map<PropertyKey, Set<EffectFn>>>()
 const effectStack: EffectFn[] = []
 
 // @ts-ignore
 window.bucket = bucket
+
+export function reactive<T extends AnyObject>(target: T): T {
+  return new Proxy(target, {
+    get(target, key, receiver) {
+      track(target, key)
+
+      return Reflect.get(target, key, receiver)
+    },
+    set(target, key, newVal, receiver) {
+      const res = Reflect.set(target, key, newVal, receiver)
+
+      trigger(target, key)
+
+      return res
+    },
+  })
+}
+
+export function effect(fn: AnyFunction, options: EffectOptions = {}) {
+  const effectFn: EffectFn = () => {
+    activeEffect = effectFn
+    effectStack.push(effectFn)
+    cleanup(effectFn)
+    fn()
+    effectStack.pop()
+    activeEffect = effectStack[effectStack.length - 1]
+  }
+
+  effectFn.options = options
+  effectFn.deps = []
+  effectFn()
+}
 
 function track(target: AnyObject, key: PropertyKey) {
   if (!activeEffect) return
@@ -48,7 +81,14 @@ function trigger(target: AnyObject, key: PropertyKey) {
         }
       })
 
-    effectsToRun.forEach((effect) => effect())
+    effectsToRun.forEach((effect) => {
+      const { scheduler } = effect.options
+      if (scheduler) {
+        scheduler(effect)
+      } else {
+        effect()
+      }
+    })
   }
 }
 
@@ -58,35 +98,4 @@ function cleanup(effectFn: EffectFn) {
   }
 
   effectFn.deps.length = 0
-}
-
-export function reactive<T extends AnyObject>(target: T): T {
-  return new Proxy(target, {
-    get(target, key, receiver) {
-      track(target, key)
-
-      return Reflect.get(target, key, receiver)
-    },
-    set(target, key, newVal, receiver) {
-      const res = Reflect.set(target, key, newVal, receiver)
-
-      trigger(target, key)
-
-      return res
-    },
-  })
-}
-
-export function effect(fn: AnyFunction, options: EffectOptions = {}) {
-  const effectFn: EffectFn = () => {
-    activeEffect = effectFn
-    effectStack.push(effectFn)
-    cleanup(effectFn)
-    fn()
-    effectStack.pop()
-    activeEffect = effectStack[effectStack.length - 1]
-  }
-
-  effectFn.deps = []
-  effectFn()
 }
