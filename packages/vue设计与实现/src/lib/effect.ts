@@ -1,5 +1,6 @@
 interface EffectFn<T = any> {
   (): T
+  deps: Deps[]
 }
 
 type DepsMap = Map<PropertyKey, Deps>
@@ -19,8 +20,30 @@ const bucket = new WeakMap<AnyObject, DepsMap>()
 let activeEffect: EffectFn | undefined
 
 export function effect(fn: AnyFunction) {
-  activeEffect = fn
-  fn()
+  const effectFn: EffectFn = () => {
+    activeEffect = effectFn
+    /**
+     * 副作用函数执行前将其从相关联的依赖集合中移除
+     * 当副作用函数执行后会重新建立联系，但在新的联系中不会包含遗留的副作用函数
+     * 比如
+     * const data = reactive({
+     *     ok: true,
+     *     text: 'not',
+     *   })
+     *   effect(() => {
+     *     document.querySelector('#text')!.textContent = data.ok ? data.text : 'not'
+     *   })
+     *
+     * data.ok = false
+     * 之后无论text怎么变都不需要重新执行副作用函数
+     */
+    cleanup(effectFn)
+    fn()
+  }
+
+  // 用来存储所有与该副作用函数相关联的依赖集合
+  effectFn.deps = []
+  effectFn()
 }
 
 export function reactive<T extends AnyObject>(target: T) {
@@ -52,6 +75,8 @@ function track(target: AnyObject, key: PropertyKey) {
   if (!deps) depsMap.set(key, (deps = new Set()))
 
   deps.add(activeEffect)
+
+  activeEffect.deps.push(deps)
 }
 
 function trigger(target: AnyObject, key: PropertyKey, value: unknown) {
@@ -61,5 +86,39 @@ function trigger(target: AnyObject, key: PropertyKey, value: unknown) {
 
   const effects = depsMap.get(key)
 
-  effects && effects.forEach((effect) => effect())
+  /**
+   * 当副作用函数执行时会调用cleanup将其清除，但副作用函数的执行会导致其重新被收集到集合中
+   * 这个过程可以用如下简短的代码来描述
+   *
+   * const set = new Set([1])
+   * set.forEach(item => {
+   *   set.delete(1)
+   *   set.add(1)
+   *   console.log('遍历中。。。')
+   * })
+   *
+   * 语言规范中对此有明确的说明：
+   * 在调用forEach遍历Set集合时，如果一个值已经被访问过了，但该值被删除并重新添加到集合，
+   * 如果此时遍历没有结束，那么该值会重新被访问。因此上面的代码会无限执行。
+   * 解决办法可以构造另外一个Set集合并遍历它。
+   *
+   * const set = new Set([1])
+   * const newSet = new Set(set)
+   *
+   * newSet.forEach((item) => {
+   *   set.delete(1)
+   *   set.add(1)
+   *   console.log('遍历中。。。')
+   * })
+   */
+  const effectsToRun = new Set(effects)
+  effectsToRun && effectsToRun.forEach((effect) => effect())
+}
+
+function cleanup(effectFn: EffectFn) {
+  effectFn.deps.forEach((deps) => {
+    deps.delete(effectFn)
+  })
+
+  effectFn.deps.length = 0
 }

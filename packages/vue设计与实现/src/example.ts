@@ -1,14 +1,17 @@
 import { effect, reactive } from './lib/effect'
 
 const data = reactive({
-  foo: 1,
-  bar: 'xx',
+  ok: true,
+  text: 'hi',
 })
 
+// @ts-ignore
+window.data = data
+
 effect(() => {
-  document.querySelector('#text')!.textContent = data.foo + ''
+  document.querySelector('#text')!.textContent = data.ok ? data.text : 'not'
 })
 
 document.querySelector('#add')?.addEventListener('click', () => {
-  data.foo++
+  data.ok = false
 })
