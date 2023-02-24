@@ -122,8 +122,31 @@ function trigger(target: AnyObject, key: PropertyKey) {
    *   console.log('遍历中。。。')
    * })
    */
-  const effectsToRun = new Set(effects)
-  effectsToRun && effectsToRun.forEach((effect) => effect())
+  const effectsToRun = new Set<EffectFn>()
+
+  effects?.forEach((effect) => {
+    /**
+     * const data = reactive({ foo: 1 })
+     * effect(() => {
+     *   data.foo++
+     * })
+     *
+     * 这段代码会导致无限递归循环，导致栈溢出
+     * data.foo++ 相当于 data.foo = data.foo + 1
+     * 这个语句中首先读取foo，会触发track操作，收集副作用函数到桶里，
+     * 接着将其加一后在赋值给foo，此时触发trigger，从桶里取出副作用函数执行。
+     * 但问题是该副作用函数正在执行中，还没执行完就又要开始下一次执行。
+     * 这样会无限递归的调用自己，于是就产生了栈溢出。
+     *
+     * 因为读取和设置操作的都是同一个函数，也就是activeEffect。
+     * 所以增加守卫条件：如果在trigger触发的副作用函数与正在执行的副作用函数相同，则不触发执行。
+     */
+    if (effect !== activeEffect) {
+      effectsToRun.add(effect)
+    }
+  })
+
+  effectsToRun.forEach((effect) => effect())
 }
 
 function cleanup(effectFn: EffectFn) {
