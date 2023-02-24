@@ -19,9 +19,11 @@ const bucket = new WeakMap<AnyObject, DepsMap>()
 // 用一个全局变量储被注册的副作用函数
 let activeEffect: EffectFn | undefined
 
+// effect栈
+const effectStack: EffectFn[] = []
+
 export function effect(fn: AnyFunction) {
   const effectFn: EffectFn = () => {
-    activeEffect = effectFn
     /**
      * 副作用函数执行前将其从相关联的依赖集合中移除
      * 当副作用函数执行后会重新建立联系，但在新的联系中不会包含遗留的副作用函数
@@ -38,7 +40,16 @@ export function effect(fn: AnyFunction) {
      * 之后无论text怎么变都不需要重新执行副作用函数
      */
     cleanup(effectFn)
+    activeEffect = effectFn
+    // 在调用副作用函数前压入栈中
+    effectStack.push(effectFn)
     fn()
+    /**
+     * 当前副作用函数执行完，将其弹出栈，并恢复为之前的值
+     * 如此，响应式数据就只会收集直接读取其值的副作用函数作为依赖，从而避免发生（比如effect嵌套导致的）错乱。
+     */
+    effectStack.pop()
+    activeEffect = effectStack[effectStack.length - 1]
   }
 
   // 用来存储所有与该副作用函数相关联的依赖集合
@@ -56,7 +67,7 @@ export function reactive<T extends AnyObject>(target: T) {
     set(target, key, value, receiver) {
       const res = Reflect.set(target, key, value, receiver)
       // 把副作用函数从桶中取出执行
-      trigger(target, key, value)
+      trigger(target, key)
 
       return res
     },
@@ -79,7 +90,7 @@ function track(target: AnyObject, key: PropertyKey) {
   activeEffect.deps.push(deps)
 }
 
-function trigger(target: AnyObject, key: PropertyKey, value: unknown) {
+function trigger(target: AnyObject, key: PropertyKey) {
   const depsMap = bucket.get(target)
 
   if (!depsMap) return
