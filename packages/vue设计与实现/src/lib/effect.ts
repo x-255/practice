@@ -1,6 +1,15 @@
 interface EffectFn<T = any> {
   (): T
   deps: Deps[]
+  options: EffectOptions
+}
+
+interface EffectOptions {
+  /**
+   * 调度器
+   * 在trigger触发副作用函数重新执行时，有能力决定副作用函数执行的实际、次数、方式。
+   */
+  scheduler?(effectFn: EffectFn): void
 }
 
 type DepsMap = Map<PropertyKey, Deps>
@@ -22,7 +31,7 @@ let activeEffect: EffectFn | undefined
 // effect栈
 const effectStack: EffectFn[] = []
 
-export function effect(fn: AnyFunction) {
+export function effect(fn: AnyFunction, options: EffectOptions = {}) {
   const effectFn: EffectFn = () => {
     /**
      * 副作用函数执行前将其从相关联的依赖集合中移除
@@ -52,6 +61,7 @@ export function effect(fn: AnyFunction) {
     activeEffect = effectStack[effectStack.length - 1]
   }
 
+  effectFn.options = options
   // 用来存储所有与该副作用函数相关联的依赖集合
   effectFn.deps = []
   effectFn()
@@ -146,7 +156,13 @@ function trigger(target: AnyObject, key: PropertyKey) {
     }
   })
 
-  effectsToRun.forEach((effect) => effect())
+  effectsToRun.forEach((effect) => {
+    if (effect.options.scheduler) {
+      effect.options.scheduler(effect)
+    } else {
+      effect()
+    }
+  })
 }
 
 function cleanup(effectFn: EffectFn) {
