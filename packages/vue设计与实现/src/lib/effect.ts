@@ -10,6 +10,7 @@ interface EffectOptions {
    * 在trigger触发副作用函数重新执行时，有能力决定副作用函数执行的实际、次数、方式。
    */
   scheduler?(effectFn: EffectFn): void
+  lazy?: boolean
 }
 
 type DepsMap = Map<PropertyKey, Deps>
@@ -31,8 +32,8 @@ let activeEffect: EffectFn | undefined
 // effect栈
 const effectStack: EffectFn[] = []
 
-export function effect(fn: AnyFunction, options: EffectOptions = {}) {
-  const effectFn: EffectFn = () => {
+export function effect<T>(fn: () => T, options: EffectOptions = {}) {
+  const effectFn: EffectFn<T> = () => {
     /**
      * 副作用函数执行前将其从相关联的依赖集合中移除
      * 当副作用函数执行后会重新建立联系，但在新的联系中不会包含遗留的副作用函数
@@ -52,19 +53,26 @@ export function effect(fn: AnyFunction, options: EffectOptions = {}) {
     activeEffect = effectFn
     // 在调用副作用函数前压入栈中
     effectStack.push(effectFn)
-    fn()
+    const res = fn()
     /**
      * 当前副作用函数执行完，将其弹出栈，并恢复为之前的值
      * 如此，响应式数据就只会收集直接读取其值的副作用函数作为依赖，从而避免发生（比如effect嵌套导致的）错乱。
      */
     effectStack.pop()
     activeEffect = effectStack[effectStack.length - 1]
+
+    return res
   }
 
   effectFn.options = options
   // 用来存储所有与该副作用函数相关联的依赖集合
   effectFn.deps = []
-  effectFn()
+
+  if (!options.lazy) {
+    effectFn()
+  }
+
+  return effectFn
 }
 
 export function reactive<T extends AnyObject>(target: T) {
@@ -82,6 +90,46 @@ export function reactive<T extends AnyObject>(target: T) {
       return res
     },
   })
+}
+
+export function computed<T>(getter: () => T) {
+  // 用来缓存上一次计算的值
+  let value: T
+  // 标识是否需要重新计算值，为true则意味着“脏”，需要重新计算。
+  let dirty = true
+
+  const effectFn = effect(getter, {
+    lazy: true,
+    scheduler() {
+      /**
+       * scheduler会在getter中所依赖的响应式数据变化时执行。
+       * dirty设置为true，下次访问value时就会重新计算
+       */
+      dirty = true
+      /**
+       * 一个计算属性内部有自己的effect，并且是懒执行的，只有读取它值的时候才会执行。
+       * 对于计算属性的getter函数来说，它里面访问的响应式数据只会把computed内部的effect收集为依赖。
+       * 而当计算属性用于另一个effect时，就会发生effect嵌套，外层的effect不会被内层effect中的响应式数据收集。
+       *
+       * 解决办法就是当读取计算属性的值时，手动调用track追踪，
+       * 当依赖的响应式数据变化时，手动调用trigger进行响应。
+       */
+      trigger(obj, 'value')
+    },
+  })
+
+  const obj = {
+    get value() {
+      if (dirty) {
+        value = effectFn()
+        dirty = false
+      }
+      track(obj, 'value')
+      return value
+    },
+  }
+
+  return obj
 }
 
 function track(target: AnyObject, key: PropertyKey) {

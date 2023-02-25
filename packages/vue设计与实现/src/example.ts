@@ -1,53 +1,17 @@
-import { effect, reactive } from './lib/effect'
+import { effect, reactive, computed } from './lib/effect'
 
-const data = reactive({ foo: 1 })
+const data = reactive({ foo: 1, bar: 2 })
 
-// 决定副作用函数执行的时机
-/* effect(
-  () => {
-    console.log(data.foo)
-  },
-  {
-    scheduler(fn) {
-      setTimeout(fn)
-    },
-  }
-)
+const sum = computed(() => {
+  const val = data.foo + data.bar
+  console.log(11, val)
 
-data.foo++
-console.log('end') */
+  return val
+})
 
-// 决定副作用函数执行的次数
-const jobQueue = new Set<AnyFunction>()
-const p = Promise.resolve()
-
-let isFlushing = false
-function flushJob() {
-  if (isFlushing) return
-
-  isFlushing = true
-
-  p.then(() => {
-    jobQueue.forEach((job) => job())
-  }).finally(() => {
-    isFlushing = false
-  })
-}
-
-effect(
-  () => {
-    console.log(data.foo)
-  },
-  {
-    scheduler(fn) {
-      jobQueue.add(fn)
-      flushJob()
-    },
-  }
-)
-
-data.foo++
-data.foo++
+effect(() => {
+  console.log(sum.value)
+})
 
 // @ts-ignore
 window.data = data
