@@ -17,6 +17,12 @@ type DepsMap = Map<PropertyKey, Deps>
 
 type Deps = Set<EffectFn>
 
+enum TriggerType {
+  'ADD',
+  'SET',
+  'DELETE',
+}
+
 /**
  * 存储副作用函数的桶
  * 结构：
@@ -75,6 +81,12 @@ export function effect<T>(fn: () => T, options: EffectOptions = {}) {
   return effectFn
 }
 
+/**
+ * ownKeys操作用来获取一个对象所有的key，
+ * 不与任何具体的key相绑定，所以需要构造一个唯一的标识。
+ */
+const ITERATE_KEY = Symbol()
+
 export function reactive<T extends AnyObject>(target: T) {
   return new Proxy(target, {
     get(target, key, receiver) {
@@ -83,9 +95,54 @@ export function reactive<T extends AnyObject>(target: T) {
       return Reflect.get(target, key, receiver)
     },
     set(target, key, value, receiver) {
+      // 如果属性存在，说明是设置已有属性，否则是在添加新属性
+      const type = hasOwn(target, key) ? TriggerType.SET : TriggerType.ADD
+
       const res = Reflect.set(target, key, value, receiver)
       // 把副作用函数从桶中取出执行
-      trigger(target, key)
+      trigger(target, key, type)
+
+      return res
+    },
+    /**
+     * 拦截判断对象或原型上是否存在给定的key：key in obj
+     *
+     * effect(() => {
+     *   'foo' in obj
+     * })
+     *
+     * in 操作符的运算结果是通过调用一个叫做HasProperty的抽象方法得到的；
+     * HasProperty的返回值是通过调用对象的内部方法[[HasProperty]]得到的；
+     * [[HasProperty]]对应的拦截函数叫 has
+     */
+    has(target, key) {
+      track(target, key)
+      return Reflect.has(target, key)
+    },
+    /**
+     * 拦截使用for..in循环遍历对象
+     *
+     * effect(() => {
+     *    for (const key in data) {
+     *      console.log(key)
+     *    }
+     *  })
+     *
+     * for..in会调用一个抽象方法：EnumerateObjectProperties(obj),
+     * 该抽象方法会使用Reflect.ownKeys(obj)来获取只属于对象自身拥有的键
+     */
+    ownKeys(target) {
+      track(target, ITERATE_KEY)
+      return Reflect.ownKeys(target)
+    },
+    deleteProperty(target, key) {
+      const hadKey = hasOwn(target, key)
+      const res = Reflect.deleteProperty(target, key)
+
+      // 只有当被删除的属性时对象自己的属性并且成功删除时，才触发更新。
+      if (hadKey && res) {
+        trigger(target, key, TriggerType.DELETE)
+      }
 
       return res
     },
@@ -114,7 +171,7 @@ export function computed<T>(getter: () => T) {
        * 解决办法就是当读取计算属性的值时，手动调用track追踪，
        * 当依赖的响应式数据变化时，手动调用trigger进行响应。
        */
-      trigger(obj, 'value')
+      trigger(obj, 'value', TriggerType.SET)
     },
   })
 
@@ -148,7 +205,7 @@ function track(target: AnyObject, key: PropertyKey) {
   activeEffect.deps.push(deps)
 }
 
-function trigger(target: AnyObject, key: PropertyKey) {
+function trigger(target: AnyObject, key: PropertyKey, type: TriggerType) {
   const depsMap = bucket.get(target)
 
   if (!depsMap) return
@@ -204,6 +261,25 @@ function trigger(target: AnyObject, key: PropertyKey) {
     }
   })
 
+  /**
+   * 只有当类型是ADD或DELETE时，才触发与ITERATE_KEY相关联的副作用函数重新执行。
+   *
+   * 和添加新属性不同，修改属性不会对for..in循环产生影响。
+   * 因为不论怎么修改一个属性的值，对于for..in来说都只会循环一次。
+   * 所以在这种情况下不需要触发副作用函数重新执行，否则会造成不必要的性能开销。
+   *
+   * 删除操作会导致对象的键变少，影响循环的次数，
+   * 所以也应当触发ITERATE_KEY相关联的副作用函数重新执行。
+   */
+  if (type === TriggerType.ADD || type === TriggerType.DELETE) {
+    const iterateEffects = depsMap.get(ITERATE_KEY)
+    iterateEffects?.forEach((effect) => {
+      if (effect !== activeEffect) {
+        effectsToRun.add(effect)
+      }
+    })
+  }
+
   effectsToRun.forEach((effect) => {
     if (effect.options.scheduler) {
       effect.options.scheduler(effect)
@@ -219,4 +295,8 @@ function cleanup(effectFn: EffectFn) {
   })
 
   effectFn.deps.length = 0
+}
+
+function hasOwn(obj: Object, key: PropertyKey) {
+  return Object.prototype.hasOwnProperty.call(obj, key)
 }
