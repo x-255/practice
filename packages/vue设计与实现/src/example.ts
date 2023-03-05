@@ -1,12 +1,23 @@
-import { effect, reactive, computed } from './lib/effect'
+import { effect, reactive, computed, shallowReactive } from './lib/effect'
 
-const child = reactive<{ foo?: number }>({})
-const parent = reactive({ foo: 1 })
-Object.setPrototypeOf(child, parent)
+const obj = { foo: { bar: 1 } }
+const data = reactive({ foo: { bar: 1 } })
+const data2 = shallowReactive({ foo: { bar: 1 } })
 
 effect(() => {
-  console.log(child.foo)
+  console.log(111, data.foo.bar)
 })
 
+effect(() => {
+  console.log(222, data2.foo.bar)
+})
+
+setTimeout(() => {
+  data.foo.bar++
+  data2.foo.bar++
+}, 500)
+
 // @ts-ignore
-window.data = child
+window.data = data
+// @ts-ignore
+window.data2 = data2

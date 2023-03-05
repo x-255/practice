@@ -1,3 +1,5 @@
+import { hasOwn, isObject } from './utils'
+
 interface EffectFn<T = any> {
   (): T
   deps: Deps[]
@@ -31,6 +33,9 @@ enum TriggerType {
  *      \_effectFn
  */
 const bucket = new WeakMap<AnyObject, DepsMap>()
+
+// @ts-ignore
+window.bucket = bucket
 
 // 用一个全局变量储被注册的副作用函数
 let activeEffect: EffectFn | undefined
@@ -87,15 +92,24 @@ export function effect<T>(fn: () => T, options: EffectOptions = {}) {
  */
 const ITERATE_KEY = Symbol()
 
-export function reactive<T extends AnyObject>(target: T) {
-  return new Proxy(target, {
+function createReactive<T extends AnyObject>(obj: T, isShallow = false): T {
+  return new Proxy(obj, {
     get(target, key, receiver) {
       // 让代理对象可以通过raw属性访问原始
       if (key === 'raw') return target
 
+      const res = Reflect.get(target, key, receiver)
+
       // 将副作用函数activeEffect添加到桶中
       track(target, key)
-      return Reflect.get(target, key, receiver)
+
+      if (isShallow) {
+        return res
+      }
+      if (isObject(res)) {
+        return reactive(res)
+      }
+      return res
     },
     set(target, key, value, receiver) {
       // 如果属性存在，说明是设置已有属性，否则是在添加新属性
@@ -122,7 +136,7 @@ export function reactive<T extends AnyObject>(target: T) {
        * 2.由于child没有bar，所以会调用parent的[[Set]],
        *   此时target是proto，receiver还是是child
        */
-      if (target !== receiver.raw) {
+      if (target === receiver.raw) {
         /**
          * 因为设置新的值时，如果值没有变化就不需要触发响应
          * 又因为NaN ===NaN -> false
@@ -179,6 +193,14 @@ export function reactive<T extends AnyObject>(target: T) {
       return res
     },
   })
+}
+
+export function reactive<T extends AnyObject>(obj: T) {
+  return createReactive(obj)
+}
+
+export function shallowReactive<T extends AnyObject>(obj: T) {
+  return createReactive(obj, true)
 }
 
 export function computed<T>(getter: () => T) {
@@ -327,8 +349,4 @@ function cleanup(effectFn: EffectFn) {
   })
 
   effectFn.deps.length = 0
-}
-
-function hasOwn(obj: Object, key: PropertyKey) {
-  return Object.prototype.hasOwnProperty.call(obj, key)
 }
