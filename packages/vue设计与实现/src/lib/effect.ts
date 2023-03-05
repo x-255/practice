@@ -90,6 +90,9 @@ const ITERATE_KEY = Symbol()
 export function reactive<T extends AnyObject>(target: T) {
   return new Proxy(target, {
     get(target, key, receiver) {
+      // 让代理对象可以通过raw属性访问原始
+      if (key === 'raw') return target
+
       // 将副作用函数activeEffect添加到桶中
       track(target, key)
       return Reflect.get(target, key, receiver)
@@ -98,9 +101,38 @@ export function reactive<T extends AnyObject>(target: T) {
       // 如果属性存在，说明是设置已有属性，否则是在添加新属性
       const type = hasOwn(target, key) ? TriggerType.SET : TriggerType.ADD
 
+      const oldVal = target[key]
+
       const res = Reflect.set(target, key, value, receiver)
-      // 把副作用函数从桶中取出执行
-      trigger(target, key, type)
+
+      /**
+       * 判断receiver是不是target的代理对象
+       *
+       * const obj = {}
+       * const proto = {bar: 1}
+       * const child = reactive(obj)
+       * const parent = reactive(proto)
+       * Object.setPrototypeOf(child, parent)
+       *
+       * child.raw -> obj
+       * parent.raw -> proto
+       *
+       * 执行：child.bar = 1,会调用2次set：
+       * 1.调用child的[[Set]]，此时target是obj，receiver是child，receiver
+       * 2.由于child没有bar，所以会调用parent的[[Set]],
+       *   此时target是proto，receiver还是是child
+       */
+      if (target !== receiver.raw) {
+        /**
+         * 因为设置新的值时，如果值没有变化就不需要触发响应
+         * 又因为NaN ===NaN -> false
+         * 所以要判断新旧值不全等，并且不都是NaN的时候触发响应
+         */
+        if (oldVal !== value && (oldVal === oldVal || value === value)) {
+          // 把副作用函数从桶中取出执行
+          trigger(target, key, type)
+        }
+      }
 
       return res
     },

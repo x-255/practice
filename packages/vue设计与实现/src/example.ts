@@ -1,14 +1,12 @@
 import { effect, reactive, computed } from './lib/effect'
 
-const data = reactive({
-  foo: 1,
-})
+const child = reactive<{ foo?: number }>({})
+const parent = reactive({ foo: 1 })
+Object.setPrototypeOf(child, parent)
 
 effect(() => {
-  for (const key in data) {
-    console.log(key)
-  }
+  console.log(child.foo)
 })
 
 // @ts-ignore
-window.data = data
+window.data = child
