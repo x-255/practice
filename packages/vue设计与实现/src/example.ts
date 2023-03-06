@@ -1,8 +1,15 @@
-import { effect, reactive, computed, shallowReactive } from './lib/effect'
+import {
+  effect,
+  reactive,
+  computed,
+  shallowReactive,
+  readonly,
+  shallowReadonly,
+} from './lib/effect'
 
 const obj = { foo: { bar: 1 } }
-const data = reactive({ foo: { bar: 1 } })
-const data2 = shallowReactive({ foo: { bar: 1 } })
+const data = readonly({ foo: { bar: 1 } })
+const data2 = shallowReadonly({ foo: { bar: 1 } })
 
 effect(() => {
   console.log(111, data.foo.bar)
@@ -19,5 +26,6 @@ setTimeout(() => {
 
 // @ts-ignore
 window.data = data
+
 // @ts-ignore
 window.data2 = data2

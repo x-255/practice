@@ -92,7 +92,11 @@ export function effect<T>(fn: () => T, options: EffectOptions = {}) {
  */
 const ITERATE_KEY = Symbol()
 
-function createReactive<T extends AnyObject>(obj: T, isShallow = false): T {
+function createReactive<T extends AnyObject>(
+  obj: T,
+  isShallow = false,
+  isReadonly = false
+): T {
   return new Proxy(obj, {
     get(target, key, receiver) {
       // 让代理对象可以通过raw属性访问原始
@@ -100,18 +104,26 @@ function createReactive<T extends AnyObject>(obj: T, isShallow = false): T {
 
       const res = Reflect.get(target, key, receiver)
 
-      // 将副作用函数activeEffect添加到桶中
-      track(target, key)
+      // 如果是只读的，不会改变，所以不需要建立响应式
+      if (!isReadonly) {
+        // 将副作用函数activeEffect添加到桶中
+        track(target, key)
+      }
 
       if (isShallow) {
         return res
       }
       if (isObject(res)) {
-        return reactive(res)
+        return isReadonly ? readonly(res) : reactive(res)
       }
       return res
     },
     set(target, key, value, receiver) {
+      if (isReadonly) {
+        console.warn(`属性 ${key as string} 是只读的`)
+        return true
+      }
+
       // 如果属性存在，说明是设置已有属性，否则是在添加新属性
       const type = hasOwn(target, key) ? TriggerType.SET : TriggerType.ADD
 
@@ -182,6 +194,11 @@ function createReactive<T extends AnyObject>(obj: T, isShallow = false): T {
       return Reflect.ownKeys(target)
     },
     deleteProperty(target, key) {
+      if (isReadonly) {
+        console.warn(`属性 ${key as string} 是只读的`)
+        return true
+      }
+
       const hadKey = hasOwn(target, key)
       const res = Reflect.deleteProperty(target, key)
 
@@ -201,6 +218,14 @@ export function reactive<T extends AnyObject>(obj: T) {
 
 export function shallowReactive<T extends AnyObject>(obj: T) {
   return createReactive(obj, true)
+}
+
+export function readonly<T extends AnyObject>(obj: T) {
+  return createReactive(obj, false, true)
+}
+
+export function shallowReadonly<T extends AnyObject>(obj: T) {
+  return createReactive(obj, true, true)
 }
 
 export function computed<T>(getter: () => T) {
