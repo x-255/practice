@@ -7,25 +7,13 @@ import {
   shallowReadonly,
 } from './lib/effect'
 
-const obj = { foo: { bar: 1 } }
-const data = readonly({ foo: { bar: 1 } })
-const data2 = shallowReadonly({ foo: { bar: 1 } })
+const data = reactive([1, 2, 3])
 
 effect(() => {
-  console.log(111, data.foo.bar)
+  console.log(data[1])
 })
 
-effect(() => {
-  console.log(222, data2.foo.bar)
-})
-
-setTimeout(() => {
-  data.foo.bar++
-  data2.foo.bar++
-}, 500)
+data.length = 1
 
 // @ts-ignore
 window.data = data
-
-// @ts-ignore
-window.data2 = data2

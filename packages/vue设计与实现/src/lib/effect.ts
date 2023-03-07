@@ -118,18 +118,24 @@ function createReactive<T extends AnyObject>(
       }
       return res
     },
-    set(target, key, value, receiver) {
+    set(target, key, newVal, receiver) {
       if (isReadonly) {
         console.warn(`属性 ${key as string} 是只读的`)
         return true
       }
 
       // 如果属性存在，说明是设置已有属性，否则是在添加新属性
-      const type = hasOwn(target, key) ? TriggerType.SET : TriggerType.ADD
+      const type = Array.isArray(target)
+        ? Number(key) < target.length
+          ? TriggerType.SET
+          : TriggerType.ADD
+        : hasOwn(target, key)
+        ? TriggerType.SET
+        : TriggerType.ADD
 
       const oldVal = target[key]
 
-      const res = Reflect.set(target, key, value, receiver)
+      const res = Reflect.set(target, key, newVal, receiver)
 
       /**
        * 判断receiver是不是target的代理对象
@@ -154,9 +160,9 @@ function createReactive<T extends AnyObject>(
          * 又因为NaN ===NaN -> false
          * 所以要判断新旧值不全等，并且不都是NaN的时候触发响应
          */
-        if (oldVal !== value && (oldVal === oldVal || value === value)) {
+        if (oldVal !== newVal && (oldVal === oldVal || newVal === newVal)) {
           // 把副作用函数从桶中取出执行
-          trigger(target, key, type)
+          trigger(target, key, type, newVal)
         }
       }
 
@@ -284,7 +290,12 @@ function track(target: AnyObject, key: PropertyKey) {
   activeEffect.deps.push(deps)
 }
 
-function trigger(target: AnyObject, key: PropertyKey, type: TriggerType) {
+function trigger(
+  target: AnyObject,
+  key: PropertyKey,
+  type: TriggerType,
+  newVal?: any
+) {
   const depsMap = bucket.get(target)
 
   if (!depsMap) return
@@ -357,6 +368,31 @@ function trigger(target: AnyObject, key: PropertyKey, type: TriggerType) {
         effectsToRun.add(effect)
       }
     })
+  }
+
+  if (Array.isArray(target)) {
+    // ADD会隐式改变length
+    if (type === TriggerType.ADD) {
+      const lengthEffects = depsMap.get('length')
+      lengthEffects?.forEach((effect) => {
+        if (effect !== activeEffect) {
+          effectsToRun.add(effect)
+        }
+      })
+    }
+
+    // 当修改length时，大于等于新的length的元素会被删除
+    if (key === 'length') {
+      depsMap.forEach((effects, key) => {
+        if (Number(key) >= newVal) {
+          effects.forEach((effect) => {
+            if (effect !== activeEffect) {
+              effectsToRun.add(effect)
+            }
+          })
+        }
+      })
+    }
   }
 
   effectsToRun.forEach((effect) => {
