@@ -104,8 +104,12 @@ function createReactive<T extends AnyObject>(
 
       const res = Reflect.get(target, key, receiver)
 
-      // 如果是只读的，不会改变，所以不需要建立响应式
-      if (!isReadonly) {
+      /**
+       * 1.如果是只读的，不会改变，所以不需要建立响应式
+       * 2.对于数组，无论是for...of还是values等方法，都会读取数组的Symbol.iterator属性。
+       *   该属性是一个symbol值，为了避免发生意外的错误，以及性能上的考虑，不应该在副作用函数和这类symbol值之间建立响应联系。
+       */
+      if (!isReadonly && typeof key !== 'symbol') {
         // 将副作用函数activeEffect添加到桶中
         track(target, key)
       }
@@ -194,9 +198,29 @@ function createReactive<T extends AnyObject>(
      *
      * for..in会调用一个抽象方法：EnumerateObjectProperties(obj),
      * 该抽象方法会使用Reflect.ownKeys(obj)来获取只属于对象自身拥有的键
+     *
+     * 如果是数组，无论新增还是删除元素都会改变数组的length，
+     * 一旦数组的length改变，那for..in的遍历结果就会改变，就应该触发响应。
+     * 而for...of和values等遍历方法都会调用数组的Symbol.iterator方法，
+     * 这会访问数组的索引和length，会在get中建立响应式联系，不需要额外增加代码。
+     * 下面是他的模拟实现：
+     * data[Symbol.iterator] = function() {
+     *   const target = this
+     *   const len = this.length
+     *   let index = 0
+     *
+     *   return {
+     *     next() {
+     *       return {
+     *         value: index < len ? target[index] : undefined,
+     *         done: index++ >= len
+     *       }
+     *     }
+     *   }
+     * }
      */
     ownKeys(target) {
-      track(target, ITERATE_KEY)
+      track(target, Array.isArray(target) ? 'length' : ITERATE_KEY)
       return Reflect.ownKeys(target)
     },
     deleteProperty(target, key) {

@@ -10,10 +10,10 @@ import {
 const data = reactive([1, 2, 3])
 
 effect(() => {
-  console.log(data[1])
+  for (let v of data) {
+    console.log(`v====`, v)
+  }
 })
-
-data.length = 1
 
 // @ts-ignore
 window.data = data
