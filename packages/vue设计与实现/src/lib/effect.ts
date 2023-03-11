@@ -94,6 +94,8 @@ const ITERATE_KEY = Symbol()
 const reactveMap = new Map()
 const arrayInstrumentations = createArrayInstrumentations()
 
+let shouldTrack = true
+
 function createReactive<T extends AnyObject>(
   obj: T,
   isShallow = false,
@@ -312,7 +314,7 @@ export function computed<T>(getter: () => T) {
 }
 
 function track(target: AnyObject, key: PropertyKey) {
-  if (!activeEffect) return
+  if (!activeEffect || !shouldTrack) return
 
   let depsMap = bucket.get(target)
 
@@ -471,6 +473,34 @@ function createArrayInstrumentations() {
       if (res === -1 || res === false) {
         res = originMethod.apply(this.raw, args)
       }
+      return res
+    }
+  })
+
+  /**
+   * const data = reactive([])
+   * effect(() => {
+   *   data.push(1)
+   * })
+   * effect(() => {
+   *   data.push(1)
+   * })
+   *
+   * push等方法会间接读取length属性，第1个副作用函数执行完就会遇length建立响应联系，
+   * 然后第二个副作用函数执行，也会建立联系，同时会设置length的值，导致第一个副作用函数执行，
+   * 但这是第2个还没执行完毕就要再次执行第1个副作用函数，
+   * 第一个函数改变length又会导致第二个函数执行，循环往复，最终导致调用栈溢出。
+   *
+   * 所以就要避免在这些方法执行时和length建立联系。
+   */
+  ;['push', 'pop', 'shift', 'unshift', 'splice'].forEach((key) => {
+    const originMethod = Array.prototype[key as any]
+
+    instrumentations[key] = function (...args: any) {
+      shouldTrack = false
+      const res = originMethod.apply(this, args)
+      shouldTrack = true
+
       return res
     }
   })

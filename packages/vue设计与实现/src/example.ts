@@ -7,11 +7,15 @@ import {
   shallowReadonly,
 } from './lib/effect'
 
-const obj = {}
-const data = reactive([obj])
-console.log(data.includes(obj))
+const data = reactive([])
 
-effect(() => {})
+effect(() => {
+  data.push(1)
+})
+
+effect(() => {
+  data.push(1)
+})
 
 // @ts-ignore
 window.data = data
