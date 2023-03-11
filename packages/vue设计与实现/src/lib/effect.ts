@@ -91,6 +91,8 @@ export function effect<T>(fn: () => T, options: EffectOptions = {}) {
  * 不与任何具体的key相绑定，所以需要构造一个唯一的标识。
  */
 const ITERATE_KEY = Symbol()
+const reactveMap = new Map()
+const arrayInstrumentations = createArrayInstrumentations()
 
 function createReactive<T extends AnyObject>(
   obj: T,
@@ -101,6 +103,10 @@ function createReactive<T extends AnyObject>(
     get(target, key, receiver) {
       // 让代理对象可以通过raw属性访问原始
       if (key === 'raw') return target
+
+      if (Array.isArray(target) && hasOwn(arrayInstrumentations, key)) {
+        return Reflect.get(arrayInstrumentations, key, receiver)
+      }
 
       const res = Reflect.get(target, key, receiver)
 
@@ -243,7 +249,14 @@ function createReactive<T extends AnyObject>(
 }
 
 export function reactive<T extends AnyObject>(obj: T) {
-  return createReactive(obj)
+  const exixtionProxy = reactveMap.get(obj)
+
+  if (exixtionProxy) return exixtionProxy
+
+  const proxy = createReactive(obj)
+  // 存储到map中，避免重复创建
+  reactveMap.set(obj, proxy)
+  return proxy
 }
 
 export function shallowReactive<T extends AnyObject>(obj: T) {
@@ -434,4 +447,33 @@ function cleanup(effectFn: EffectFn) {
   })
 
   effectFn.deps.length = 0
+}
+
+/**
+ * const obj = {}
+ * const data = reactive([obj])
+ * console.log(data.includes(obj)) -> false
+ *
+ * 由于数组和obj会被转成响应式对象，所以用原始的obj去代理数组找会返回false，不符合用户的直觉。
+ * 所以需要在get拦截函数中重写数组的查找方法。
+ */
+function createArrayInstrumentations() {
+  const instrumentations: Record<string, Function> = {}
+
+  ;['includes', 'indexOf', 'lastIndexOf'].forEach((key) => {
+    const originMethod = Array.prototype[key as any]
+
+    instrumentations[key] = function (...args: any) {
+      // this是代理对象
+      let res = originMethod.apply(this, args)
+
+      // 如果没找到，再去原始对象中查找
+      if (res === -1 || res === false) {
+        res = originMethod.apply(this.raw, args)
+      }
+      return res
+    }
+  })
+
+  return instrumentations
 }
