@@ -5,16 +5,13 @@ import {
   shallowReactive,
   readonly,
   shallowReadonly,
+  ref,
 } from './lib/effect'
 
-const data = reactive([])
+const data = ref(1)
 
 effect(() => {
-  data.push(1)
-})
-
-effect(() => {
-  data.push(1)
+  console.log(`data.value====`, data.value)
 })
 
 // @ts-ignore

@@ -25,6 +25,10 @@ enum TriggerType {
   'DELETE',
 }
 
+interface Ref<T> {
+  value: T
+}
+
 /**
  * 存储副作用函数的桶
  * 结构：
@@ -250,7 +254,7 @@ function createReactive<T extends AnyObject>(
   })
 }
 
-export function reactive<T extends AnyObject>(obj: T) {
+export function reactive<T extends AnyObject>(obj: T): T {
   const exixtionProxy = reactveMap.get(obj)
 
   if (exixtionProxy) return exixtionProxy
@@ -271,6 +275,17 @@ export function readonly<T extends AnyObject>(obj: T) {
 
 export function shallowReadonly<T extends AnyObject>(obj: T) {
   return createReactive(obj, true, true)
+}
+
+export function ref<T>(value: T) {
+  const wrapper = { value }
+
+  // 定义一个不可枚举、不可修改、不可配置的值，来判断一个值是否是ref
+  Object.defineProperty(wrapper, '__v_isRef', {
+    value: true,
+  })
+
+  return reactive(wrapper)
 }
 
 export function computed<T>(getter: () => T) {
