@@ -27,6 +27,11 @@ enum TriggerType {
 
 interface Ref<T> {
   value: T
+  readonly __v_isRef: true
+}
+
+type ToRefs<T extends object> = {
+  [K in keyof T]: Ref<T[K]>
 }
 
 /**
@@ -278,7 +283,7 @@ export function shallowReadonly<T extends AnyObject>(obj: T) {
 }
 
 export function ref<T>(value: T) {
-  const wrapper = { value }
+  const wrapper = { value } as Ref<T>
 
   // 定义一个不可枚举、不可修改、不可配置的值，来判断一个值是否是ref
   Object.defineProperty(wrapper, '__v_isRef', {
@@ -286,6 +291,33 @@ export function ref<T>(value: T) {
   })
 
   return reactive(wrapper)
+}
+
+export function toRef<T extends object, K extends keyof T>(obj: T, key: K) {
+  const wrapper = {
+    get value() {
+      return obj[key]
+    },
+    set value(val) {
+      obj[key] = val
+    },
+  } as Ref<T[K]>
+
+  Object.defineProperty(wrapper, '__v_isRef', {
+    value: true,
+  })
+
+  return wrapper
+}
+
+export function toRefs<T extends object>(obj: T) {
+  const ret = {} as ToRefs<T>
+
+  for (const key in obj) {
+    ret[key] = toRef(obj, key)
+  }
+
+  return ret
 }
 
 export function computed<T>(getter: () => T) {

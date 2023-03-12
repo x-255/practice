@@ -6,12 +6,19 @@ import {
   readonly,
   shallowReadonly,
   ref,
+  toRef,
+  toRefs,
 } from './lib/effect'
 
-const data = ref(1)
+const data = reactive({ foo: 1, bar: 1 })
+const { foo, bar } = toRefs(data)
 
 effect(() => {
-  console.log(`data.value====`, data.value)
+  console.log(`foo.value====`, foo.value)
+})
+
+effect(() => {
+  console.log(`bar.value====`, bar.value)
 })
 
 // @ts-ignore
