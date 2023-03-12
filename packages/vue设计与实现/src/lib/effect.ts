@@ -25,7 +25,7 @@ enum TriggerType {
   'DELETE',
 }
 
-interface Ref<T> {
+interface Ref<T = any> {
   value: T
   readonly __v_isRef: true
 }
@@ -119,7 +119,7 @@ function createReactive<T extends AnyObject>(
         return Reflect.get(arrayInstrumentations, key, receiver)
       }
 
-      const res = Reflect.get(target, key, receiver)
+      const res = Reflect.get(target, key, receiver) as any
 
       /**
        * 1.如果是只读的，不会改变，所以不需要建立响应式
@@ -134,9 +134,15 @@ function createReactive<T extends AnyObject>(
       if (isShallow) {
         return res
       }
+
+      if (isRef(res)) {
+        return res.value
+      }
+
       if (isObject(res)) {
         return isReadonly ? readonly(res) : reactive(res)
       }
+
       return res
     },
     set(target, key, newVal, receiver) {
@@ -318,6 +324,30 @@ export function toRefs<T extends object>(obj: T) {
   }
 
   return ret
+}
+
+export function proxyRefs<T extends AnyObject>(obj: T) {
+  return new Proxy(obj, {
+    get(target, key, receiver) {
+      const value = Reflect.get(target, key, receiver) as any
+
+      return isRef(value) ? value.value : value
+    },
+    set(target, key, newVal, receiver) {
+      const value = target[key]
+
+      if (isRef(value)) {
+        value.value = newVal
+        return true
+      }
+
+      return Reflect.set(target, key, newVal, receiver)
+    },
+  })
+}
+
+export function isRef(r: any): r is Ref {
+  return !!(r && r.__v_isRef)
 }
 
 export function computed<T>(getter: () => T) {

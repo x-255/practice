@@ -8,18 +8,13 @@ import {
   ref,
   toRef,
   toRefs,
+  proxyRefs,
 } from './lib/effect'
 
 const data = reactive({ foo: 1, bar: 1 })
-const { foo, bar } = toRefs(data)
+const pRefs = reactive({ ...toRefs(data) })
 
-effect(() => {
-  console.log(`foo.value====`, foo.value)
-})
-
-effect(() => {
-  console.log(`bar.value====`, bar.value)
-})
+console.log(pRefs)
 
 // @ts-ignore
 window.data = data
