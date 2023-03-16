@@ -13,24 +13,39 @@ export interface RenderOptions<N = RendererNode, E = RendererElement> {
   setElement(el: E, text: string): void
   // 在给定的parent下添加指定元素
   inster(el: N, parent: E, anchor?: N | null): void
+  // 设置相关属性
+  patchProps(el: E, key: string, prevValue: any, nextValue: any): void
 }
 
 type VNodeType = string
 
 export interface VNode {
   type: VNodeType
-  children: string | VNode | Array<string | VNode>
+  children?: string | VNode | VNode[] | null
+  props?: { [K: string]: any } | null
 }
 
 // 不直接依赖于浏览器特有的API，只要传入不同的配置项，就能够完成非浏览器环境下的渲染工作
 export function createRenderer(options: RenderOptions) {
-  const { createElement, setElement, inster } = options
+  const { createElement, setElement, inster, patchProps } = options
 
   function mountedElement(vnode: VNode, container: RendererElement) {
     const el = createElement(vnode.type)
 
-    if (isString(vnode.children)) {
-      setElement(el, vnode.children)
+    const { children, props } = vnode
+
+    if (isString(children)) {
+      setElement(el, children)
+    } else if (Array.isArray(children)) {
+      children.forEach((child) => {
+        patch(null, child, el)
+      })
+    }
+
+    if (props) {
+      Object.entries(props).forEach(([key, val]) => {
+        patchProps(el, key, null, val)
+      })
     }
 
     inster(el, container)

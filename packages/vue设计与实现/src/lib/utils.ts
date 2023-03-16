@@ -6,6 +6,10 @@ export function isObject(obj: unknown): obj is object {
   return typeof obj === 'object' && obj !== null
 }
 
-export function isString(obj: unknown): obj is string {
-  return typeof obj === 'string'
+export function isString(value: unknown): value is string {
+  return typeof value === 'string'
+}
+
+export function isBoolean(value: unknown): value is boolean {
+  return typeof value === 'boolean'
 }
