@@ -23,6 +23,7 @@ export interface VNode {
   type: VNodeType
   children?: string | VNode | VNode[] | null
   props?: { [K: string]: any } | null
+  el?: RendererNode
 }
 
 // 不直接依赖于浏览器特有的API，只要传入不同的配置项，就能够完成非浏览器环境下的渲染工作
@@ -30,7 +31,7 @@ export function createRenderer(options: RenderOptions) {
   const { createElement, setElement, inster, patchProps } = options
 
   function mountedElement(vnode: VNode, container: RendererElement) {
-    const el = createElement(vnode.type)
+    const el = (vnode.el = createElement(vnode.type))
 
     const { children, props } = vnode
 
@@ -64,7 +65,16 @@ export function createRenderer(options: RenderOptions) {
     }
   }
 
-  function render(vnode: VNode, container: RendererElement) {
+  function unmount(vnode: VNode) {
+    const { el } = vnode
+    const parent = el?.parentNode
+
+    if (parent) {
+      parent.removeChild(el)
+    }
+  }
+
+  function render(vnode: VNode | null, container: RendererElement) {
     if (vnode) {
       patch(container._vnode, vnode, container)
     } else {
@@ -73,12 +83,12 @@ export function createRenderer(options: RenderOptions) {
        * 只需要将container内的DOM清空即可
        */
       if (container._vnode) {
-        container.innerHTML = ''
+        unmount(container._vnode)
       }
     }
 
     container._vnode = vnode
   }
 
-  return render
+  return { render }
 }
