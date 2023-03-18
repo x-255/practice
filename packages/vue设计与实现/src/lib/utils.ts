@@ -2,7 +2,7 @@ export function hasOwn(obj: Object, key: PropertyKey) {
   return Object.prototype.hasOwnProperty.call(obj, key)
 }
 
-export function isObject(obj: unknown): obj is object {
+export function isObject(obj: unknown): obj is AnyObject {
   return typeof obj === 'object' && obj !== null
 }
 

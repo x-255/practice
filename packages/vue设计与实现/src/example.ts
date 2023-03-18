@@ -1,10 +1,13 @@
-import { domRenderOptions } from './lib/dom'
+import { domRenderOptions, normalizeClass } from './lib/dom'
 import { VNode, createRenderer } from './lib/renderer'
 
 const render = createRenderer(domRenderOptions)
 
 const vnode: VNode = {
   type: 'div',
+  props: {
+    class: normalizeClass(['foo bar', [{ baz: true }]]),
+  },
   children: [
     {
       type: 'p',

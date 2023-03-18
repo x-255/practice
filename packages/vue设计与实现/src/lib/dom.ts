@@ -1,5 +1,5 @@
 import { RenderOptions, createRenderer } from './renderer'
-import { isBoolean } from './utils'
+import { isBoolean, isObject, isString } from './utils'
 
 export const domRenderOptions: RenderOptions<Node, Element> = {
   createElement(tag) {
@@ -12,7 +12,13 @@ export const domRenderOptions: RenderOptions<Node, Element> = {
     parent.insertBefore(el, anchor ? anchor : null)
   },
   patchProps(el, key, prevValue, nextValue) {
-    if (shouldSetProps(el, key, nextValue)) {
+    if (key === 'class') {
+      /**
+       * 为元素设置class有三种方式，按性能从高到低：
+       * className > classList > setAttribute
+       */
+      el.className = nextValue ?? ''
+    } else if (shouldSetProps(el, key, nextValue)) {
       /**
        * 如果直接在html上添加attr但不设置值，浏览器会默认将它的prop设为true，这一切都是浏览器处理好的，
        * 但在vnode中，需要手动处理；
@@ -43,4 +49,28 @@ function shouldSetProps(
   if (el.tagName === 'INPUT' && key === 'form') return false
 
   return key in el
+}
+
+/**
+ * 序列化class，
+ * class可能的值有以下类型：
+ * 1. 字符串：'foo bar'
+ * 2. 对象： {foo: true, bar: false}
+ * 3. 包含上面两种类型的数组： ['foo bar', {baz: true}]
+ */
+export function normalizeClass(value: unknown) {
+  let res = ''
+
+  if (isString(value)) {
+    res = value
+  } else if (Array.isArray(value)) {
+    res = value.map(normalizeClass).join(' ')
+  } else if (isObject(value)) {
+    res = Object.entries(value)
+      .filter(([_, v]) => !!v)
+      .map(([k, _]) => k)
+      .join(' ')
+  }
+
+  return res.trim()
 }
