@@ -17,7 +17,7 @@ export interface RenderOptions<N = RendererNode, E = RendererElement> {
   patchProps(el: E, key: string, prevValue: any, nextValue: any): void
 }
 
-type VNodeType = string
+type VNodeType = string | VNode
 
 export interface VNode {
   type: VNodeType
@@ -31,7 +31,7 @@ export function createRenderer(options: RenderOptions) {
   const { createElement, setElement, inster, patchProps } = options
 
   function mountedElement(vnode: VNode, container: RendererElement) {
-    const el = (vnode.el = createElement(vnode.type))
+    const el = (vnode.el = createElement(vnode.type as string))
 
     const { children, props } = vnode
 
@@ -57,13 +57,32 @@ export function createRenderer(options: RenderOptions) {
    * @param n2 新vnode
    */
   function patch(n1: VNode | null, n2: VNode, container: RendererElement) {
-    if (!n1) {
-      // n1不存在，意味着挂载，直接调用mountedElement完成
-      mountedElement(n2, container)
-    } else {
-      // n1存在，意味着打补丁
+    if (n1 && n1.type !== n2.type) {
+      // 类型不同，就直接将旧vnode卸载
+      unmount(n1)
+      // 将n1重置为null，保证后续挂载操作能正确执行
+      n1 = null
+    }
+
+    const { type } = n2
+
+    // 如果是字符串类型，则它描述的是普通标签元素
+    if (isString(type)) {
+      if (!n1) {
+        // n1不存在，意味着挂载，直接调用mountedElement完成
+        mountedElement(n2, container)
+      } else {
+        // n1存在，意味着打补丁
+        patchElement(n1, n2)
+      }
+    } else if (isObject(type)) {
+      // 如果type是对象，则它描述的是组件
+    } else if (type === 'xxx') {
+      // 处理其它类型的vnode
     }
   }
+
+  function patchElement(n1: VNode, n2: VNode) {}
 
   function unmount(vnode: VNode) {
     const { el } = vnode
