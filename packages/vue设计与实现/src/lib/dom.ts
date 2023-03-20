@@ -1,5 +1,9 @@
 import { RenderOptions, createRenderer } from './renderer'
-import { isBoolean, isObject, isString } from './utils'
+import { isBoolean, isObject, isOn, isString } from './utils'
+
+export interface Invoker extends EventListener {
+  value: Function | Function[]
+}
 
 export const domRenderOptions: RenderOptions<Node, Element> = {
   createElement(tag) {
@@ -11,8 +15,46 @@ export const domRenderOptions: RenderOptions<Node, Element> = {
   inster(el, parent, anchor) {
     parent.insertBefore(el, anchor ? anchor : null)
   },
-  patchProps(el, key, prevValue, nextValue) {
-    if (key === 'class') {
+  patchProps(
+    el: Element & { _vei: Record<string, Invoker | undefined> },
+    key,
+    prevValue,
+    nextValue
+  ) {
+    // 约定on开头的属性为事件
+    if (isOn(key)) {
+      const name = key.slice(2).toLowerCase()
+      // 定义el._vei为一个对象，存事件名到事件处理函数的映射，vei是vue event invoker的缩写
+      const invokers = el._vei || (el._vei = {})
+      let invoker = invokers[key]
+
+      if (nextValue) {
+        if (!invoker) {
+          // 如果没有invoker，则将一个伪造的invoker缓存到_vei[key]中
+          invoker = el._vei[key] = ((e) => {
+            if (Array.isArray(invoker!.value)) {
+              invoker!.value.forEach((fn) => fn(e))
+            } else {
+              // 当伪造的invoker执行时，会执行真正的事件处理函数
+              invoker!.value(e)
+            }
+          }) as Invoker
+
+          invoker.value = nextValue
+          el.addEventListener(name, invoker)
+        } else {
+          /**
+           * 如果invoker存在，只需要更新value的值即可，
+           * 不需要移除上一次的事件处理函数，再重新绑定；
+           * 在更新事件时可以避免一次removeEventListener的调用，从而提升了性能。
+           */
+          invoker.value = nextValue
+        }
+      } else if (invoker) {
+        // 新的事件绑定函数不存在，且之前绑定的invoker存在，则移除绑定。
+        el.removeEventListener(name, invoker)
+      }
+    } else if (key === 'class') {
       /**
        * 为元素设置class有三种方式，按性能从高到低：
        * className > classList > setAttribute

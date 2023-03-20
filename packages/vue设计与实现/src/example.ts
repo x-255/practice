@@ -5,30 +5,34 @@ const renderer = createRenderer(domRenderOptions)
 
 const vnode: VNode = {
   type: 'div',
-  props: {
-    class: normalizeClass(['foo bar', [{ baz: true }]]),
-  },
   children: [
     {
-      type: 'p',
+      type: 'div',
       props: {
-        id: 'pp',
+        onClick() {
+          console.log(111)
+        },
       },
-      children: 'hello',
+      children: '1111',
     },
     {
-      type: 'input',
+      type: 'div',
       props: {
-        type: 'text',
-        value: 'world',
-        disabled: '',
+        onClick: [
+          (e: Event) => {
+            console.log(e.target, 222)
+          },
+          () => {
+            console.log(333)
+          },
+        ],
       },
+      children: '2233',
     },
   ],
 }
 
 renderer.render(vnode, document.querySelector('#app')!)
-renderer.render(null, document.querySelector('#app')!)
 
 // @ts-ignore
 // window.data = data
