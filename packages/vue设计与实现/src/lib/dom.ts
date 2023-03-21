@@ -1,8 +1,9 @@
 import { RenderOptions, createRenderer } from './renderer'
-import { isBoolean, isObject, isOn, isString } from './utils'
+import { assertNotNullable, isBoolean, isObject, isOn, isString } from './utils'
 
 export interface Invoker extends EventListener {
   value: Function | Function[]
+  attached: number
 }
 
 export const domRenderOptions: RenderOptions<Node, Element> = {
@@ -32,15 +33,23 @@ export const domRenderOptions: RenderOptions<Node, Element> = {
         if (!invoker) {
           // 如果没有invoker，则将一个伪造的invoker缓存到_vei[key]中
           invoker = el._vei[key] = ((e) => {
-            if (Array.isArray(invoker!.value)) {
-              invoker!.value.forEach((fn) => fn(e))
+            assertNotNullable(invoker)
+            /**
+             * e.timeStamp是事件发生的时间
+             * 如果事件发生的时间早于事件处理函数绑定的时间，则不执行。
+             */
+            if (e.timeStamp < invoker.attached) return
+
+            if (Array.isArray(invoker.value)) {
+              invoker.value.forEach((fn) => fn(e))
             } else {
               // 当伪造的invoker执行时，会执行真正的事件处理函数
-              invoker!.value(e)
+              invoker.value(e)
             }
           }) as Invoker
 
           invoker.value = nextValue
+          invoker.attached = performance.now()
           el.addEventListener(name, invoker)
         } else {
           /**

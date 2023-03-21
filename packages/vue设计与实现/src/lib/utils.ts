@@ -17,3 +17,9 @@ export function isBoolean(value: unknown): value is boolean {
 export function isOn(value: string) {
   return /^on[^a-z]/.test(value)
 }
+
+export function assertNotNullable<T>(
+  obj: T
+): asserts obj is Exclude<T, null | undefined> {
+  if (obj == null) throw new Error('is undefined')
+}
