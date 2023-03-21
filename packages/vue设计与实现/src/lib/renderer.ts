@@ -1,4 +1,4 @@
-import { isString } from './utils'
+import { assertNotNullable, isString } from './utils'
 
 interface RendererNode {
   [k: string]: any
@@ -10,7 +10,7 @@ export interface RenderOptions<N = RendererNode, E = RendererElement> {
   // 创建元素
   createElement(tag: string): E
   // 设置元素的文本节点
-  setElement(el: E, text: string): void
+  setElementText(el: E, text: string): void
   // 在给定的parent下添加指定元素
   inster(el: N, parent: E, anchor?: N | null): void
   // 设置相关属性
@@ -28,7 +28,7 @@ export interface VNode {
 
 // 不直接依赖于浏览器特有的API，只要传入不同的配置项，就能够完成非浏览器环境下的渲染工作
 export function createRenderer(options: RenderOptions) {
-  const { createElement, setElement, inster, patchProps } = options
+  const { createElement, setElementText, inster, patchProps } = options
 
   function mountedElement(vnode: VNode, container: RendererElement) {
     const el = (vnode.el = createElement(vnode.type as string))
@@ -36,7 +36,7 @@ export function createRenderer(options: RenderOptions) {
     const { children, props } = vnode
 
     if (isString(children)) {
-      setElement(el, children)
+      setElementText(el, children)
     } else if (Array.isArray(children)) {
       children.forEach((child) => {
         patch(null, child, el)
@@ -82,7 +82,56 @@ export function createRenderer(options: RenderOptions) {
     }
   }
 
-  function patchElement(n1: VNode, n2: VNode) {}
+  function patchElement(n1: VNode, n2: VNode) {
+    const el = (n2.el = n1.el)
+    assertNotNullable(el)
+    const oldProps = n1.props
+    const newProps = n2.props
+
+    for (const key in newProps) {
+      const newVal = newProps[key]
+      const oldVal = oldProps?.[key]
+
+      if (newVal !== oldVal) {
+        patchProps(el, key, oldVal, newVal)
+      }
+    }
+
+    for (const key in oldProps) {
+      if (newProps && !(key in newProps)) {
+        patchProps(el, key, oldProps[key], null)
+      }
+    }
+
+    patchChildren(n1, n2, el)
+  }
+
+  function patchChildren(
+    n1: VNode | undefined,
+    n2: VNode | undefined,
+    container: RendererElement
+  ) {
+    if (isString(n2?.children)) {
+      if (Array.isArray(n1)) {
+        n1.forEach(unmount)
+      }
+      setElementText(container, n2!.children)
+    } else if (Array.isArray(n2?.children)) {
+      if (Array.isArray(n1?.children)) {
+        n1!.children.forEach(unmount)
+        n2!.children.forEach((c) => patch(null, c, container))
+      } else {
+        setElementText(container, '')
+        n2!.children.forEach((c) => patch(null, c, container))
+      }
+    } else {
+      if (Array.isArray(n1?.children)) {
+        n1!.children.forEach(unmount)
+      } else {
+        setElementText(container, '')
+      }
+    }
+  }
 
   function unmount(vnode: VNode) {
     const { el } = vnode

@@ -10,7 +10,7 @@ export const domRenderOptions: RenderOptions<Node, Element> = {
   createElement(tag) {
     return document.createElement(tag)
   },
-  setElement(el, text) {
+  setElementText(el, text) {
     el.textContent = text
   },
   inster(el, parent, anchor) {
