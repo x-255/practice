@@ -16,6 +16,18 @@ export const domRenderOptions: RenderOptions<Node, Element> = {
   inster(el, parent, anchor) {
     parent.insertBefore(el, anchor ? anchor : null)
   },
+  createText(text) {
+    return document.createTextNode(text)
+  },
+  setText(el, text) {
+    el.nodeValue = text
+  },
+  createComment(comment) {
+    return document.createComment(comment)
+  },
+  setComment(el, comment) {
+    el.nodeValue = comment
+  },
   patchProps(
     el: Element & { _vei: Record<string, Invoker | undefined> },
     key,

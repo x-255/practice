@@ -15,9 +15,17 @@ export interface RenderOptions<N = RendererNode, E = RendererElement> {
   inster(el: N, parent: E, anchor?: N | null): void
   // 设置相关属性
   patchProps(el: E, key: string, prevValue: any, nextValue: any): void
+  // 创建文本节点
+  createText(text: string): N
+  // 修改文本节点内容
+  setText(el: N, text: string): void
+  // 创建注释节点
+  createComment(comment: string): N
+  // 修改注释节点内容
+  setComment(el: N, comment: string): void
 }
 
-type VNodeType = string | VNode
+type VNodeType = string | VNode | typeof Text | typeof Comment
 
 export interface VNode {
   type: VNodeType
@@ -26,9 +34,23 @@ export interface VNode {
   el?: RendererNode
 }
 
+// 文本节点的type标识
+export const Text = Symbol()
+// 注释节点的type标识
+export const Comment = Symbol()
+
 // 不直接依赖于浏览器特有的API，只要传入不同的配置项，就能够完成非浏览器环境下的渲染工作
 export function createRenderer(options: RenderOptions) {
-  const { createElement, setElementText, inster, patchProps } = options
+  const {
+    createElement,
+    setElementText,
+    inster,
+    patchProps,
+    createText,
+    setText,
+    createComment,
+    setComment,
+  } = options
 
   function mountedElement(vnode: VNode, container: RendererElement) {
     const el = (vnode.el = createElement(vnode.type as string))
@@ -75,10 +97,28 @@ export function createRenderer(options: RenderOptions) {
         // n1存在，意味着打补丁
         patchElement(n1, n2)
       }
+    } else if (type === Text) {
+      if (!n1) {
+        const el = (n2.el = createText(n2.children as string))
+        inster(el, container)
+      } else {
+        if (n2.children !== n1.children) {
+          const el = (n2.el = n1.el!)
+          setText(el, n2.children as string)
+        }
+      }
+    } else if (type === Comment) {
+      if (!n1) {
+        const el = (n2.el = createComment(n2.children as string))
+        inster(el, container)
+      } else {
+        if (n2.children !== n1.children) {
+          const el = (n2.el = n1.el!)
+          setComment(el, n2.children as string)
+        }
+      }
     } else if (isObject(type)) {
       // 如果type是对象，则它描述的是组件
-    } else if (type === 'xxx') {
-      // 处理其它类型的vnode
     }
   }
 
