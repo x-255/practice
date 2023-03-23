@@ -25,11 +25,11 @@ export interface RenderOptions<N = RendererNode, E = RendererElement> {
   setComment(el: N, comment: string): void
 }
 
-type VNodeType = string | VNode | typeof Text | typeof Comment
+type VNodeType = string | VNode | typeof Text | typeof Comment | typeof Fragment
 
 export interface VNode {
   type: VNodeType
-  children?: string | VNode | VNode[] | null
+  children?: string | VNode[] | null
   props?: { [K: string]: any } | null
   el?: RendererNode
 }
@@ -38,6 +38,8 @@ export interface VNode {
 export const Text = Symbol()
 // 注释节点的type标识
 export const Comment = Symbol()
+// 多跟节点模板的type标识
+export const Fragment = Symbol()
 
 // 不直接依赖于浏览器特有的API，只要传入不同的配置项，就能够完成非浏览器环境下的渲染工作
 export function createRenderer(options: RenderOptions) {
@@ -117,6 +119,12 @@ export function createRenderer(options: RenderOptions) {
           setComment(el, n2.children as string)
         }
       }
+    } else if (type === Fragment) {
+      if (!n1) {
+        ;(n2.children as VNode[])?.forEach((c) => patch(null, c, container))
+      } else {
+        patchChildren(n1, n2, container)
+      }
     } else if (isObject(type)) {
       // 如果type是对象，则它描述的是组件
     }
@@ -174,7 +182,13 @@ export function createRenderer(options: RenderOptions) {
   }
 
   function unmount(vnode: VNode) {
-    const { el } = vnode
+    const { el, type, children } = vnode
+
+    if (type === Fragment) {
+      ;(children as VNode[]).forEach(unmount)
+      return
+    }
+
     const parent = el?.parentNode
 
     if (parent) {

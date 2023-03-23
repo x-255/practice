@@ -1,14 +1,24 @@
 import { domRenderOptions, normalizeClass } from './lib/dom'
 import { effect, ref } from './lib/effect'
-import { Comment, Text, VNode, createRenderer } from './lib/renderer'
+import { Comment, Fragment, Text, VNode, createRenderer } from './lib/renderer'
 
 const renderer = createRenderer(domRenderOptions)
 const app = document.querySelector('#app')!
 
 renderer.render(
   {
-    type: Comment,
-    children: '111',
+    type: 'ul',
+    children: [
+      {
+        type: Fragment,
+        children: [
+          { type: 'li', children: '1' },
+          { type: 'li', children: '2' },
+          { type: 'li', children: '3' },
+          { type: 'li', children: '4' },
+        ],
+      },
+    ],
   },
   app
 )
@@ -16,12 +26,21 @@ renderer.render(
 setTimeout(() => {
   renderer.render(
     {
-      type: Comment,
-      children: '222',
+      type: 'ul',
+      children: [
+        {
+          type: Fragment,
+          children: [
+            { type: 'li', children: '5' },
+            { type: 'li', children: '4' },
+            { type: 'li', children: '3' },
+          ],
+        },
+      ],
     },
     app
   )
-}, 1000)
+}, 800)
 
 // @ts-ignore
 // window.data = data
