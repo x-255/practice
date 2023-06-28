@@ -1,5 +1,9 @@
 {
   "editor.formatOnSave": true,
   "commentTranslate.multiLineMerge": true,
-  "commentTranslate.source": "Baidu"
+  "commentTranslate.source": "Baidu",
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.autopep8"
+  },
+  "python.formatting.provider": "none"
 }
