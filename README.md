@@ -24,3 +24,12 @@
 ```
 
 fp-in-js 原网站[Functional Programming in Javascript](http://reactivex.io/learnrx/)
+
+## 安装依赖
+
+安装到项目根目录：
+`pnpm add [package] -w`
+
+安装到某个目录下：
+
+`pnpm add [package] -F [dirname] `

@@ -2,7 +2,6 @@
   "name": "@practice/fp-guide",
   "version": "1.0.0",
   "description": "",
-  "main": "index.ts",
   "scripts": {
     "dev": "parcel index.html --port"
   },

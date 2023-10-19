@@ -2,7 +2,6 @@
   "name": "@practice/z7z8",
   "version": "1.0.0",
   "description": "",
-  "main": "index.ts",
   "scripts": {
     "dev": "parcel index.html --port",
     "test:promise": "tsc src/promise.ts -m commonjs && promises-aplus-tests src/promise.js"
