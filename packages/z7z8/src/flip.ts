@@ -1,17 +1,19 @@
 function createItems(n: number) {
-    return [...Array(n).keys()].map((i) => `<div class="item">${i + 1}</div>`).join('')
+  return [...Array(n).keys()]
+    .map((i) => `<div class="item">${i + 1}</div>`)
+    .join('')
 }
 
-function renderItems() {
-    const app = document.querySelector('#app')!;
+function render() {
+  const app = document.querySelector('#app')!
 
-    app.innerHTML = `<button id="shuffle">shuffle</button>
+  app.innerHTML = `<button id="shuffle">shuffle</button>
     <div class="box">
         ${createItems(10)}
     </div>`
 
-    const style = document.createElement('style');
-    style.innerHTML = `
+  const style = document.createElement('style')
+  style.innerHTML = `
     .box {
         display: grid;
         grid-template-columns: repeat(2, 100px);
@@ -27,44 +29,46 @@ function renderItems() {
         text-align: center;
         line-height: 25px;
       }
-    `;
-    document.head.appendChild(style);
+    `
+  document.head.appendChild(style)
 
-    app.querySelector('#shuffle')!.addEventListener('click', shuffle)
+  app.querySelector('#shuffle')!.addEventListener('click', shuffle)
 }
-renderItems()
+render()
 
 function getLocation(el: Element) {
-    return el.getBoundingClientRect()
-  }
+  return el.getBoundingClientRect()
+}
 
-  function flip(oldLocation: DOMRect, newLocation: DOMRect, el: Element) {
-    // 将元素放到到初始位置再运用动画移动到结束位置
-    el.animate(
-      [
-        {
-          transform: `translate(${oldLocation.left - newLocation.left}px, ${
-            oldLocation.top - newLocation.top
-          }px)`, 
-        },
-        { transform: 'translate(0, 0)' },
-      ],
+function flip(oldLocation: DOMRect, newLocation: DOMRect, el: Element) {
+  // 将元素放到到初始位置再运用动画移动到结束位置
+  el.animate(
+    [
       {
-        duration: 500,
-        easing: 'ease-in-out',
-      }
-    )
-  }
+        transform: `translate(${oldLocation.left - newLocation.left}px, ${
+          oldLocation.top - newLocation.top
+        }px)`,
+      },
+      { transform: 'translate(0, 0)' },
+    ],
+    {
+      duration: 500,
+      easing: 'ease-in-out',
+    }
+  )
+}
 
 function shuffle() {
-    const box = document.querySelector('.box')!;
-    const items = Array.from(box.children);
+  const box = document.querySelector('.box')!
+  const items = Array.from(box.children)
 
-    items.sort(() => Math.random() - 0.5);
-    const locatoins = items.map(getLocation); // 记录初始位置
+  items.sort(() => Math.random() - 0.5)
+  const locatoins = items.map(getLocation) // 记录初始位置
 
-    items.forEach((item) => box.appendChild(item));
-    items.forEach((item, index) => {
-        flip(locatoins[index], getLocation(item), item); // 记录结束位置
-    });}
+  items.forEach((item) => box.appendChild(item))
+  items.forEach((item, index) => {
+    flip(locatoins[index], getLocation(item), item) // 记录结束位置
+  })
+}
 
+export {}
