@@ -47,6 +47,7 @@ function flip(els: Element | Element[], handler: () => void) {
 
   const locatoinsMap = new Map()
 
+  // 记录初始位置
   els.forEach((el) => {
     locatoinsMap.set(el, getLocation(el))
   })
@@ -55,8 +56,10 @@ function flip(els: Element | Element[], handler: () => void) {
 
   els.forEach((el) => {
     const oldLocation = locatoinsMap.get(el)
+    // 记录当前位置
     const newLocation = getLocation(el)
 
+    // 将元素放到初始位置，再通过动画移动到当前位置
     el.animate(
       [
         {
