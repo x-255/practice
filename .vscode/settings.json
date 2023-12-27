@@ -1,7 +1,7 @@
 {
   "editor.formatOnSave": true,
   "commentTranslate.multiLineMerge": true,
-  "commentTranslate.source": "Baidu",
+  "commentTranslate.source": "intellsmi.comment-translate-ali.cloud",
   "[python]": {
     "editor.defaultFormatter": "ms-python.autopep8"
   },
