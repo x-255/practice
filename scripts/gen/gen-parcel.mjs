@@ -1,8 +1,8 @@
 /*
  * @Author: x-255 ouhuangff@163.com
  * @Date: 2023-06-27 23:34:13
- * @LastEditors: x-255 ouhuangff@163.com
- * @LastEditTime: 2023-12-27 22:29:42
+ * @LastEditors: finn finn.xu@perficient.com
+ * @LastEditTime: 2023-12-28 10:22:40
  * @FilePath: /practice/scripts/gen/gen-parcel.mjs
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -22,7 +22,6 @@ export class ParcelCreator extends GenCreator {
       name: `@practice/${this.name}`,
       version: '1.0.0',
       description: '',
-      main: 'index.ts',
       scripts: {
         dev: 'parcel index.html --port',
       },
