@@ -1,15 +1,18 @@
 import { useAppDispatch, useAppSelector } from "./store"
-import { increment, incrementAsync } from "./store/count"
+import { decrement, increamentAsync, increment, incrementByAmountAsync } from "./store/counterSlice"
+
 
 function App() {
-  const count = useAppSelector((state) => state.count)
+  const count = useAppSelector(state => state.counter)
   const dispatch = useAppDispatch()
 
   return (
     <>
-      <button onClick={() => dispatch(increment(1))}>+1</button>
-      <button onClick={() => dispatch(incrementAsync(1))}>async +1</button>
-      <p>{count}</p>
+      <button onClick={() => dispatch(increment())}>+1</button>
+      <button onClick={() => dispatch(decrement())}>-1</button>
+      <button onClick={() => dispatch(increamentAsync())}>+1 later</button>
+      <button onClick={() => dispatch(incrementByAmountAsync(2))}>+2 later</button>
+      <p>{count.value}</p>
     </>
   )
 }

@@ -1,33 +1,23 @@
-import {
-  Dispatch,
-  applyMiddleware,
-  combineReducers,
-  createStore,
-  legacy_createStore,
-} from 'redux'
-import { countEpic, countReducer } from './count'
+import { UnknownAction, configureStore } from '@reduxjs/toolkit'
+import { CounterState, counterEpic, counterReducer } from './counterSlice'
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
-import { combineEpics, createEpicMiddleware } from 'redux-observable' // Add this line
+import { combineEpics, createEpicMiddleware } from 'redux-observable'
 
-export type RootState = ReturnType<typeof store.getState>
+export type AppState = ReturnType<typeof store.getState>
 export type AppDispatch = typeof store.dispatch
-export type AppAction = AppDispatch extends Dispatch<infer A> ? A : never
 
-const rootReducer = combineReducers({
-  count: countReducer,
-})
-
-const rootEpic = combineEpics(countEpic)
-
+const rootEpic = combineEpics(counterEpic)
 const epicMiddleware = createEpicMiddleware()
 
-// @ts-ignore
-const store = legacy_createStore(rootReducer, applyMiddleware(epicMiddleware))
+export const store = configureStore({
+  reducer: {
+    counter: counterReducer,
+  },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(epicMiddleware),
+})
 
-// @ts-ignore
-epicMiddleware.run(rootEpic)
+epicMiddleware.run(rootEpic as any)
 
-export default store
-
-export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
 export const useAppDispatch: () => AppDispatch = useDispatch
+export const useAppSelector: TypedUseSelectorHook<AppState> = useSelector
