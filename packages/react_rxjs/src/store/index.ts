@@ -1,7 +1,7 @@
-import { UnknownAction, configureStore } from '@reduxjs/toolkit'
-import { CounterState, counterEpic, counterReducer } from './counterSlice'
+import { Tuple, configureStore } from '@reduxjs/toolkit'
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
 import { combineEpics, createEpicMiddleware } from 'redux-observable'
+import { counterEpic, counterReducer } from './counterSlice'
 
 export type AppState = ReturnType<typeof store.getState>
 export type AppDispatch = typeof store.dispatch
@@ -13,8 +13,7 @@ export const store = configureStore({
   reducer: {
     counter: counterReducer,
   },
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(epicMiddleware),
+  middleware: () => new Tuple(epicMiddleware),
 })
 
 epicMiddleware.run(rootEpic as any)

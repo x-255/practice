@@ -1,12 +1,14 @@
-import { PayloadAction, UnknownAction, createSlice } from '@reduxjs/toolkit'
-import { Epic, combineEpics } from 'redux-observable'
+import {
+  PayloadAction,
+  UnknownAction,
+  createAction,
+  createSlice,
+} from '@reduxjs/toolkit'
 import { Observable, delay, filter, map, merge } from 'rxjs'
 
 export interface CounterState {
   value: number
 }
-
-type CounterEpic = Epic<UnknownAction, UnknownAction, CounterState>
 
 export const counterSlice = createSlice({
   name: 'counter',
@@ -23,18 +25,16 @@ export const counterSlice = createSlice({
     incrementByAmount(state, action: PayloadAction<number>) {
       state.value += action.payload
     },
-    increamentAsync() {},
-    incrementByAmountAsync(state, action: PayloadAction<number>) {},
   },
 })
 
-export const {
-  increment,
-  decrement,
-  incrementByAmount,
-  increamentAsync,
-  incrementByAmountAsync,
-} = counterSlice.actions
+export const { increment, decrement, incrementByAmount } = counterSlice.actions
+
+export const increamentAsync = createAction('counter/increamentAsync')
+
+export const incrementByAmountAsync = createAction<number>(
+  'counter/incrementByAmountAsync'
+)
 
 export const counterReducer = counterSlice.reducer
 
