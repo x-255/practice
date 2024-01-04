@@ -1,14 +1,19 @@
+import { MouseEventHandler } from 'react'
 import styled from 'styled-components'
-import { Sky } from './Sky'
-import { Ground } from './Ground'
 import { CannonBase } from './CannonBase'
 import { CannonPipe } from './CannonPipe'
+import { Ground } from './Ground'
+import { Sky } from './Sky'
+
+export interface CanvasProps {
+  trackMouse: MouseEventHandler<SVGSVGElement>
+}
 
 const Container = styled.svg`
   border: 1px solid black;
 `
 
-export function Canvas() {
+export function Canvas({ trackMouse }: CanvasProps) {
   const viewBox = [
     window.innerWidth / -2,
     100 - window.innerHeight,
@@ -21,10 +26,11 @@ export function Canvas() {
       id="aliens-go-home-canvas"
       preserveAspectRatio="none"
       viewBox={viewBox.join(' ')}
+      onMouseMove={trackMouse}
     >
       <Sky></Sky>
       <Ground></Ground>
-      <CannonPipe rotation={45}></CannonPipe>
+      <CannonPipe></CannonPipe>
       <CannonBase></CannonBase>
     </Container>
   )

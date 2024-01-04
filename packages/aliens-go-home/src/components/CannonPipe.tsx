@@ -1,9 +1,6 @@
 import styled from 'styled-components'
 import { CubicBezierCurve, pathFromBezierCurve } from '../utils/formulas'
-
-interface CannonPipeProps {
-  rotation: number
-}
+import { useAppSelector } from '../app/hooks'
 
 const cannonPipeStyle = `
   fill: '#999';
@@ -19,8 +16,10 @@ const CannonPipeLine = styled.line`
   ${cannonPipeStyle}
 `
 
-export function CannonPipe({ rotation }: CannonPipeProps) {
-  const transform = `rotate(${rotation}, 0, 0)`
+export function CannonPipe() {
+  const { angle } = useAppSelector((state) => state.game)
+
+  const transform = `rotate(${angle}, 0, 0)`
 
   const muzzleWidth = 40
   const halfMuzzle = 20

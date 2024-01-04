@@ -1,3 +1,5 @@
+import { MouseEvent, MouseEventHandler } from 'react'
+
 export interface Point {
   x: number
   y: number
@@ -42,4 +44,16 @@ export const calculateAngle = (
   const divisor = y2 - y1
   const quotient = dividend / divisor
   return radiansToDegrees(Math.atan(quotient)) * -1
+}
+
+export const getCanvasPosition = (
+  e: MouseEvent<SVGSVGElement, globalThis.MouseEvent>
+) => {
+  const svg = document.querySelector('#aliens-go-home-canvas') as SVGSVGElement
+  const point = svg.createSVGPoint()
+
+  point.x = e.clientX
+  point.y = e.clientY
+  const { x, y } = point.matrixTransform(svg.getScreenCTM()?.inverse())
+  return { x, y }
 }
