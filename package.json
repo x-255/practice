@@ -18,7 +18,8 @@
     "dev:anjs": "cd packages/angularjs_learn && npm run dev 8334",
     "dev:vs": "cd packages/vue设计与实现 && npm run dev 8084",
     "dev:rx": "cd packages/rxjs && npm run dev 8475",
-    "dev:rtr": "cd packages/react_rxjs && npm run dev 8527"
+    "dev:rtr": "cd packages/react_rxjs && npm run dev 8527",
+    "dev:agh": "cd packages/aliens-go-home && npm run dev 8287"
   },
   "keywords": [],
   "author": {
