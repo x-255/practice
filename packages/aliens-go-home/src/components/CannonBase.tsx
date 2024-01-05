@@ -4,7 +4,7 @@ import { CubicBezierCurve, pathFromBezierCurve } from '../utils/formulas'
 const cannonBaseStyle = `
   fill: #a16012;
   stroke: #75450e;
-  stroke-width: 2;
+  stroke-width: 2px;
 `
 
 const CannonBasePath = styled.path`

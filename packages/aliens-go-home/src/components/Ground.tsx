@@ -7,7 +7,7 @@ const GroundBox = styled.rect`
 
 const DivisionBox = styled.line`
   stroke: #458232;
-  stroke-width: 3;
+  stroke-width: 3px;
 `
 
 export function Ground() {
