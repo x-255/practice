@@ -1,4 +1,4 @@
-import { MouseEvent, MouseEventHandler } from 'react'
+import { MouseEvent } from 'react'
 
 export interface Point {
   x: number
@@ -46,10 +46,7 @@ export const calculateAngle = (
   return radiansToDegrees(Math.atan(quotient)) * -1
 }
 
-export const getCanvasPosition = (
-  e: MouseEvent<SVGSVGElement, globalThis.MouseEvent>
-) => {
-  const svg = document.querySelector('#aliens-go-home-canvas') as SVGSVGElement
+export const getCanvasPosition = (e: MouseEvent, svg: SVGSVGElement) => {
   const point = svg.createSVGPoint()
 
   point.x = e.clientX

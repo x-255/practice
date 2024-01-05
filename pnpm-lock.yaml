@@ -86,6 +86,12 @@ importers:
       redux:
         specifier: ^5.0.1
         version: 5.0.1
+      redux-observable:
+        specifier: 2.0.0-rc.2
+        version: 2.0.0-rc.2(redux@5.0.1)
+      rxjs:
+        specifier: ^7.8.1
+        version: 7.8.1
       styled-components:
         specifier: ^6.1.6
         version: 6.1.6(react-dom@18.2.0)(react@18.2.0)
@@ -5843,6 +5849,16 @@ packages:
       util-deprecate: 1.0.2
     dev: true
 
+  /redux-observable@2.0.0-rc.2(redux@5.0.1):
+    resolution: {integrity: sha512-IUaAW/maqnOQURpvLCWf2c1LrCp4hZuNFiJarOg3ev1XUPIAQYCmdQ7LpVfVIyrg1qDZUrPJAewqy3VVmHOWBQ==}
+    peerDependencies:
+      redux: '>=4 <5'
+    dependencies:
+      redux: 5.0.1
+      rxjs: 7.8.1
+      tslib: 2.1.0
+    dev: false
+
   /redux-observable@3.0.0-rc.2(redux@5.0.1)(rxjs@7.8.1):
     resolution: {integrity: sha512-gG/pWIKgSrcTyyavm2so5tc7tuyCQ47p3VdCAG6wt+CV0WGhDr50cMQHLcYKxFZSGgTm19a8ZmyfJGndmGDpYg==}
     peerDependencies:
@@ -6371,6 +6387,10 @@ packages:
 
   /ts-toolbelt@6.15.5:
     resolution: {integrity: sha512-FZIXf1ksVyLcfr7M317jbB67XFJhOO1YqdTcuGaq9q5jLUoTikukZ+98TPjKiP2jC5CgmYdWWYs0s2nLSU0/1A==}
+
+  /tslib@2.1.0:
+    resolution: {integrity: sha512-hcVC3wYEziELGGmEEXue7D75zbwIIVUMWAVbHItGPx0ziyXxrOMQx4rQEVEV45Ut/1IotuEvwqPopzIOkDMf0A==}
+    dev: false
 
   /tslib@2.5.0:
     resolution: {integrity: sha512-336iVw3rtn2BUK7ORdIAHTyxHGRIHVReokCR3XjbckJMK7ms8FysBfhLR8IXnAgy7T0PTPNBWKiH514FOW/WSg==}
