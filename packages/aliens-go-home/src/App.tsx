@@ -1,11 +1,26 @@
-import { MouseEventHandler, useEffect, useState } from 'react'
+import { useEffect, useRef } from 'react'
 import { Canvas } from './components/Canvas'
-import { getCanvasPosition } from './utils/formulas'
-import { useAppDispatch } from './app/hooks'
-import { moveObjects } from './features/gameSlice'
 
 function App() {
-  return <Canvas></Canvas>
+  const canvasRef = useRef<SVGSVGElement>(null)
+
+  useEffect(() => {
+    const onResize = () => {
+      const cnv = canvasRef.current
+      if (cnv) {
+        cnv.style.width = `${window.innerWidth}px`
+        cnv.style.height = `${window.innerHeight}px`
+      }
+    }
+    onResize()
+    window.addEventListener('resize', onResize)
+
+    return () => {
+      window.removeEventListener('resize', onResize)
+    }
+  }, [])
+
+  return <Canvas ref={canvasRef}></Canvas>
 }
 
 export default App

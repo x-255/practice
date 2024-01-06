@@ -10,6 +10,8 @@ const getHeartSide = () => styled.path`
   stroke: #a51708;
   stroke-width: 2px;
 `
+const LeftSide = getHeartSide()
+const RightSide = getHeartSide()
 
 export const Heart = ({ position: { x, y } }: HeartProps) => {
   const leftSide = {
@@ -49,9 +51,6 @@ export const Heart = ({ position: { x, y } }: HeartProps) => {
       y: 40,
     },
   }
-
-  const LeftSide = getHeartSide()
-  const RightSide = getHeartSide()
 
   return (
     <g filter="url(#shadow)">
