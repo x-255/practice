@@ -18,7 +18,8 @@ const StartText = styled.text`
 export const StartGame = () => {
   const dispatch = useAppDispatch()
 
-  const handleStartGame = () => {
+  const handleStartGame = (e: React.MouseEvent) => {
+    e.stopPropagation()
     dispatch(startGame())
   }
 

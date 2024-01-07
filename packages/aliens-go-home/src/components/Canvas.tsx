@@ -1,16 +1,20 @@
-import { forwardRef, useRef } from 'react'
+import { forwardRef, useState } from 'react'
 import styled from 'styled-components'
 import { useAppDispatch, useAppSelector } from '../app/hooks'
-import { moveObjectsByThrottle } from '../features/gameSlice'
+import {
+  moveObjects,
+  moveObjectsByThrottle,
+  shoot,
+} from '../features/gameSlice'
 import { getCanvasPosition } from '../utils/formulas'
+import { CannonBall } from './CannonBall'
 import { CannonBase } from './CannonBase'
 import { CannonPipe } from './CannonPipe'
-import { Ground } from './Ground'
-import { Sky } from './Sky'
-import { CannonBall } from './CannonBall'
 import { CurrentScore } from './CurrentScore'
 import { FlyingObject } from './FlyingObject'
+import { Ground } from './Ground'
 import { Heart } from './Heart'
+import { Sky } from './Sky'
 import { StartGame } from './StartGame'
 import { Title } from './Title'
 
@@ -19,10 +23,15 @@ const Container = styled.svg`
 `
 
 export const Canvas = forwardRef<SVGSVGElement>((_, ref) => {
-  const { started, flyingObjects } = useAppSelector(
+  const { started, flyingObjects, cannonBalls } = useAppSelector(
     (state) => state.game.gameState
   )
   const dispatch = useAppDispatch()
+
+  const [canvasMousePosition, setCanvasMousePosition] = useState({
+    x: 0,
+    y: 0,
+  })
 
   const gameHeight = 1200
   const viewBox = [
@@ -35,8 +44,13 @@ export const Canvas = forwardRef<SVGSVGElement>((_, ref) => {
   const trackMouse = (e: React.MouseEvent<SVGSVGElement, MouseEvent>) => {
     if (ref && 'current' in ref && ref.current !== null) {
       const mousePosition = getCanvasPosition(e, ref.current)
-      dispatch(moveObjectsByThrottle(mousePosition))
+      setCanvasMousePosition(mousePosition)
+      dispatch(moveObjects(mousePosition))
     }
+  }
+
+  const handleShoot = () => {
+    dispatch(shoot(canvasMousePosition))
   }
 
   return (
@@ -45,6 +59,7 @@ export const Canvas = forwardRef<SVGSVGElement>((_, ref) => {
       preserveAspectRatio="none"
       viewBox={viewBox.join(' ')}
       onMouseMove={trackMouse}
+      onClick={handleShoot}
     >
       <defs>
         <filter id="shadow">
@@ -54,9 +69,11 @@ export const Canvas = forwardRef<SVGSVGElement>((_, ref) => {
 
       <Sky></Sky>
       <Ground></Ground>
+      {cannonBalls.map((cannonBall) => (
+        <CannonBall key={cannonBall.id} position={cannonBall.position} />
+      ))}
       <CannonPipe></CannonPipe>
       <CannonBase></CannonBase>
-      <CannonBall position={{ x: 0, y: -100 }} />
       <CurrentScore></CurrentScore>
       {started && (
         <g>

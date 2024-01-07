@@ -12,6 +12,13 @@ export interface CubicBezierCurve {
   endingAxis: Point
 }
 
+export interface Rect {
+  x1: number
+  y1: number
+  x2: number
+  y2: number
+}
+
 export const pathFromBezierCurve = ({
   initialAxis,
   initialControlPoint,
@@ -54,3 +61,28 @@ export const getCanvasPosition = (e: MouseEvent, svg: SVGSVGElement) => {
   const { x, y } = point.matrixTransform(svg.getScreenCTM()?.inverse())
   return { x, y }
 }
+
+const degreesToRadian = (degrees: number) => (degrees * Math.PI) / 180
+
+export const calculateNextPosition = (
+  x: number,
+  y: number,
+  angle: number,
+  divisor = 300
+) => {
+  const realAngle = angle * -1 + 90
+  const stepsX =
+    radiansToDegrees(Math.cos(degreesToRadian(realAngle))) / divisor
+  const stepsY =
+    radiansToDegrees(Math.sin(degreesToRadian(realAngle))) / divisor
+  return {
+    x: x + stepsX,
+    y: y - stepsY,
+  }
+}
+
+export const checkCollision = (rectA: Rect, rectB: Rect) =>
+  rectA.x1 < rectB.x2 &&
+  rectA.x2 > rectB.x1 &&
+  rectA.y1 < rectB.y2 &&
+  rectA.y2 > rectB.y1
