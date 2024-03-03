@@ -1,5 +1,7 @@
 package com.jdbc.api;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -29,7 +31,9 @@ public class BaseDao {
     return rows;
   }
 
-  public <T> List<T> executeQuery(Class<T> clazz, String sql, Object... args) throws SQLException {
+  public <T> List<T> executeQuery(Class<T> clazz, String sql, Object... args)
+      throws SQLException, InstantiationException, IllegalAccessException, IllegalArgumentException,
+      InvocationTargetException, NoSuchMethodException, SecurityException, NoSuchFieldException {
     Connection connection = JdbcUtil.getConnection();
     PreparedStatement statement = connection.prepareStatement(sql);
 
@@ -44,6 +48,26 @@ public class BaseDao {
     int columnCount = metaData.getColumnCount();
 
     List<T> list = new ArrayList<>();
+
+    while (resultSet.next()) {
+      T t = clazz.getDeclaredConstructor().newInstance();
+
+      for (int i = 1; i <= columnCount; i++) {
+        String key = metaData.getColumnLabel(i);
+        Object value = resultSet.getObject(i);
+        Field field = clazz.getDeclaredField(key);
+        field.setAccessible(true);
+        field.set(t, value);
+      }
+
+      list.add(t);
+    }
+
+    resultSet.close();
+
+    if (connection.getAutoCommit()) {
+      connection.close();
+    }
 
     return list;
   }

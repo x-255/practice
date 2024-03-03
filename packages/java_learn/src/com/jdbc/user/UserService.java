@@ -1,11 +1,9 @@
 package com.jdbc.user;
 
-import java.sql.SQLException;
-
 public class UserService {
-  public static void main(String[] args) throws SQLException {
+  public static void main(String[] args) throws Exception {
     UserDao userDao = new UserDao();
 
-    userDao.insert();
+    userDao.select();
   }
 }
