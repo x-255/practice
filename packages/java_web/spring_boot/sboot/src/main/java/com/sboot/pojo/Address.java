@@ -4,6 +4,14 @@ public class Address {
   private String province;
   private String city;
 
+  public Address() {
+  }
+
+  public Address(String province, String city) {
+    this.province = province;
+    this.city = city;
+  }
+
   public String getProvince() {
     return province;
   }
