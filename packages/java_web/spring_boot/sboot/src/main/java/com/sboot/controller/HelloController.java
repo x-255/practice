@@ -9,12 +9,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sboot.pojo.Address;
 import com.sboot.pojo.Result;
-import com.sboot.pojo.User;
+import com.sboot.pojo.User1;
 
 @RestController
 public class HelloController {
@@ -31,7 +30,7 @@ public class HelloController {
   }
 
   @RequestMapping("/simplePojo")
-  public String simplePojo(User user) {
+  public String simplePojo(User1 user) {
     System.out.println(user);
     return "Get ok!";
   }
@@ -55,12 +54,11 @@ public class HelloController {
   }
 
   @RequestMapping("/jsonParam")
-  public String jsonParam(@RequestBody User user) {
+  public String jsonParam(@RequestBody User1 user) {
     System.out.println(user);
     return "Get ok!";
   }
 
-  
   @RequestMapping("/path/{id}")
   public String path(@PathVariable int id) {
     System.out.println(id);
