@@ -1,10 +1,27 @@
 package com.sboot.mapper;
 
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Mapper;
+import com.sboot.pojo.Emp;
+import org.apache.ibatis.annotations.*;
 
 @Mapper
 public interface EmpMapper {
     @Delete("delete from emp where id = #{id}")
-    public void delete(Integer id);
+    void delete(Integer id);
+
+    @Options(keyProperty = "id", useGeneratedKeys = true)
+    @Insert("""
+        insert into emp(username, name, gender, image, job, entrydate, dept_id, create_time, update_time)
+        values(#{username}, #{name}, #{ gender}, #{image}, #{job}, #{entryDate}, #{deptId}, now(), now())
+        """)
+    void insert(Emp emp);
+
+    @Update("""
+            update emp
+            set
+                username = #{username},
+                name = #{name},
+                update_time = now()
+            where id = #{id}
+        """)
+    void update(Emp emp);
 }
