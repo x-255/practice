@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="ee505743-5e21-4e66-9210-a19cdb0a0747" name="更改" comment="">
+      <change beforePath="$PROJECT_DIR$/../../.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../../.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring_boot/sboot/src/main/java/com/sboot/mapper/EmpMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring_boot/sboot/src/main/java/com/sboot/mapper/EmpMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring_boot/sboot/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/spring_boot/sboot/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring_boot/sboot/src/test/java/com/sboot/EmpTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring_boot/sboot/src/test/java/com/sboot/EmpTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring_boot/sboot/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/spring_boot/sboot/target/classes/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring_boot/sboot/target/classes/com/sboot/SbootApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/spring_boot/sboot/target/classes/com/sboot/SbootApplication.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring_boot/sboot/target/classes/com/sboot/controller/HelloController.class" beforeDir="false" afterPath="$PROJECT_DIR$/spring_boot/sboot/target/classes/com/sboot/controller/HelloController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring_boot/sboot/target/classes/com/sboot/mapper/EmpMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/spring_boot/sboot/target/classes/com/sboot/mapper/EmpMapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring_boot/sboot/target/classes/com/sboot/pojo/Address.class" beforeDir="false" afterPath="$PROJECT_DIR$/spring_boot/sboot/target/classes/com/sboot/pojo/Address.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring_boot/sboot/target/classes/com/sboot/pojo/Emp.class" beforeDir="false" afterPath="$PROJECT_DIR$/spring_boot/sboot/target/classes/com/sboot/pojo/Emp.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring_boot/sboot/target/classes/com/sboot/pojo/Result.class" beforeDir="false" afterPath="$PROJECT_DIR$/spring_boot/sboot/target/classes/com/sboot/pojo/Result.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring_boot/sboot/target/classes/com/sboot/pojo/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/spring_boot/sboot/target/classes/com/sboot/pojo/User.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring_boot/sboot/target/classes/com/sboot/pojo/User1.class" beforeDir="false" afterPath="$PROJECT_DIR$/spring_boot/sboot/target/classes/com/sboot/pojo/User1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring_boot/sboot/target/test-classes/com/sboot/EmpTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/spring_boot/sboot/target/test-classes/com/sboot/EmpTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring_boot/sboot/target/test-classes/com/sboot/SbootApplicationTests.class" beforeDir="false" afterPath="$PROJECT_DIR$/spring_boot/sboot/target/test-classes/com/sboot/SbootApplicationTests.class" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5
+}</component>
+  <component name="ProjectId" id="2ddeSt0bqomp1RfjdN1ghHZqTpb" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "JUnit.EmpTest.testSelectEmps.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "master",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/Users/xff/pro/practice/packages/java_web",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RunManager" selected="JUnit.EmpTest.testSelectEmps">
+    <configuration name="EmpTest.testSelectEmps" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="sboot" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.sboot.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.sboot" />
+      <option name="MAIN_CLASS_NAME" value="com.sboot.EmpTest" />
+      <option name="METHOD_NAME" value="testSelectEmps" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SbootApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
+      <module name="sboot" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.sboot.SbootApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.EmpTest.testSelectEmps" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="应用程序级" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="默认任务">
+      <changelist id="ee505743-5e21-4e66-9210-a19cdb0a0747" name="更改" comment="" />
+      <created>1710342386239</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1710342386239</updated>
+      <workItem from="1710342387336" duration="320000" />
+      <workItem from="1710342709779" duration="32000" />
+      <workItem from="1710342753694" duration="452000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

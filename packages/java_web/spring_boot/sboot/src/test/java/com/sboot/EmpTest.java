@@ -44,8 +44,15 @@ public class EmpTest {
 
 
     @Test
-    public void testSelect() {
+    public void testSelectEmp() {
         Emp emp = empMapper.getEmpById(10);
         System.out.println(emp);
+    }
+
+    @Test
+    public void testSelectEmps () {
+//        var emps = empMapper.getEmps("张", (short) 1, LocalDate.of(2000, 1, 1), LocalDate.of(2020, 12, 31));
+        var emps = empMapper.getEmps("张", (short) 1, null, null);
+        System.out.println(emps);
     }
 }

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sboot.mapper.EmpMapper">
+    <select id="getEmps" resultType="com.sboot.pojo.Emp">
+        select *
+        from emp
+        <where>
+            <if test="name != null">
+                name like concat('%', #{name}, '%')
+            </if>
+
+            <if test="gender != null">
+                and gender = #{gender}
+            </if>
+            <if test="start != null and end != null">
+                and entrydate between #{start} and #{end}
+            </if>
+        </where>
+    </select>
+</mapper>
