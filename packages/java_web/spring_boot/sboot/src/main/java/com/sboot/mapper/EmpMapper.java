@@ -24,4 +24,12 @@ public interface EmpMapper {
             where id = #{id}
         """)
     void update(Emp emp);
+
+    @Results({
+        @Result(column = "dept_id", property = "deptId"),
+        @Result(column = "create_time", property = "createTime"),
+        @Result(column = "update_time", property = "updateTime")
+    })
+    @Select("select  * from emp where id = #{id}")
+    Emp getEmpById(Integer id);
 }

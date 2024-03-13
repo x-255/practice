@@ -2,6 +2,8 @@ package com.sboot;
 
 import com.sboot.mapper.EmpMapper;
 import com.sboot.pojo.Emp;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Results;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -38,5 +40,12 @@ public class EmpTest {
         emp.setUsername("Tom1");
         emp.setName("汤姆1");
         empMapper.update(emp);
+    }
+
+
+    @Test
+    public void testSelect() {
+        Emp emp = empMapper.getEmpById(10);
+        System.out.println(emp);
     }
 }
