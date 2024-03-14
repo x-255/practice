@@ -4,22 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ee505743-5e21-4e66-9210-a19cdb0a0747" name="更改" comment="">
-      <change beforePath="$PROJECT_DIR$/../../.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../../.gitignore" afterDir="false" />
+    <list default="true" id="ee505743-5e21-4e66-9210-a19cdb0a0747" name="更改" comment="mybatis + gitignore update">
+      <change beforePath="$PROJECT_DIR$/.idea/java_web.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/java_web.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/spring_boot/sboot/src/main/java/com/sboot/mapper/EmpMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring_boot/sboot/src/main/java/com/sboot/mapper/EmpMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spring_boot/sboot/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/spring_boot/sboot/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring_boot/sboot/src/main/java/com/sboot/pojo/Emp.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring_boot/sboot/src/main/java/com/sboot/pojo/Emp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring_boot/sboot/src/main/resources/com/sboot/mapper/EmpMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/spring_boot/sboot/src/main/resources/com/sboot/mapper/EmpMapper.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/spring_boot/sboot/src/test/java/com/sboot/EmpTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring_boot/sboot/src/test/java/com/sboot/EmpTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spring_boot/sboot/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/spring_boot/sboot/target/classes/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spring_boot/sboot/target/classes/com/sboot/SbootApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/spring_boot/sboot/target/classes/com/sboot/SbootApplication.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spring_boot/sboot/target/classes/com/sboot/controller/HelloController.class" beforeDir="false" afterPath="$PROJECT_DIR$/spring_boot/sboot/target/classes/com/sboot/controller/HelloController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/spring_boot/sboot/target/classes/com/sboot/mapper/EmpMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/spring_boot/sboot/target/classes/com/sboot/mapper/EmpMapper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spring_boot/sboot/target/classes/com/sboot/pojo/Address.class" beforeDir="false" afterPath="$PROJECT_DIR$/spring_boot/sboot/target/classes/com/sboot/pojo/Address.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring_boot/sboot/target/classes/com/sboot/mapper/EmpMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/spring_boot/sboot/target/classes/com/sboot/mapper/EmpMapper.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/spring_boot/sboot/target/classes/com/sboot/pojo/Emp.class" beforeDir="false" afterPath="$PROJECT_DIR$/spring_boot/sboot/target/classes/com/sboot/pojo/Emp.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spring_boot/sboot/target/classes/com/sboot/pojo/Result.class" beforeDir="false" afterPath="$PROJECT_DIR$/spring_boot/sboot/target/classes/com/sboot/pojo/Result.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spring_boot/sboot/target/classes/com/sboot/pojo/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/spring_boot/sboot/target/classes/com/sboot/pojo/User.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spring_boot/sboot/target/classes/com/sboot/pojo/User1.class" beforeDir="false" afterPath="$PROJECT_DIR$/spring_boot/sboot/target/classes/com/sboot/pojo/User1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/spring_boot/sboot/target/test-classes/com/sboot/EmpTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/spring_boot/sboot/target/test-classes/com/sboot/EmpTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spring_boot/sboot/target/test-classes/com/sboot/SbootApplicationTests.class" beforeDir="false" afterPath="$PROJECT_DIR$/spring_boot/sboot/target/test-classes/com/sboot/SbootApplicationTests.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,7 +34,9 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "JUnit.EmpTest.testDeleteByIds.executor": "Run",
     "JUnit.EmpTest.testSelectEmps.executor": "Run",
+    "JUnit.EmpTest.testUpdate2.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "master",
@@ -50,10 +47,30 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "模块",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "preferences.keymap",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager" selected="JUnit.EmpTest.testSelectEmps">
+  <component name="RunManager" selected="JUnit.EmpTest.testDeleteByIds">
+    <configuration name="EmpTest.testDeleteByIds" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="sboot" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.sboot.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.sboot" />
+      <option name="MAIN_CLASS_NAME" value="com.sboot.EmpTest" />
+      <option name="METHOD_NAME" value="testDeleteByIds" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="EmpTest.testSelectEmps" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="sboot" />
       <extension name="coverage">
@@ -70,6 +87,22 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="EmpTest.testUpdate2" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="sboot" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.sboot.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.sboot" />
+      <option name="MAIN_CLASS_NAME" value="com.sboot.EmpTest" />
+      <option name="METHOD_NAME" value="testUpdate2" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="SbootApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
       <module name="sboot" />
@@ -80,6 +113,8 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.EmpTest.testDeleteByIds" />
+        <item itemvalue="JUnit.EmpTest.testUpdate2" />
         <item itemvalue="JUnit.EmpTest.testSelectEmps" />
       </list>
     </recent_temporary>
@@ -94,8 +129,17 @@
       <updated>1710342386239</updated>
       <workItem from="1710342387336" duration="320000" />
       <workItem from="1710342709779" duration="32000" />
-      <workItem from="1710342753694" duration="452000" />
+      <workItem from="1710342753694" duration="3909000" />
     </task>
+    <task id="LOCAL-00001" summary="mybatis + gitignore update">
+      <option name="closed" value="true" />
+      <created>1710343327157</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1710343327157</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -111,5 +155,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="mybatis + gitignore update" />
+    <option name="LAST_COMMIT_MESSAGE" value="mybatis + gitignore update" />
   </component>
 </project>

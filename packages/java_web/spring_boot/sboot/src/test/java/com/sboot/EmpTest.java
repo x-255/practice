@@ -2,13 +2,13 @@ package com.sboot;
 
 import com.sboot.mapper.EmpMapper;
 import com.sboot.pojo.Emp;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.Results;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDate;
+import java.util.List;
+
 
 @SpringBootTest
 public class EmpTest {
@@ -28,7 +28,7 @@ public class EmpTest {
         emp.setImage("tom.jpg");
         emp.setGender((short) 1);
         emp.setJob((short) 1);
-        emp.setEntryDate(LocalDate.of(2020, 2, 12));
+        emp.setEntrydate(LocalDate.of(2020, 2, 12));
         emp.setDeptId(1);
         empMapper.insert(emp);
     }
@@ -54,5 +54,19 @@ public class EmpTest {
 //        var emps = empMapper.getEmps("张", (short) 1, LocalDate.of(2000, 1, 1), LocalDate.of(2020, 12, 31));
         var emps = empMapper.getEmps("张", (short) 1, null, null);
         System.out.println(emps);
+    }
+
+    @Test
+    public void testUpdate2() {
+        Emp emp = new Emp();
+        emp.setId(18);
+        emp.setUsername("Tom11");
+        emp.setName("汤姆11");
+        empMapper.update(emp);
+    }
+
+    @Test
+    public void testDeleteByIds () {
+        empMapper.deleteByIds(List.of(18, 19));
     }
 }

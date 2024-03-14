@@ -4,6 +4,22 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.sboot.mapper.EmpMapper">
+    <update id="updatePart">
+        update emp
+        <set>
+            <if test="username != null">username = #{username},</if>
+            <if test="password != null">password = #{password},</if>
+            <if test="name != null">name = #{name},</if>
+            <if test="gender != null">gender = #{gender},</if>
+            <if test="image != null">image = #{image},</if>
+            <if test="job != null">job = #{job},</if>
+            <if test="entryDate != null">entrydate = #{entrydate},</if>
+            <if test="deptId != null">dept_id = #{deptId},</if>
+            update_time = now()
+        </set>
+        where id = #{id}
+    </update>
+
     <select id="getEmps" resultType="com.sboot.pojo.Emp">
         select *
         from emp
@@ -20,4 +36,12 @@
             </if>
         </where>
     </select>
+
+    <delete id="deleteByIds">
+        delete from emp
+        where id in
+        <foreach collection="ids" item="id" separator="," open="(" close=")">
+            #{id}
+        </foreach>
+    </delete>
 </mapper>
