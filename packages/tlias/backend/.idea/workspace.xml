@@ -4,12 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b14e8ac2-7bba-452f-a575-e8b7a2aab244" name="更改" comment="">
-      <change beforePath="$PROJECT_DIR$/../../java_web/.idea/copilot/chatSessions/00000000000.xd" beforeDir="false" afterPath="$PROJECT_DIR$/../../java_web/.idea/copilot/chatSessions/00000000000.xd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../java_web/.idea/copilot/chatSessions/xd.lck" beforeDir="false" afterPath="$PROJECT_DIR$/../../java_web/.idea/copilot/chatSessions/xd.lck" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../java_web/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../java_web/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../java_web/.idea/dataSources/091d52fd-1c92-4624-ae31-e394556f2401.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../java_web/.idea/dataSources/091d52fd-1c92-4624-ae31-e394556f2401.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../java_web/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../java_web/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="b14e8ac2-7bba-452f-a575-e8b7a2aab244" name="更改" comment="tlias学习辅助系统（java）">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/tlias/controller/DeptController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tlias/controller/DeptController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/tlias/mapper/DeptMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tlias/mapper/DeptMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/tlias/service/DeptService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tlias/service/DeptService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/tlias/service/impl/DeptServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tlias/service/impl/DeptServiceImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,6 +55,7 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "Spring Boot.BackendApplication.executor": "Run",
     "git-widget-placeholder": "master",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "/Users/xff/pro/practice/packages/tlias/backend/src/main/java/com/tlias/pojo",
@@ -102,11 +103,35 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1710428213998</updated>
-      <workItem from="1710428215155" duration="3045000" />
+      <workItem from="1710428215155" duration="4308000" />
     </task>
+    <task id="LOCAL-00001" summary="tlias学习辅助系统（java）">
+      <option name="closed" value="true" />
+      <created>1710432166005</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1710432166005</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="tlias学习辅助系统（java）" />
+    <option name="LAST_COMMIT_MESSAGE" value="tlias学习辅助系统（java）" />
   </component>
 </project>
