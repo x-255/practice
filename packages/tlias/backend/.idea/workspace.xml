@@ -5,21 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b14e8ac2-7bba-452f-a575-e8b7a2aab244" name="更改" comment="tlias学习辅助系统（java）">
-      <change beforePath="$PROJECT_DIR$/../../../README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../../README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../../package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../java_web/.idea/copilot/chatSessions/00000000000.xd" beforeDir="false" afterPath="$PROJECT_DIR$/../../java_web/.idea/copilot/chatSessions/00000000000.xd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../java_web/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../java_web/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/copilot/chatSessions/00000000000.xd" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/copilot/chatSessions/00000000000.xd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/35524342-5b90-4e79-beea-91d84322462c.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/35524342-5b90-4e79-beea-91d84322462c.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tlias/controller/DeptController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tlias/controller/DeptController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tlias/mapper/DeptMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tlias/mapper/DeptMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tlias/pojo/Result.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tlias/pojo/Result.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tlias/service/DeptService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tlias/service/DeptService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tlias/service/impl/DeptServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tlias/service/impl/DeptServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/tlias/controller/DeptController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/tlias/controller/DeptController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../pnpm-lock.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../pnpm-lock.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/tlias/pojo/Dept.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tlias/pojo/Dept.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
