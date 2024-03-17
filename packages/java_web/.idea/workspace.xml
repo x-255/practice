@@ -5,11 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ee505743-5e21-4e66-9210-a19cdb0a0747" name="更改" comment="mybatis">
-      <change beforePath="$PROJECT_DIR$/.idea/copilot/chatSessions/00000000000.xd" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/copilot/chatSessions/00000000000.xd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/copilot/chatSessions/xd.lck" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/copilot/chatSessions/xd.lck" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/091d52fd-1c92-4624-ae31-e394556f2401.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/091d52fd-1c92-4624-ae31-e394556f2401.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tlias/backend/.idea/copilot/chatSessions/00000000000.xd" beforeDir="false" afterPath="$PROJECT_DIR$/../tlias/backend/.idea/copilot/chatSessions/00000000000.xd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tlias/backend/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../tlias/backend/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tlias/backend/src/main/java/com/tlias/controller/DeptController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../tlias/backend/src/main/java/com/tlias/controller/DeptController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tlias/backend/target/classes/com/tlias/controller/DeptController.class" beforeDir="false" afterPath="$PROJECT_DIR$/../tlias/backend/target/classes/com/tlias/controller/DeptController.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

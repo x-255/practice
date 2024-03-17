@@ -7,4 +7,9 @@ import java.util.List;
 
 public interface DeptService {
     List<Dept> list();
+
+    void insert(Dept dept);
+    void delete(Integer id);
+
+    void update(Dept dept);
 }
