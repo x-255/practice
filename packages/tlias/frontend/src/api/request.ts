@@ -1,4 +1,3 @@
-import { useSpinStore } from '@/store'
 import axios from 'axios'
 
 const request = axios.create({

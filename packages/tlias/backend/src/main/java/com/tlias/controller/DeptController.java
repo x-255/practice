@@ -12,29 +12,30 @@ import java.util.List;
 @Slf4j
 @CrossOrigin
 @RestController
+@RequestMapping("/depts")
 public class DeptController {
     @Autowired
     DeptService deptService;
-    @GetMapping("/depts")
+    @GetMapping
     public Result list() {
         List<Dept> deptList = deptService.list();
 
         return Result.success(deptList);
     }
 
-    @PostMapping("/depts")
+    @PostMapping
     public Result insert(@RequestBody Dept dept) {
         deptService.insert(dept);
         return Result.success(null, "添加成功");
     }
 
-    @DeleteMapping("/depts/{id}")
+    @DeleteMapping("/{id}")
     public Result delete(@PathVariable Integer id) {
         deptService.delete(id);
         return Result.success(null, "删除成功");
     }
 
-    @PutMapping("/depts")
+    @PutMapping
     public Result update(@RequestBody Dept dept) {
         deptService.update(dept);
         return Result.success(null, "修改成功");

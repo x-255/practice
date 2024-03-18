@@ -1,5 +1,5 @@
 import loginImg from '@/assets/login_bg.png'
-import { useLoginStore } from '@/store'
+import { useBoundStore } from '@/store'
 import { Button, Checkbox, Form, Input } from 'antd'
 import { useNavigate } from 'react-router-dom'
 
@@ -10,7 +10,7 @@ interface LoginField {
 }
 
 function Login() {
-  const { setLogin } = useLoginStore()
+  const setLogin = useBoundStore((s) => s.setLogin)
   const navigate = useNavigate()
 
   const onFinish = (values: LoginField) => {

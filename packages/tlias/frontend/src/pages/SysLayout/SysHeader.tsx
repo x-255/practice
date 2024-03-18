@@ -1,12 +1,12 @@
 import reactSvg from '@/assets/react.svg'
-import { useLoginStore } from '@/store'
+import { useBoundStore } from '@/store'
 import { UserOutlined } from '@ant-design/icons'
 import { Avatar, Dropdown, MenuProps, Space } from 'antd'
 import { Header } from 'antd/es/layout/layout'
 import { useNavigate } from 'react-router-dom'
 
 function SysHeader() {
-  const { setLogin } = useLoginStore()
+  const setLogin = useBoundStore((s) => s.setLogin)
   const navigator = useNavigate()
 
   const items: MenuProps['items'] = [

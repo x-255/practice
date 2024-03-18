@@ -1,11 +1,10 @@
 import { create } from 'zustand'
-import { LoginSlice, createLoginSlice } from './loginSlice'
-import { persist, devtools } from 'zustand/middleware'
+import { devtools, persist } from 'zustand/middleware'
 import { immer } from 'zustand/middleware/immer'
-import { partial, pick } from 'ramda'
+import { LoginSlice, createLoginSlice } from './loginSlice'
 import { SpinSlice, createSpinSlice } from './spinSlice'
 
-const useBoundStore = create<LoginSlice & SpinSlice>()(
+export const useBoundStore = create<LoginSlice & SpinSlice>()(
   persist(
     immer(
       devtools((...a) => ({
@@ -18,11 +17,3 @@ const useBoundStore = create<LoginSlice & SpinSlice>()(
     }
   )
 )
-
-export const useLoginStore = partial<LoginSlice>(useBoundStore, [
-  pick(['isLogin', 'setLogin']),
-])
-
-export const useSpinStore = partial<SpinSlice>(useBoundStore, [
-  pick(['spinning', 'setSpinning']),
-])

@@ -1,4 +1,4 @@
-import { useSpinStore } from '@/store'
+import { useBoundStore } from '@/store'
 import { message } from 'antd'
 import { AxiosPromise } from 'axios'
 import { useEffect, useState } from 'react'
@@ -14,7 +14,7 @@ const useRequest = <T, A>(
 ) => {
   const { manual = false, defaultParams = [] } = options
 
-  const { setSpinning } = useSpinStore()
+  const setSpinning = useBoundStore((s) => s.setSpinning)
 
   const [data, setData] = useState<T>()
 
