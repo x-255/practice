@@ -3,3 +3,8 @@ interface Result<T> {
   data: T
   msg: string
 }
+
+interface PageBean<T> {
+  rows: T[]
+  total: number
+}

@@ -34,7 +34,7 @@ const items: SubMenuType[] = [
         label: '部门管理',
       },
       {
-        key: 'aa5',
+        key: '/emps',
         label: '员工管理',
       },
     ],

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tlias.mapper.EmpMapper">
+    <select id="list" resultType="com.tlias.pojo.Emp">
+        select * from emp
+<!--        <where>-->
+<!--            <if test="!empty(name)">-->
+<!--                name like concat('%', #{name}, '%')-->
+<!--            </if>-->
+<!--            <if test="!empty(gender)">-->
+<!--                and gender = #{gender}-->
+<!--            </if>-->
+<!--            <if test="!empty(begin) and !empty(end)">-->
+<!--                and entrydate between #{begin} and #{end}-->
+<!--            </if>-->
+<!--        </where>-->
+        order by update_time desc
+    </select>
+</mapper>
