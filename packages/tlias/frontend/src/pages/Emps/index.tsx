@@ -1,4 +1,5 @@
-import { Emp, getEmps } from '@/api/emps'
+import type { Dayjs } from 'dayjs'
+import { Emp, GetEmpsQuery, getEmps } from '@/api/emps'
 import useRequest from '@/hooks/useRequest'
 import {
   Button,
@@ -10,7 +11,13 @@ import {
   TableProps,
 } from 'antd'
 import { assoc, dissoc, pipe } from 'ramda'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+
+interface EmpFilter {
+  name?: string
+  gender?: number
+  entrydate?: [Dayjs, Dayjs]
+}
 
 const genderOptions: {
   value: string
@@ -49,21 +56,28 @@ const columns: TableProps<Emp>['columns'] = [
 ]
 
 function Users() {
-  const [form] = Form.useForm()
+  const [form] = Form.useForm<EmpFilter>()
 
-  const handleGetList = (values: any) => {
-    const [start, end] = values.entrydate
+  const handleGetList = () => {
+    const values = form.getFieldsValue()
+    const [begin, end] = values.entrydate ?? []
     const data = pipe(
-      assoc('start', start?.format('YYYY-MM-DD')),
+      assoc('begin', begin?.format('YYYY-MM-DD')),
       assoc('end', end?.format('YYYY-MM-DD')),
-      dissoc('entrydate')
+      dissoc('entrydate'),
+      assoc('page', page),
+      assoc('pageSize', pageSize)
     )(values)
-    console.log(data)
+
+    run(data)
   }
 
   const [page, setPage] = useState(1)
   const [pageSize, setPageSize] = useState(10)
-  const [total, setTotal] = useState(0)
+
+  useEffect(() => {
+    handleGetList()
+  }, [page, pageSize])
 
   const initialValues = {
     page,
@@ -73,6 +87,7 @@ function Users() {
   const { data, run } = useRequest(getEmps, {
     defaultParams: [initialValues],
   })
+  const { total = 0, rows = [] } = data ?? {}
 
   return (
     <div>
@@ -101,11 +116,18 @@ function Users() {
       <Table
         columns={columns}
         rowKey="id"
-        dataSource={data?.rows}
+        dataSource={rows}
         pagination={{
           current: page,
           total,
           pageSize,
+          showSizeChanger: true,
+          onChange(page) {
+            setPage(page)
+          },
+          onShowSizeChange(_, size) {
+            setPageSize(size)
+          },
         }}
       />
     </div>

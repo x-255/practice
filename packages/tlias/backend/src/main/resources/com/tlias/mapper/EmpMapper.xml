@@ -5,18 +5,19 @@
 
 <mapper namespace="com.tlias.mapper.EmpMapper">
     <select id="list" resultType="com.tlias.pojo.Emp">
-        select * from emp
-<!--        <where>-->
-<!--            <if test="!empty(name)">-->
-<!--                name like concat('%', #{name}, '%')-->
-<!--            </if>-->
-<!--            <if test="!empty(gender)">-->
-<!--                and gender = #{gender}-->
-<!--            </if>-->
-<!--            <if test="!empty(begin) and !empty(end)">-->
-<!--                and entrydate between #{begin} and #{end}-->
-<!--            </if>-->
-<!--        </where>-->
-        order by update_time desc
+        select *
+        from emp
+        <where>
+            <if test="name != null and name != ''">
+                name like concat('%', #{name}, '%')
+            </if>
+            <if test="gender != null">
+                and gender = #{gender}
+            </if>
+            <if test="begin != null and end != null">
+                and entrydate between #{begin} and #{end}
+            </if>
+        </where>
+        order by update_time
     </select>
 </mapper>

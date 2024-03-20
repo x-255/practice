@@ -20,14 +20,14 @@ public class EmpServiceImpl implements EmpService {
 
     @Override
     public PageBean list(String name,
-                       Short gender,
-                       LocalDate begin,
-                       LocalDate end,
-                       Integer page,
-                       Integer pageSize) {
+                         Short gender,
+                         LocalDate begin,
+                         LocalDate end,
+                         Integer page,
+                         Integer pageSize) {
         PageHelper.startPage(page, pageSize);
 
-        List<Emp> emps = empMapper.list(name, gender, begin, end);
+        List<Emp> emps = empMapper.list(name, gender, begin, end, page, pageSize);
         Page<Emp> p = (Page<Emp>) emps;
 
         return new PageBean(p.getTotal(), p.getResult());

@@ -7,21 +7,13 @@
     <list default="true" id="b14e8ac2-7bba-452f-a575-e8b7a2aab244" name="更改" comment="tlias学习辅助系统（java）">
       <change beforePath="$PROJECT_DIR$/.idea/copilot/chatSessions/00000000000.xd" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/copilot/chatSessions/00000000000.xd" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/copilot/chatSessions/xd.lck" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/copilot/chatSessions/xd.lck" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tlias/controller/EmpController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tlias/controller/EmpController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/tlias/mapper/EmpMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tlias/mapper/EmpMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tlias/pojo/Emp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tlias/pojo/Emp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tlias/service/EmpService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tlias/service/EmpService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/tlias/service/impl/EmpServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tlias/service/impl/EmpServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/tlias/controller/EmpController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/tlias/controller/EmpController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/tlias/mapper/EmpMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/tlias/mapper/EmpMapper.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/tlias/mapper/EmpMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/tlias/mapper/EmpMapper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/tlias/pojo/Emp.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/tlias/pojo/Emp.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/tlias/service/EmpService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/tlias/service/EmpService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/tlias/mapper/EmpMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/tlias/mapper/EmpMapper.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/tlias/service/impl/EmpServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/tlias/service/impl/EmpServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/src/pages/SysLayout/SysMenu.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/pages/SysLayout/SysMenu.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/src/router/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/router/index.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,8 +29,14 @@
       </list>
     </option>
   </component>
+  <component name="FormatOnSaveOptions">
+    <option name="myRunOnSave" value="true" />
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="jar://$MAVEN_REPOSITORY$/org/mybatis/mybatis/3.5.14/mybatis-3.5.14-sources.jar!/org/apache/ibatis/binding/MapperProxy.java" root0="SKIP_INSPECTION" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -64,32 +62,32 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "Spring Boot.BackendApplication.executor": "Debug",
-    "git-widget-placeholder": "master",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/Users/xff/pro/practice/packages/tlias/backend/src/main/java/com/tlias/pojo",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "reference.settings.project.maven.repository.indices",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;Spring Boot.BackendApplication.executor&quot;: &quot;Debug&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/xff/pro/practice/packages/tlias/backend/src/main/java/com/tlias/pojo&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "mysql"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/main/java/com/tlias/pojo" />
@@ -123,7 +121,10 @@
       <workItem from="1710428215155" duration="6351000" />
       <workItem from="1710661862601" duration="1692000" />
       <workItem from="1710858406867" duration="369000" />
-      <workItem from="1710858972971" duration="2907000" />
+      <workItem from="1710858972971" duration="4217000" />
+      <workItem from="1710940260928" duration="187000" />
+      <workItem from="1710940507141" duration="470000" />
+      <workItem from="1710940990726" duration="1858000" />
     </task>
     <task id="LOCAL-00001" summary="tlias学习辅助系统（java）">
       <option name="closed" value="true" />
@@ -161,17 +162,6 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="tlias学习辅助系统（java）" />
     <option name="LAST_COMMIT_MESSAGE" value="tlias学习辅助系统（java）" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/tlias/service/impl/EmpServiceImpl.java</url>
-          <line>29</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
