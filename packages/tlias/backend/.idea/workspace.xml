@@ -4,16 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b14e8ac2-7bba-452f-a575-e8b7a2aab244" name="更改" comment="tlias学习辅助系统（java）">
+    <list default="true" id="b14e8ac2-7bba-452f-a575-e8b7a2aab244" name="更改" comment="js重写clear_all_node_modules">
+      <change afterPath="$PROJECT_DIR$/../../../scripts/clear_all_node_modules.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/copilot/chatSessions/00000000000.xd" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/copilot/chatSessions/00000000000.xd" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/copilot/chatSessions/xd.lck" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/copilot/chatSessions/xd.lck" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/35524342-5b90-4e79-beea-91d84322462c.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/35524342-5b90-4e79-beea-91d84322462c.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tlias/mapper/EmpMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tlias/mapper/EmpMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tlias/service/impl/EmpServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tlias/service/impl/EmpServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/tlias/mapper/EmpMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/tlias/mapper/EmpMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/tlias/mapper/EmpMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/tlias/mapper/EmpMapper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/tlias/mapper/EmpMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/tlias/mapper/EmpMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/tlias/service/impl/EmpServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/tlias/service/impl/EmpServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../scripts/clear_all_node_modules.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -110,6 +108,13 @@
       </method>
     </configuration>
   </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="jdk-17.0.9-corretto-17.0.9-4caba194b151-107bc6b7" />
+      </set>
+    </attachedChunks>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="应用程序级" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="默认任务">
@@ -125,6 +130,8 @@
       <workItem from="1710940260928" duration="187000" />
       <workItem from="1710940507141" duration="470000" />
       <workItem from="1710940990726" duration="1858000" />
+      <workItem from="1711004604921" duration="480000" />
+      <workItem from="1711005158841" duration="779000" />
     </task>
     <task id="LOCAL-00001" summary="tlias学习辅助系统（java）">
       <option name="closed" value="true" />
@@ -161,7 +168,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="tlias学习辅助系统（java）" />
-    <option name="LAST_COMMIT_MESSAGE" value="tlias学习辅助系统（java）" />
+    <MESSAGE value="js重写clear_all_node_modules" />
+    <option name="LAST_COMMIT_MESSAGE" value="js重写clear_all_node_modules" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
