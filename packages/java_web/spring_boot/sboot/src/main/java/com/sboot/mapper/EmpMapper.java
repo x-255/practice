@@ -32,4 +32,8 @@ public interface EmpMapper {
     Emp getEmpById(@Param("id") Integer id);
 
     List<Emp> getEmps(String name, Short gender, LocalDate start, LocalDate end);
+
+    void updatePart(Emp emp);
+
+    void deleteByIds(List<Integer> ids);
 }
