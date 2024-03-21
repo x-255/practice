@@ -5,13 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b14e8ac2-7bba-452f-a575-e8b7a2aab244" name="更改" comment="js重写clear_all_node_modules">
-      <change afterPath="$PROJECT_DIR$/../../../scripts/clear_all_node_modules.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../../../.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java_web/.idea/copilot/chatSessions/00000000000.xd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java_web/.idea/copilot/chatSessions/blobs/version" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java_web/.idea/copilot/chatSessions/xd.lck" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/copilot/chatSessions/00000000000.xd" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/copilot/chatSessions/00000000000.xd" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/copilot/chatSessions/xd.lck" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/copilot/chatSessions/xd.lck" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/35524342-5b90-4e79-beea-91d84322462c.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/35524342-5b90-4e79-beea-91d84322462c.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../scripts/clear_all_node_modules.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/pages/Emps/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/pages/Emps/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../pnpm-lock.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../pnpm-lock.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -132,6 +137,7 @@
       <workItem from="1710940990726" duration="1858000" />
       <workItem from="1711004604921" duration="480000" />
       <workItem from="1711005158841" duration="779000" />
+      <workItem from="1711009009049" duration="2749000" />
     </task>
     <task id="LOCAL-00001" summary="tlias学习辅助系统（java）">
       <option name="closed" value="true" />
