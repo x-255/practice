@@ -14,6 +14,7 @@ dist/
 /dataSources.local.xml
 # GitHub Copilot persisted chat sessions
 /copilot/chatSessions
+# java项目文件
 *.class
 *.ctxt
 .mtj.tmp/
