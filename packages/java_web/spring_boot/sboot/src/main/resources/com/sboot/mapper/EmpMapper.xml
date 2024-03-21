@@ -19,5 +19,6 @@
                 and entrydate between #{start} and #{end}
             </if>
         </where>
+        order by create_time desc
     </select>
 </mapper>

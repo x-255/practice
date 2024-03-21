@@ -5,21 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ee505743-5e21-4e66-9210-a19cdb0a0747" name="更改" comment="">
-      <change beforePath="$PROJECT_DIR$/../../.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../../.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spring_boot/sboot/src/main/java/com/sboot/mapper/EmpMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring_boot/sboot/src/main/java/com/sboot/mapper/EmpMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/copilot/chatSessions/00000000000.xd" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/copilot/chatSessions/00000000000.xd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/copilot/chatSessions/xd.lck" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/copilot/chatSessions/xd.lck" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/091d52fd-1c92-4624-ae31-e394556f2401.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/091d52fd-1c92-4624-ae31-e394556f2401.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/spring_boot/sboot/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/spring_boot/sboot/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring_boot/sboot/src/main/resources/com/sboot/mapper/EmpMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/spring_boot/sboot/src/main/resources/com/sboot/mapper/EmpMapper.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/spring_boot/sboot/src/test/java/com/sboot/EmpTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring_boot/sboot/src/test/java/com/sboot/EmpTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/spring_boot/sboot/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/spring_boot/sboot/target/classes/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spring_boot/sboot/target/classes/com/sboot/SbootApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/spring_boot/sboot/target/classes/com/sboot/SbootApplication.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spring_boot/sboot/target/classes/com/sboot/controller/HelloController.class" beforeDir="false" afterPath="$PROJECT_DIR$/spring_boot/sboot/target/classes/com/sboot/controller/HelloController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spring_boot/sboot/target/classes/com/sboot/mapper/EmpMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/spring_boot/sboot/target/classes/com/sboot/mapper/EmpMapper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spring_boot/sboot/target/classes/com/sboot/pojo/Address.class" beforeDir="false" afterPath="$PROJECT_DIR$/spring_boot/sboot/target/classes/com/sboot/pojo/Address.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spring_boot/sboot/target/classes/com/sboot/pojo/Emp.class" beforeDir="false" afterPath="$PROJECT_DIR$/spring_boot/sboot/target/classes/com/sboot/pojo/Emp.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spring_boot/sboot/target/classes/com/sboot/pojo/Result.class" beforeDir="false" afterPath="$PROJECT_DIR$/spring_boot/sboot/target/classes/com/sboot/pojo/Result.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spring_boot/sboot/target/classes/com/sboot/pojo/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/spring_boot/sboot/target/classes/com/sboot/pojo/User.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spring_boot/sboot/target/classes/com/sboot/pojo/User1.class" beforeDir="false" afterPath="$PROJECT_DIR$/spring_boot/sboot/target/classes/com/sboot/pojo/User1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring_boot/sboot/target/classes/com/sboot/mapper/EmpMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/spring_boot/sboot/target/classes/com/sboot/mapper/EmpMapper.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/spring_boot/sboot/target/test-classes/com/sboot/EmpTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/spring_boot/sboot/target/test-classes/com/sboot/EmpTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spring_boot/sboot/target/test-classes/com/sboot/SbootApplicationTests.class" beforeDir="false" afterPath="$PROJECT_DIR$/spring_boot/sboot/target/test-classes/com/sboot/SbootApplicationTests.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,22 +33,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "JUnit.EmpTest.testSelectEmps.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "master",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/Users/xff/pro/practice/packages/java_web",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;JUnit.EmpTest.testSelectEmps.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/xff/pro/practice/packages/java_web&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="JUnit.EmpTest.testSelectEmps">
     <configuration name="EmpTest.testSelectEmps" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="sboot" />
@@ -84,6 +81,13 @@
       </list>
     </recent_temporary>
   </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="jdk-17.0.9-corretto-17.0.9-4caba194b151-107bc6b7" />
+      </set>
+    </attachedChunks>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="应用程序级" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="默认任务">
@@ -95,6 +99,8 @@
       <workItem from="1710342387336" duration="320000" />
       <workItem from="1710342709779" duration="32000" />
       <workItem from="1710342753694" duration="452000" />
+      <workItem from="1710378977249" duration="2415000" />
+      <workItem from="1710402461091" duration="69000" />
     </task>
     <servers />
   </component>

@@ -53,6 +53,6 @@ public class EmpTest {
     public void testSelectEmps () {
 //        var emps = empMapper.getEmps("张", (short) 1, LocalDate.of(2000, 1, 1), LocalDate.of(2020, 12, 31));
         var emps = empMapper.getEmps("张", (short) 1, null, null);
-        System.out.println(emps);
+        emps.forEach(System.out::println);
     }
 }
