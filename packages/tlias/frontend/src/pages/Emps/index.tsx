@@ -1,5 +1,5 @@
-import { getDepts } from '@/api/depts'
 import { Emp, getEmps } from '@/api/emps'
+import { Gender, Job } from '@/enums/emp'
 import useRequest from '@/hooks/useRequest'
 import {
   Button,
@@ -13,7 +13,7 @@ import {
   TableProps,
 } from 'antd'
 import type { Dayjs } from 'dayjs'
-import { assoc, find, pipe, prop, propEq, propOr } from 'ramda'
+import { assoc, pipe } from 'ramda'
 import { Key, useEffect, useState } from 'react'
 
 interface EmpFilter {
@@ -30,19 +30,6 @@ const genderOptions: {
   { value: '1', label: <span>男</span> },
   { value: '2', label: <span>女</span> },
 ]
-
-enum Gender {
-  男 = 1,
-  女 = 2,
-}
-
-enum Job {
-  班主任 = 1,
-  讲师 = 2,
-  学工主管 = 3,
-  教研主管 = 4,
-  咨询师 = 5,
-}
 
 function Users() {
   const [form] = Form.useForm<EmpFilter>()
@@ -72,14 +59,12 @@ function Users() {
     pageSize,
   }
 
-  const {data: depts = []} = useRequest(getDepts)
-
   const { data, run } = useRequest(getEmps, {
     defaultParams: [initialValues],
   })
   const { total = 0, rows = [] } = data ?? {}
 
-  const [selectedRowKeys, setSelectedRowKeys] = useState<Key[]>([]);
+  const [selectedRowKeys, setSelectedRowKeys] = useState<Key[]>([])
 
   const columns: TableProps<Emp>['columns'] = [
     {
@@ -98,7 +83,7 @@ function Users() {
     {
       title: '职位',
       dataIndex: 'job',
-      render: (_, { job }) => <>{pipe(find(propEq('id', job)), propOr('Unknow Job', 'name'))(depts)}</>,
+      render: (_, { job }) => Job[job],
     },
     {
       title: '入职日期',
