@@ -1,0 +1,14 @@
+com\tlias\pojo\PageBean.class
+com\tlias\BackendApplication.class
+com\tlias\mapper\EmpMapper.class
+com\tlias\pojo\Dept.class
+com\tlias\pojo\Result.class
+com\tlias\controller\EmpController.class
+com\tlias\service\impl\EmpServiceImpl.class
+com\tlias\controller\UploadController.class
+com\tlias\service\EmpService.class
+com\tlias\service\DeptService.class
+com\tlias\mapper\DeptMapper.class
+com\tlias\controller\DeptController.class
+com\tlias\pojo\Emp.class
+com\tlias\service\impl\DeptServiceImpl.class

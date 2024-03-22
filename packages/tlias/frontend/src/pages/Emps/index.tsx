@@ -1,3 +1,4 @@
+import { getDepts } from '@/api/depts'
 import { Emp, getEmps } from '@/api/emps'
 import useRequest from '@/hooks/useRequest'
 import {
@@ -12,7 +13,7 @@ import {
   TableProps,
 } from 'antd'
 import type { Dayjs } from 'dayjs'
-import { assoc, pipe } from 'ramda'
+import { assoc, find, pipe, prop, propEq, propOr } from 'ramda'
 import { Key, useEffect, useState } from 'react'
 
 interface EmpFilter {
@@ -71,6 +72,8 @@ function Users() {
     pageSize,
   }
 
+  const {data: depts = []} = useRequest(getDepts)
+
   const { data, run } = useRequest(getEmps, {
     defaultParams: [initialValues],
   })
@@ -95,7 +98,7 @@ function Users() {
     {
       title: '职位',
       dataIndex: 'job',
-      render: (_, { job }) => Job[job],
+      render: (_, { job }) => <>{pipe(find(propEq('id', job)), propOr('Unknow Job', 'name'))(depts)}</>,
     },
     {
       title: '入职日期',
