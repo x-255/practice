@@ -5,7 +5,6 @@ import com.github.pagehelper.PageHelper;
 import com.tlias.mapper.EmpMapper;
 import com.tlias.pojo.Emp;
 import com.tlias.pojo.PageBean;
-import com.tlias.pojo.Result;
 import com.tlias.service.EmpService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,5 +30,20 @@ public class EmpServiceImpl implements EmpService {
         Page<Emp> p = (Page<Emp>) emps;
 
         return new PageBean(p.getTotal(), p.getResult());
+    }
+
+    @Override
+    public void insert(Emp emp) {
+        empMapper.insert(emp);
+    }
+
+    @Override
+    public void update(Emp emp) {
+        empMapper.update(emp);
+    }
+
+    @Override
+    public void delete(Integer[] ids) {
+        empMapper.delete(ids);
     }
 }

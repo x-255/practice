@@ -1,8 +1,7 @@
 package com.tlias.mapper;
 
 import com.tlias.pojo.Emp;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -18,4 +17,10 @@ public interface EmpMapper {
                    LocalDate end,
                    Integer page,
                    Integer pageSize);
+
+    void insert(Emp emp);
+
+    void update(Emp emp);
+
+    void delete(Integer[] ids);
 }

@@ -17,8 +17,8 @@ import java.util.UUID;
 @Component
 public class AliOSSUtils {
     private String endpoint = "https://oss-cn-hangzhou.aliyuncs.com";
-    private String accessKeyId = "";
-    private String accessKeySecret = "";
+    private String accessKeyId = "LTAI5tSjz2GnCKYmbGzUjVae";
+    private String accessKeySecret = "gg55RDjemqwNMSpcegECHUdPz81Yy9";
     private  String bucketName = "ff-web-tlias";
 
     public String upload(MultipartFile file) throws IOException {

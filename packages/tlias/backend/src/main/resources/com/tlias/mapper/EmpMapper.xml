@@ -4,6 +4,39 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.tlias.mapper.EmpMapper">
+    <insert id="insert">
+        insert into emp(username, name, gender, image, job, entrydate, dept_id, create_time, update_time)
+        values (#{username}, #{name}, #{gender}, #{image}, #{job}, #{entrydate}, #{deptId}, now(), now())
+    </insert>
+    <update id="update">
+        update emp
+        <set>
+            username = #{username},
+            name = #{name},
+            gender = #{gender},
+            <if test="image != null">
+                image = #{image},
+            </if>
+            <if test="job != null">
+                job = #{job},
+            </if>
+            <if test="entrydate != null">
+                entrydate = #{entrydate},
+            </if>
+            <if test="deptId != null">
+                dept_id = #{deptId},
+            </if>
+            update_time = now()
+        </set>
+        where id = #{id}
+    </update>
+    <delete id="delete">
+        delete from emp where id in
+        <foreach collection="ids" item="id" separator="," open="(" close=")">
+            #{id}
+        </foreach>
+    </delete>
+
     <select id="list" resultType="com.tlias.pojo.Emp">
         select *
         from emp
@@ -18,6 +51,6 @@
                 and entrydate between #{begin} and #{end}
             </if>
         </where>
-        order by update_time
+        order by update_time desc
     </select>
 </mapper>

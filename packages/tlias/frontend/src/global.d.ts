@@ -1,3 +1,5 @@
+type AnyObject = Record<string, any>
+
 interface Result<T> {
   code: number
   data: T

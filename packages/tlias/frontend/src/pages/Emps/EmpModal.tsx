@@ -1,9 +1,16 @@
 import { getDepts } from '@/api/depts'
 import { addEmp, Emp, updateEmp } from '@/api/emps'
+import ImageUpload from '@/components/ImageUpload'
 import { Gender, Job } from '@/enums/emp'
 import useRequest from '@/hooks/useRequest'
-import { enums2options as enum2options } from '@/utils/antdUtils'
-import { Form, Input, Modal, Select } from 'antd'
+import { modify } from '@/utils'
+import {
+  enums2options as enum2options,
+  formatDate,
+  list2options,
+  parseDate,
+} from '@/utils/antdUtils'
+import { DatePicker, Form, Input, Modal, Select } from 'antd'
 import { useEffect, useState } from 'react'
 
 export interface EmpModalProps {
@@ -16,12 +23,13 @@ export interface EmpModalProps {
 function EmpModal({ initialValues, open, setOpen, onSuccess }: EmpModalProps) {
   const [form] = Form.useForm<Emp>()
   const [title, setTitle] = useState<string>()
-  const {data: depts} = useRequest(getDepts)
+  const { data: depts = [] } = useRequest(getDepts)
   const { run: runAdd } = useRequest(addEmp, { manual: true })
   const { run: runUpdate } = useRequest(updateEmp, { manual: true })
 
   const handleOk = async () => {
     const values = await form.validateFields()
+    values.entrydate = formatDate(values.entrydate)
     setOpen(false)
 
     if (initialValues) {
@@ -37,7 +45,7 @@ function EmpModal({ initialValues, open, setOpen, onSuccess }: EmpModalProps) {
     if (!open) return
 
     if (initialValues) {
-      form.setFieldsValue(initialValues)
+      form.setFieldsValue(modify('entrydate', parseDate, initialValues))
       setTitle('编辑员工')
     } else {
       form.resetFields()
@@ -85,11 +93,17 @@ function EmpModal({ initialValues, open, setOpen, onSuccess }: EmpModalProps) {
         >
           <Select options={enum2options(Gender)} />
         </Form.Item>
+        <Form.Item name="image" label="图像">
+          <ImageUpload />
+        </Form.Item>
         <Form.Item name="job" label="职位">
           <Select options={enum2options(Job)} />
         </Form.Item>
+        <Form.Item name="entrydate" label="入职日期">
+          <DatePicker format="YYYY-MM-DD" />
+        </Form.Item>
         <Form.Item name="deptId" label="归属部门">
-          <Select options={depts} />
+          <Select options={list2options('id', 'name', depts)} />
         </Form.Item>
       </Form>
     </Modal>

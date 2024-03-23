@@ -1,3 +1,4 @@
+import { Dayjs } from 'dayjs'
 import request from './request'
 
 export interface Emp {
@@ -9,7 +10,7 @@ export interface Emp {
   image: string
   job: number
   deptId: number
-  entrydate: string
+  entrydate: string | Dayjs
   createTime: string
   updateTime: string
 }
@@ -29,3 +30,6 @@ export const getEmps = (query: GetEmpsQuery) =>
 export const addEmp = (data: Emp) => request.post<Result<null>>('/emps', data)
 
 export const updateEmp = (data: Emp) => request.put<Result<null>>('/emps', data)
+
+export const deleteEmp = (ids: number[]) =>
+  request.delete<Result<null>>(`/emps/${ids.join(',')}`)
