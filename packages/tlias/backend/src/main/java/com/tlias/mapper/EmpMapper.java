@@ -23,4 +23,6 @@ public interface EmpMapper {
     void update(Emp emp);
 
     void delete(Integer[] ids);
+
+    Emp getEmpByUsernameAndPassword(String username, String password);
 }

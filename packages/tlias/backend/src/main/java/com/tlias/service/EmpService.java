@@ -21,4 +21,6 @@ public interface EmpService {
     void update(Emp emp);
 
     void delete(Integer[] ids);
+
+    Emp login(String username, String password);
 }

@@ -46,4 +46,9 @@ public class EmpServiceImpl implements EmpService {
     public void delete(Integer[] ids) {
         empMapper.delete(ids);
     }
+
+    @Override
+    public Emp login(String username, String password) {
+        return empMapper.getEmpByUsernameAndPassword(username, password);
+    }
 }

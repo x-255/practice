@@ -1,3 +1,4 @@
+import request from '@/api/request'
 import { useBoundStore } from '@/store'
 import { message } from 'antd'
 import { AxiosPromise } from 'axios'
@@ -15,8 +16,15 @@ const useRequest = <T, A>(
   const { manual = false, defaultParams = [] } = options
 
   const setSpinning = useBoundStore((s) => s.setSpinning)
-
   const [data, setData] = useState<T>()
+  const toekn = useBoundStore((s) => s.token)
+
+  request.interceptors.request.use((config) => {
+    if (toekn) {
+      config.headers.token = toekn
+    }
+    return config
+  })
 
   const run = async (...args: A[]) => {
     setSpinning(true)
@@ -36,6 +44,7 @@ const useRequest = <T, A>(
       }
 
       setData(data)
+      return data
     } catch (err: any) {
       if (err.message) message.error(err.message)
     } finally {

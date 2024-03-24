@@ -6,7 +6,7 @@ import { Header } from 'antd/es/layout/layout'
 import { useNavigate } from 'react-router-dom'
 
 function SysHeader() {
-  const setLogin = useBoundStore((s) => s.setLogin)
+  const setToken = useBoundStore((s) => s.setToken)
   const navigator = useNavigate()
 
   const items: MenuProps['items'] = [
@@ -14,7 +14,7 @@ function SysHeader() {
       key: '1',
       label: '退出登录',
       onClick() {
-        setLogin(false)
+        setToken('')
         navigator('/login')
       },
     },

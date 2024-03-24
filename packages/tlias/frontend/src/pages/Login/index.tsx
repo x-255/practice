@@ -1,4 +1,6 @@
+import { login } from '@/api/login'
 import loginImg from '@/assets/login_bg.png'
+import useRequest from '@/hooks/useRequest'
 import { useBoundStore } from '@/store'
 import { Button, Checkbox, Form, Input } from 'antd'
 import { useNavigate } from 'react-router-dom'
@@ -10,11 +12,13 @@ interface LoginField {
 }
 
 function Login() {
-  const setLogin = useBoundStore((s) => s.setLogin)
+  const setToken = useBoundStore((s) => s.setToken)
   const navigate = useNavigate()
+  const { run: runLogin } = useRequest(login, { manual: true })
 
-  const onFinish = (values: LoginField) => {
-    setLogin(true)
+  const onFinish = async (values: LoginField) => {
+    const data = await runLogin(values)
+    setToken(data!)
     navigate('/')
   }
 

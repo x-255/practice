@@ -8,12 +8,12 @@ import SysHeader from './SysHeader'
 import SysMenu from './SysMenu'
 
 function SysLayout() {
-  const isLogin = useBoundStore((s) => s.isLogin)
+  const token = useBoundStore((s) => s.token)
   const spinning = useBoundStore((s) => s.spinning)
   const navigate = useNavigate()
 
   useEffect(() => {
-    if (!isLogin) {
+    if (!token) {
       navigate('/login')
     }
   }, [])

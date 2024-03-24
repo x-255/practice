@@ -1,11 +1,11 @@
 import { StateCreator } from 'zustand'
 
 export interface LoginSlice {
-  isLogin: boolean
-  setLogin: (isLogin: boolean) => void
+  token: string
+  setToken: (token: string) => void
 }
 
 export const createLoginSlice: StateCreator<LoginSlice> = (set) => ({
-  isLogin: false,
-  setLogin: (isLogin: boolean) => set({ isLogin }),
+  token: '',
+  setToken: (token: string) => set({ token }),
 })
