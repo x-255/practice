@@ -15,7 +15,7 @@ import java.util.Map;
 
 //@SpringBootTest
 class BackendApplicationTests {
-	private String token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwibmFtZSI6IkFBQSIsInVzZXJuYW1lIjoiYWFhIiwiZXhwIjoxNzExMjkwMjM0fQ.3-4QLLjtxHCRtKFLykeBqpiieW4fj_vr1nHfagfV2-o";
+	private String token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.ewogICJpZCI6IDIyLAogICJuYW1lIjogIueuoeeQhuWRmCIsCiAgInVzZXJuYW1lIjogImFzZCIsCiAgImV4cCI6IDE3MTEzNzgxNDQKfQ==.NMqp7yCXvExd6I5mAI9V7QhC_ZjJXukw0C8QyBc3tK0";
 
 	@Test
 	void contextLoads() {
