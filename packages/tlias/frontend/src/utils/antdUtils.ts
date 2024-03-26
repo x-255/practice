@@ -31,7 +31,8 @@ export const list2options = <
     )
   )(list) as BaseOptionType[]
 
-export const formatDate = (date: string | Dayjs) =>
-  dayjs(date).format(DATE_FORMAT)
+export const formatDate = (date?: string | Dayjs) =>
+  date && dayjs(date).format(DATE_FORMAT)
 
-export const parseDate = (date: string | Dayjs) => dayjs(date, DATE_FORMAT)
+export const parseDate = (date?: string | Dayjs) =>
+  date && dayjs(date, DATE_FORMAT)

@@ -1,4 +1,3 @@
-import request from '@/api/request'
 import { NOT_LOGIN } from '@/constant/api'
 import { useBoundStore } from '@/store'
 import { message } from 'antd'
@@ -20,18 +19,11 @@ const useRequest = <T, A>(
 
   const [data, setData] = useState<T>()
   const navigate = useNavigate()
-  const { token, setToken, setSpinning } = useBoundStore(
-    pick(['token', 'setToken', 'setSpinning'])
+  const { setToken, setSpinning } = useBoundStore(
+    pick(['setToken', 'setSpinning'])
   )
 
   const run = async (...args: A[]) => {
-    request.interceptors.request.use((config) => {
-      if (token) {
-        config.headers.token = token
-      }
-      return config
-    })
-
     setSpinning(true)
     try {
       const {

@@ -14,9 +14,10 @@ import {
   TableProps,
 } from 'antd'
 import type { Dayjs } from 'dayjs'
-import { assoc, pipe } from 'ramda'
+import { assoc, dissoc, evolve, pipe } from 'ramda'
 import { Key, useEffect, useState } from 'react'
 import EmpModal from './EmpModal'
+import { formatDate } from '@/utils/antdUtils'
 
 interface EmpFilter {
   name?: string
@@ -40,10 +41,11 @@ function Users() {
     const values = form.getFieldsValue()
     const [begin, end] = values.entrydate ?? []
     const data = pipe(
-      assoc('begin', begin?.format('YYYY-MM-DD')),
-      assoc('end', end?.format('YYYY-MM-DD')),
+      assoc('begin', formatDate(begin)),
+      assoc('end', formatDate(end)),
       assoc('page', page),
-      assoc('pageSize', pageSize)
+      assoc('pageSize', pageSize),
+      dissoc('entrydate')
     )(values)
 
     run(data)

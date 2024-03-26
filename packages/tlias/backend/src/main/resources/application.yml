@@ -21,6 +21,6 @@ mybatis:
 aliyun:
   oss:
     endpoint: https://oss-cn-hangzhou.aliyuncs.com
-    accessKeyId: aaa
-    accessKeySecret: bbb
+    accessKeyId: 1
+    accessKeySecret: 2
     bucketName: ff-web-tlias

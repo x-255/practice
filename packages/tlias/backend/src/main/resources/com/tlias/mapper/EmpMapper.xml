@@ -36,6 +36,9 @@
             #{id}
         </foreach>
     </delete>
+    <delete id="deleteByDeptId">
+        delete from emp where dept_id = #{deptId}
+    </delete>
 
     <select id="list" resultType="com.tlias.pojo.Emp">
         select *
