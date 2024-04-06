@@ -1,5 +1,5 @@
 {
-  "editor.formatOnSave": true,
+  // "editor.formatOnSave": true,
   "commentTranslate.multiLineMerge": true,
   "commentTranslate.source": "intellsmi.comment-translate-ali.cloud",
   "[python]": {
