@@ -1,21 +1,22 @@
 package com.tlias;
 
+import com.tlias.controller.DeptController;
 import com.tlias.pojo.Emp;
 import com.tlias.utils.TokenUtil;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwsHeader;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.ApplicationContext;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-
-//@SpringBootTest
+@SpringBootTest
 class BackendApplicationTests {
-	private String token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.ewogICJpZCI6IDIyLAogICJuYW1lIjogIueuoeeQhuWRmCIsCiAgInVzZXJuYW1lIjogImFzZCIsCiAgImV4cCI6IDE3MTEzNzgxNDQKfQ==.NMqp7yCXvExd6I5mAI9V7QhC_ZjJXukw0C8QyBc3tK0";
+	private String token = "";
+
+
+	@Autowired
+	private ApplicationContext applicationContext;
 
 	@Test
 	void contextLoads() {
@@ -42,5 +43,16 @@ class BackendApplicationTests {
 	public void ParseJWTPayload () {
 		Claims claims = TokenUtil.parsePayload(token);
 		System.out.println(claims);
+	}
+
+	@Test
+	public void testBean () {
+		DeptController bean1 = (DeptController) applicationContext.getBean("deptController");
+		DeptController bean2 = applicationContext.getBean(DeptController.class);
+		DeptController bean3 = applicationContext.getBean("deptController", DeptController.class);
+
+		System.out.println(bean1);
+		System.out.println(bean2);
+		System.out.println(bean3);
 	}
 }
