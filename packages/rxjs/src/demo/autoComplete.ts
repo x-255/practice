@@ -1,7 +1,7 @@
 import { ajax } from 'rxjs/ajax'
 import { debounceTime, fromEvent, map, retry, switchMap } from 'rxjs'
 
-interface Owner {
+export interface Owner {
   login: string
   id: number
   node_id: string
@@ -22,7 +22,7 @@ interface Owner {
   site_admin: boolean
 }
 
-interface License {
+export interface License {
   key: string
   name: string
   spdx_id: string
@@ -30,7 +30,7 @@ interface License {
   node_id: string
 }
 
-interface Item {
+export interface Item {
   id: number
   node_id: string
   name: string
@@ -113,7 +113,7 @@ interface Item {
   score: number
 }
 
-interface Repositories {
+export interface Repositories {
   items: Item[]
 }
 
