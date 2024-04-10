@@ -1,10 +1,23 @@
-import { __, always, compose, gt, isEmpty, length, not } from 'ramda'
+import {
+  __,
+  add,
+  always,
+  compose,
+  gt,
+  isEmpty,
+  length,
+  max,
+  not,
+  propEq,
+  uncurryN,
+} from 'ramda'
 import {
   BehaviorSubject,
   combineLatest,
   debounceTime,
   distinctUntilChanged,
   filter,
+  first,
   fromEvent,
   map,
   merge,
@@ -12,10 +25,19 @@ import {
   shareReplay,
   startWith,
   switchMap,
-  take,
+  tap,
 } from 'rxjs'
 import { getSearchResult, getSuggestions } from './dataUtils'
-import { fillAutoSuggestions, fillSearchResult, init } from './domUtils'
+import {
+  fillAutoSuggestions,
+  fillSearchResult,
+  init,
+  loaded,
+  loading,
+  updateForksSort,
+  updatePageNumber,
+  updateStarsSort,
+} from './domUtils'
 
 init()
 
@@ -34,7 +56,7 @@ keywork$
   )
   .subscribe(fillAutoSuggestions)
 
-const keywordForSearch$ = keywork$.pipe(take(1))
+const keywordForSearch$ = keywork$.pipe(first())
 
 const search$ = fromEvent(document.querySelector('#search')!, 'click')
 
@@ -43,21 +65,29 @@ const searchByKeyword$ = search$.pipe(
   filter(compose(not, isEmpty))
 )
 
-const sort$ = new BehaviorSubject({ sort: 'stars', order: 'desc' })
+interface SortBy {
+  sort: string
+  order: string
+}
+
+const sortBy$ = new BehaviorSubject<SortBy>({ sort: 'stars', order: 'desc' })
 
 const changeSort = (sortField: string) => {
-  if (sortField === sort$.value.sort) {
-    sort$.next({
+  if (sortField === sortBy$.value.sort) {
+    sortBy$.next({
       sort: sortField,
-      order: sort$.value.order === 'desc' ? 'asc' : 'desc',
+      order: sortBy$.value.order === 'desc' ? 'asc' : 'desc',
     })
   } else {
-    sort$.next({
+    sortBy$.next({
       sort: sortField,
       order: 'desc',
     })
   }
 }
+
+sortBy$.pipe(filter<SortBy>(propEq('sort', 'stars'))).subscribe(updateStarsSort)
+sortBy$.pipe(filter<SortBy>(propEq('sort', 'forks'))).subscribe(updateForksSort)
 
 fromEvent(document.querySelector('#sort-stars')!, 'click').subscribe(() =>
   changeSort('stars')
@@ -82,18 +112,24 @@ const nextPage$ = fromEvent(
 ).pipe(map(always(1)))
 
 const page$ = merge(prevPage$, nextPage$).pipe(
-  scan((page, value) => (page < 1 ? 1 : page + value), 1)
+  scan(compose(max(1), uncurryN(2, add)), 1)
 )
+
+page$.subscribe(updatePageNumber)
 
 const startSearch$ = combineLatest([
   searchByKeyword$,
-  sort$,
-  perPage$.pipe(startWith(10)),
+  sortBy$,
   page$.pipe(startWith(1)),
-])
+  perPage$.pipe(startWith(10)),
+]).pipe(
+  distinctUntilChanged((a, b) => a[2] === b[2]),
+  tap(loading)
+)
 
 const searchResult$ = startSearch$.pipe(
-  switchMap(([k, s, pp, p]) => getSearchResult(k, s.sort, s.order, p, pp))
+  switchMap(([k, s, p, pp]) => getSearchResult(k, s.sort, s.order, p, pp)),
+  tap(loaded)
 )
 
 searchResult$.subscribe(fillSearchResult)
