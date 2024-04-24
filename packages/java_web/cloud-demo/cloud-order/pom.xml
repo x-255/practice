@@ -26,6 +26,12 @@
         </dependency>
 
         <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-ribbon</artifactId>
+            <version>2.2.10.RELEASE</version>
+        </dependency>
+
+        <dependency>
             <groupId>com.ff</groupId>
             <artifactId>cloud-user</artifactId>
             <version>0.0.1-SNAPSHOT</version>

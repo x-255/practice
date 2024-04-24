@@ -7,6 +7,6 @@ dist/
 # java项目文件
 *.class
 *.jar
-**/target/
-**/.idea/
+target/
+.idea/
 *.iml
