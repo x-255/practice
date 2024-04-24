@@ -1,0 +1,12 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: eureka-server
+  autoconfigure:
+    # 如果Eureka服务并不需要数据库，需要禁用Spring Boot的数据源自动配置
+    exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8080/eureka/

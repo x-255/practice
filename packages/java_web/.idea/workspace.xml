@@ -4,16 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ee505743-5e21-4e66-9210-a19cdb0a0747" name="更改" comment="">
-      <change afterPath="$PROJECT_DIR$/cloud-demo/cloud-order/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cloud-demo/pom.xml" afterDir="false" />
+    <list default="true" id="ee505743-5e21-4e66-9210-a19cdb0a0747" name="更改" comment="spring cloud">
+      <change afterPath="$PROJECT_DIR$/cloud-demo/eureka-server/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cloud-demo/cloud-order/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/cloud-demo/cloud-order/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cloud-demo/cloud-order/src/main/java/com/ff/cloudorder/cloudorderApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/cloud-demo/cloud-order/src/main/java/com/ff/cloudorder/CloudOrderApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cloud-demo/cloud-order/src/main/java/com/ff/cloudorder/pojo/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/cloud-demo/cloud-order/src/main/java/com/ff/cloudorder/pojo/Order.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cloud-demo/cloud-order/src/main/java/com/ff/cloudorder/service/impl/OrderServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/cloud-demo/cloud-order/src/main/java/com/ff/cloudorder/service/impl/OrderServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cloud-demo/cloud-order/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/cloud-demo/cloud-order/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cloud-demo/cloud-user/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/cloud-demo/cloud-user/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cloud-demo/cloud-user/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/cloud-demo/cloud-user/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cloud-demo/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/cloud-demo/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,13 +59,20 @@
     "JUnit.EmpTest.testDeleteByIds.executor": "Run",
     "JUnit.EmpTest.testSelectEmps.executor": "Run",
     "JUnit.EmpTest.testUpdate2.executor": "Run",
+    "Maven.cloud-demo [install].executor": "Run",
     "RequestMappingsPanelOrder0": "0",
     "RequestMappingsPanelOrder1": "1",
     "RequestMappingsPanelWidth0": "75",
     "RequestMappingsPanelWidth1": "75",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "Spring Boot.CloudOrderApplication.executor": "Debug",
+    "Spring Boot.CloudUserApplication (1).executor": "Run",
+    "Spring Boot.CloudUserApplication 2.executor": "Run",
     "Spring Boot.CloudUserApplication.executor": "Run",
+    "Spring Boot.EurekaServerApplication.executor": "Run",
+    "Spring Boot.SbootApplication.executor": "Run",
+    "Spring Boot.cloudOrderApplication.executor": "Run",
     "Spring Boot.cloudorderApplication.executor": "Run",
     "git-widget-placeholder": "master",
     "jdk.selected.JAVA_MODULE": "17",
@@ -87,6 +97,9 @@
     ]
   }
 }]]></component>
+  <component name="ReactorSettings">
+    <option name="notificationShown" value="true" />
+  </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/cloud-demo/cloud-order/src/main/resources" />
@@ -105,7 +118,7 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="Spring Boot.cloudorderApplication">
+  <component name="RunManager" selected="Spring Boot.CloudUserApplication (1)">
     <configuration name="EmpTest.testDeleteByIds" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="sboot" />
       <extension name="coverage">
@@ -154,24 +167,9 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CloudUserApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
-      <module name="cloud-user" />
-      <option name="SPRING_BOOT_MAIN_CLASS" value="com.ff.clouduser.CloudUserApplication" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="SbootApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
-      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
-      <module name="sboot" />
-      <option name="SPRING_BOOT_MAIN_CLASS" value="com.sboot.SbootApplication" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="cloudorderApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+    <configuration name="CloudOrderApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
       <module name="cloud-order" />
-      <option name="SPRING_BOOT_MAIN_CLASS" value="com.ff.cloudorder.cloudorderApplication" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.ff.cloudorder.CloudOrderApplication" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="com.ff.cloudorder.*" />
@@ -182,9 +180,40 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="CloudUserApplication (1)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="cloud-user" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.ff.clouduser.CloudUserApplication" />
+      <option name="VM_PARAMETERS" value="-Dserver.port=8083" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CloudUserApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="cloud-user" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.ff.clouduser.CloudUserApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="EurekaServerApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="eureka-server" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.ff.eurekaServer.EurekaServerApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="JUnit.EmpTest.testDeleteByIds" />
+      <item itemvalue="JUnit.EmpTest.testSelectEmps" />
+      <item itemvalue="JUnit.EmpTest.testUpdate2" />
+      <item itemvalue="Spring Boot.CloudUserApplication (1)" />
+      <item itemvalue="Spring Boot.EurekaServerApplication" />
+      <item itemvalue="Spring Boot.CloudUserApplication" />
+      <item itemvalue="Spring Boot.CloudOrderApplication" />
+    </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Spring Boot.cloudorderApplication" />
+        <item itemvalue="Spring Boot.CloudOrderApplication" />
         <item itemvalue="JUnit.EmpTest.testDeleteByIds" />
         <item itemvalue="JUnit.EmpTest.testUpdate2" />
         <item itemvalue="JUnit.EmpTest.testSelectEmps" />
@@ -206,7 +235,7 @@
       <workItem from="1710427077106" duration="10000" />
       <workItem from="1710427157933" duration="164000" />
       <workItem from="1710427848402" duration="545000" />
-      <workItem from="1713620626214" duration="9596000" />
+      <workItem from="1713620626214" duration="16050000" />
     </task>
     <task id="LOCAL-00001" summary="mybatis + gitignore update">
       <option name="closed" value="true" />
@@ -224,7 +253,15 @@
       <option name="project" value="LOCAL" />
       <updated>1710424920877</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="spring cloud">
+      <option name="closed" value="true" />
+      <created>1713791790379</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1713791790380</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -244,6 +281,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="mybatis + gitignore update" />
     <MESSAGE value="mybatis" />
-    <option name="LAST_COMMIT_MESSAGE" value="mybatis" />
+    <MESSAGE value="spring cloud" />
+    <option name="LAST_COMMIT_MESSAGE" value="spring cloud" />
   </component>
 </project>

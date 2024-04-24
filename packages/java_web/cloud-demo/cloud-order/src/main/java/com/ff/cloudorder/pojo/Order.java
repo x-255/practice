@@ -6,7 +6,7 @@ import lombok.Data;
 @Data
 public class Order {
     private long id;
-    private long user_id;
+    private long userId;
     private String name;
     private int price;
     private int num;
