@@ -6,8 +6,10 @@ import tk.mybatis.spring.annotation.MapperScan;
 
 @SpringBootApplication
 @MapperScan("com.atguigu.cloud.mapper") //import tk.mybatis.spring.annotation.MapperScan;
-public class Main8001 {
-    public static void main(String[] args) {
-        SpringApplication.run(Main8001.class, args);
+public class Main8001
+{
+    public static void main(String[] args)
+    {
+        SpringApplication.run(Main8001.class,args);
     }
 }

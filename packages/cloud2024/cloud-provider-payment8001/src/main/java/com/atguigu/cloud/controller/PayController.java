@@ -3,47 +3,56 @@ package com.atguigu.cloud.controller;
 import cn.hutool.core.bean.BeanUtil;
 import com.atguigu.cloud.entities.Pay;
 import com.atguigu.cloud.entities.PayDTO;
+import com.atguigu.cloud.resp.Result;
 import com.atguigu.cloud.service.PayService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/pay")
+@Tag(name="支付微服务")
 public class PayController {
     @Resource
     PayService payService;
 
-    @PostMapping("/add")
-    public String addPay(@RequestBody PayDTO payDTO) {
+    @PostMapping
+    @Operation(summary = "新增支付", description = "新增支付流水")
+    public Result addPay(@RequestBody PayDTO payDTO) {
         Pay pay = new Pay();
         BeanUtil.copyProperties(payDTO, pay);
 
         int i = payService.add(pay);
-        return "新增成功，结果: " + i;
+        return Result.success("新增成功，结果: " + i);
     }
 
-    @DeleteMapping("/delete/{id}")
-    public String deletePay(@PathVariable Integer id) {
+    @DeleteMapping("/{id}")
+    @Operation(summary = "删除支付", description = "根据id删除支付流水")
+    public Result deletePay(@PathVariable("id") Integer id) {
         int i = payService.delete(id);
-        return "删除成功，结果: " + i;
+        return Result.success("删除成功，结果: " + i);
     }
 
-    @PutMapping("/update")
-    public String updatePay(@RequestBody PayDTO payDTO) {
+    @PutMapping
+    @Operation(summary = "更新支付", description = "更新支付流水")
+    public Result updatePay(@RequestBody PayDTO payDTO) {
         Pay pay = new Pay();
         BeanUtil.copyProperties(payDTO, pay);
 
         int i = payService.update(pay);
-        return "更新成功，结果: " + i;
+        return Result.success("更新成功，结果: " + i);
     }
 
-    @GetMapping("/get/{id}")
-    public Pay getPay(@PathVariable Integer id) {
-        return payService.getById(id);
+    @GetMapping
+    @Operation(summary = "获取所有支付", description = "获取所有支付流水")
+    public Result getAllPay() {
+        return Result.success(payService.getAll());
     }
 
-    @GetMapping("/getAll")
-    public String getAllPay() {
-        return payService.getAll().toString();
+    @GetMapping("/{id}")
+    @Operation(summary = "获取支付", description = "根据id获取支付流水")
+    public Result getPay(@PathVariable("id") Integer id) {
+        return Result.success(payService.getById(id));
     }
 }
