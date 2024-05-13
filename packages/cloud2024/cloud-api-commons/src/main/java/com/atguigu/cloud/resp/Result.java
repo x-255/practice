@@ -1,9 +1,15 @@
 package com.atguigu.cloud.resp;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.io.Serializable;
 
 @Data
-public class Result {
+@NoArgsConstructor
+@AllArgsConstructor
+public class Result implements Serializable {
     private Integer code;
     private String message;
     private Object data;

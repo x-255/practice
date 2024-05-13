@@ -8,6 +8,7 @@ import com.atguigu.cloud.service.PayService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -54,5 +55,14 @@ public class PayController {
     @Operation(summary = "获取支付", description = "根据id获取支付流水")
     public Result getPay(@PathVariable("id") Integer id) {
         return Result.success(payService.getById(id));
+    }
+
+    @Value("${server.port}")
+    private String port;
+
+    @GetMapping("/test")
+    @Operation(summary = "测试", description = "测试info")
+    public String testInfo(@Value("${test.info}") String info) {
+        return "port: " + port + ", info: " + info;
     }
 }
