@@ -60,9 +60,9 @@ public class PayController {
     @Value("${server.port}")
     private String port;
 
-    @GetMapping("/test")
+    @GetMapping("/get/info")
     @Operation(summary = "测试", description = "测试info")
-    public String testInfo(@Value("${test.info}") String info) {
-        return "port: " + port + ", info: " + info;
+    public Result testInfo(@Value("${test.info}") String info) {
+        return Result.success("port: " + port + ", info: " + info);
     }
 }

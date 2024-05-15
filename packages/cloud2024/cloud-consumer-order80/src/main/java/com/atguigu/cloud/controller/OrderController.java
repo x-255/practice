@@ -43,4 +43,10 @@ public class OrderController {
         restTemplate.delete(PAYMENT_URL + "/pay/" + id);
         return Result.success("删除成功");
     }
+
+    @GetMapping("/pay/get/info")
+    @Operation(summary = "测试获取信息", description = "获取info配置信息")
+    public Result getInfo() {
+        return restTemplate.getForObject(PAYMENT_URL + "/pay/get/info", Result.class);
+    }
 }
