@@ -10,6 +10,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
+import java.util.concurrent.TimeUnit;
 
 @RestController
 @RequestMapping("/pay")
@@ -54,6 +55,12 @@ public class PayController {
     @GetMapping("/{id}")
     @Operation(summary = "获取支付", description = "根据id获取支付流水")
     public Result getPay(@PathVariable("id") Integer id) {
+        try {
+            TimeUnit.SECONDS.sleep(30);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         return Result.success(payService.getById(id));
     }
 
