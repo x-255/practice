@@ -19,4 +19,10 @@ public interface PayFeignApi {
 
     @GetMapping(value = "/circuit/{id}")
     public String myCircuit(@PathVariable("id") Integer id);
+
+    @GetMapping(value = "/bulkhead/{id}")
+    public String myBulkhead(@PathVariable("id") Integer id);
+
+    @GetMapping(value = "/ratelimit/{id}")
+    public String myRatelimit(@PathVariable("id") Integer id);
 }
