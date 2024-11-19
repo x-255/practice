@@ -15,42 +15,34 @@
 class TimeLimitedCache {
   _cache: {
     [key: number]: {
-      value: number
-      expiredTime: number
+      value: number,
+      timer: NodeJS.Timeout
     }
   }
   constructor() {
-    this._cache = {}
+      this._cache = {}
   }
-
+  
   set(key: number, value: number, duration: number): boolean {
-    const hasCache = key in this._cache
-    this._cache[key] = {
-      value,
-      expiredTime: Date.now() + duration
-    }
-    return hasCache
-  }
-
-  get(key: number): number {
-    const data = this._cache[key]
-    if (!data || data.expiredTime > Date.now()) return -1
-    return data.value
-  }
-
-  count(): number {
-    let count = 0
-    for (const key in this._cache) {
-      if (this._cache[key].expiredTime > Date.now()) {
-        delete this._cache[key]
-      } else {
-        count++
+      const cache = this._cache[key]
+      if (cache) {
+          clearTimeout(cache.timer)
       }
-    }
-    return count
+      this._cache[key] = {
+        value,
+        timer: setTimeout(() => {
+          delete this._cache[key]
+        }, duration)
+      }
+      return !!cache
+  }
+  
+  get(key: number): number {
+      return this._cache?.[key]?.value ?? -1
+  }
+  
+  count(): number {
+      return Object.keys(this._cache).length
   }
 }
 
-const c = new TimeLimitedCache()
-c.set(1, 42, 100)
-console.log(c.get(1))
