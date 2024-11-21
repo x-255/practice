@@ -11,3 +11,9 @@ const timer2 = timer(200, 100).pipe(
 )
 
 concat(timer1, timer2).subscribe(console.log)
+
+/* 
+timer1从0开始，每100ms发出一个值，共发出5个值，
+timer2从200ms开始，每100ms发出一个值，共发出5个值，
+concat会按顺序订阅timer1和timer2，timer1发出5个值后，timer2才会开始发出值，
+ */

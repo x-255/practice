@@ -9,3 +9,7 @@ const ob$ = generate({
 })
 
 ob$.subscribe((v) => console.log(v))
+
+/* 
+从1开始，每次加1，然后取反输出（-1 ~ -9），直到大于10停止
+ */

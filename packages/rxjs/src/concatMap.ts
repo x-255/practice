@@ -6,3 +6,7 @@ range(1, 5)
     concatMap((i) => ajax(`https://jsonplaceholder.typicode.com/posts/${i}`))
   )
   .subscribe(console.log)
+
+/* 
+按顺序请求1到5的数据，然后输出
+ */

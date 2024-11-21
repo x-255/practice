@@ -171,3 +171,5 @@ const redu = reduce(
   {} as any,
 )
 console.log(redu)
+
+export {}

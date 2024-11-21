@@ -1,10 +1,5 @@
 import { fromEvent, interval, map, merge, take } from 'rxjs'
 
-/* const timer$ = interval(1000).pipe(take(10))
-const click$ = fromEvent(document, 'click')
-
-merge(timer$, click$).subscribe(console.log) */
-
 const timer1 = interval(1000).pipe(
   take(10),
   map((x) => `timer1: ${x}`)

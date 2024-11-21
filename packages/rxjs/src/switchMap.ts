@@ -1,3 +1,5 @@
+/* 每次点击取消上一次未完成的请求 */
+
 import { fromEvent, map, switchMap } from 'rxjs'
 import { ajax } from 'rxjs/ajax'
 

@@ -1,1 +1,1 @@
-import './combo'
+import './merge'
