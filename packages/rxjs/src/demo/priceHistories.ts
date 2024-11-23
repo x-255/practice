@@ -1,7 +1,7 @@
 /*
  * @Author: finn.xu ouhuangff@163.com
  * @Date: 2024-04-08 16:39:13
- * @LastEditTime: 2024-04-08 16:52:41
+ * @LastEditTime: 2024-11-23 23:27:59
  * @Description: 
  * 假設有一個資料流會發送每日收盤時股價，平均股價約 100 元上下
  * 第一天股價一定是 100 元，可忽略它，從第二天開始呈現以下資訊
@@ -36,3 +36,7 @@ from(priceHistories)
     console.log(`今日股价${data.type}`)
     console.log(`历史股价小于100的有${data.lower100}天`)
   })
+
+  /* 
+  pairwise将连续的两个数据合并成一个数组发出,比如[1,2,3,4] => [[1,2],[2,3],[3,4]]
+   */
