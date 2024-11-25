@@ -1,2 +1,2 @@
 import './utils/transformViz'
-import './zip'
+import './demo/jsonPlaceholder'

@@ -1,8 +1,8 @@
 /*
  * @Author: x-255 ouhuangff@163.com
  * @Date: 2024-11-24 21:01:54
- * @LastEditTime: 2024-11-24 23:41:58
- * @Description: 将代码转换为rxviz可执行的代码（由于rxviz使用的rxjs6，版本差异原因可能有些代码无法执行）
+ * @LastEditTime: 2024-11-25 21:26:46
+ * @Description: 将代码转换为rxviz可执行的代码, 由于rxviz使用的rxjs6，版本差异原因可能有些代码(比如ajax方法)无法执行
  */
 import { groupBy } from "ramda"
 
@@ -19,9 +19,14 @@ button.addEventListener('click', () => {
   const input = textarea.value
   const output = transformViz(input)
   navigator.clipboard.writeText(output).then(() => {
-    console.log('Text copied to clipboard');
+    button.textContent = 'Copied'
   }).catch(err => {
     console.error('Failed to copy text: ', err);
+    button.textContent = 'Copy Failed'
+  }).finally(() => {
+    setTimeout(() => {
+      button.textContent = 'Transform'
+    }, 2000)
   });
 })
 
