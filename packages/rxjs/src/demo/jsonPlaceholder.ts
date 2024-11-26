@@ -1,50 +1,60 @@
-import { concatAll, forkJoin, map, mergeMap, of, take, tap } from "rxjs"
-import { ajax } from "rxjs/ajax"
+import { forkJoin, from, of } from 'rxjs'
+import { ajax } from 'rxjs/ajax'
+import { map, mergeMap, take, toArray } from 'rxjs/operators'
 
+// 接口定义保持不变
 interface Post {
-  userId: number;
-  id: number;
-  title: string;
-  body: string;
+  userId: number
+  id: number
+  title: string
+  body: string
 }
 
 interface User {
-  id: number;
-  name: string;
-  username: string;
-  email: string;
-  address: Address;
+  id: number
+  name: string
+  username: string
+  email: string
+  address: Address
 }
 interface Address {
-  street: string;
-  suite: string;
-  city: string;
-  zipcode: string;
-  geo: Geo;
+  street: string
+  suite: string
+  city: string
+  zipcode: string
+  geo: Geo
 }
 interface Geo {
-  lat: string;
-  lng: string;
+  lat: string
+  lng: string
 }
 
 interface Comment {
-  postId: number;
-  id: number;
-  name: string;
-  email: string;
-  body: string;
+  postId: number
+  id: number
+  name: string
+  email: string
+  body: string
 }
 
-const http = <T>(path: string) => ajax<T>(`https://jsonplaceholder.typicode.com/${path}`).pipe(map(res => res.response))
+// HTTP 工具函数
+const fetchData = <T>(endpoint: string) =>
+  ajax.getJSON<T>(`https://jsonplaceholder.typicode.com/${endpoint}`);
 
-http<Post[]>('posts').pipe(
-  concatAll(),
-  take(5),
-  tap(x => console.log(`x====`, x)),
-  // mergeMap(({id, userId, title}) => forkJoin({
-  //   id: of(id),
-  //   title: of(title),
-  //   username: http<User>(`users/${userId}`).pipe(map(u => u.username)),
-  //   comment: http<Comment[]>(`comments?postId=${id}`),
-  // }), 3)
-).subscribe(console.log)
+// 获取帖子数据（简化至前5个）
+const fetchPosts = () => fetchData<Post[]>('posts').pipe(map(posts => posts.slice(0, 5)));
+
+// 获取与帖子相关的详细信息
+const fetchPostDetails = (post: Post) =>
+  forkJoin({
+    id: of(post.id),
+    title: of(post.title),
+    username: fetchData<User>(`users/${post.userId}`).pipe(map(user => user.username)),
+    comments: fetchData<Comment[]>(`comments?postId=${post.id}`)
+  });
+
+fetchPosts().pipe(
+  mergeMap(posts => from(posts)), // 将数组转为流
+  mergeMap(fetchPostDetails, 3), // 并发控制（最多3个并发请求）
+  toArray(),
+).subscribe(console.log);
