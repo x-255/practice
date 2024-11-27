@@ -1,6 +1,6 @@
 import { forkJoin, from, of } from 'rxjs'
 import { ajax } from 'rxjs/ajax'
-import { map, mergeMap, take, toArray } from 'rxjs/operators'
+import { concatMap, map, mergeMap, toArray } from 'rxjs/operators'
 
 // 接口定义保持不变
 interface Post {
@@ -37,24 +37,29 @@ interface Comment {
   body: string
 }
 
-// HTTP 工具函数
-const fetchData = <T>(endpoint: string) =>
-  ajax.getJSON<T>(`https://jsonplaceholder.typicode.com/${endpoint}`);
+const req = <T>(path: string) =>
+  ajax.getJSON<T>(`https://jsonplaceholder.typicode.com/${path}`);
 
-// 获取帖子数据（简化至前5个）
-const fetchPosts = () => fetchData<Post[]>('posts').pipe(map(posts => posts.slice(0, 5)));
+const fetchPosts = () => req<Post[]>('posts').pipe(map(posts => posts.slice(0, 5)));
 
-// 获取与帖子相关的详细信息
 const fetchPostDetails = (post: Post) =>
   forkJoin({
     id: of(post.id),
     title: of(post.title),
-    username: fetchData<User>(`users/${post.userId}`).pipe(map(user => user.username)),
-    comments: fetchData<Comment[]>(`comments?postId=${post.id}`)
+    username: req<User>(`users/${post.userId}`).pipe(map(user => user.username)),
+    comments: req<Comment[]>(`comments?postId=${post.id}`)
   });
 
 fetchPosts().pipe(
-  mergeMap(posts => from(posts)), // 将数组转为流
-  mergeMap(fetchPostDetails, 3), // 并发控制（最多3个并发请求）
+  mergeMap(from),
+  concatMap(fetchPostDetails),
   toArray(),
 ).subscribe(console.log);
+
+
+
+/* 
+先从posts接口获取前5篇文章
+再依次获取每篇文章的作者名和评论
+最后放到一个数组中输出
+ */
