@@ -1,2 +1,1 @@
-import './utils/transformViz'
-import './mergeMap'
+import './demo/autoComplete'
