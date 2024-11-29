@@ -1,1 +1,1 @@
-import './demo/autoComplete'
+import './combineLatestAll'

@@ -1,4 +1,5 @@
 import { forkJoin, from, of } from 'rxjs'
+import { debug } from 'rxjs-browser-debugger'
 import { ajax } from 'rxjs/ajax'
 import { concatMap, map, mergeMap, toArray } from 'rxjs/operators'
 
@@ -55,7 +56,6 @@ fetchPosts().pipe(
   concatMap(fetchPostDetails),
   toArray(),
 ).subscribe(console.log);
-
 
 
 /* 
