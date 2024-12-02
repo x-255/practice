@@ -1,7 +1,7 @@
 /*
  * @Author: x-255 ouhuangff@163.com
  * @Date: 2024-11-24 21:01:54
- * @LastEditTime: 2024-11-25 21:26:46
+ * @LastEditTime: 2024-12-02 13:45:57
  * @Description: 将代码转换为rxviz可执行的代码, 由于rxviz使用的rxjs6，版本差异原因可能有些代码(比如ajax方法)无法执行
  */
 import { groupBy } from "ramda"
@@ -137,7 +137,7 @@ function transformViz(raw: string) {
     'zip',
     'zipAll',
   ]
-  const output =  raw.replace(/import {(.*)} from 'rxjs'/, (match, keys: string) => {
+  const output =  raw.replace(/import {(.*)} from ["']rxjs['"]/, (match, keys: string) => {
     const imps = keys.split(',').map((key) => key.trim())
     const { rxs, operators } = groupBy(imp => rxOperators.includes(imp) ? 'operators' : 'rxs', imps)
     return `const { ${rxs.join(', ')} } = Rx;`
