@@ -1,12 +1,21 @@
-import { fromEvent, map, merge, Observable, startWith, zip } from "rxjs"
-import { renderCalculatePage } from "./render"
+import {
+  combineLatest,
+  defaultIfEmpty,
+  fromEvent,
+  map,
+  Observable,
+  startWith
+} from 'rxjs'
+import { renderCalculatePage } from './render'
 
 renderCalculatePage()
 
-const getInputVal = () => (source$: Observable<Event>) => source$.pipe(
-  map(e => (e.target as HTMLInputElement).value),
-  map(Number)
-)
+const getInputVal = () => (source$: Observable<Event>) =>
+  source$.pipe(
+    map((e) => (e.target as HTMLInputElement).value),
+    map(Number),
+    defaultIfEmpty(0),
+  )
 
 const a$ = fromEvent(document.querySelector('.a')!, 'input').pipe(getInputVal())
 const b$ = fromEvent(document.querySelector('.b')!, 'input').pipe(getInputVal())
@@ -18,9 +27,16 @@ const formulaMap = {
   divide: (a: number, b: number) => a / b,
 }
 
-const type$ = fromEvent(document.querySelector('.type')!, 'change').pipe(map(e => (e.target as HTMLInputElement).value), startWith('plus'))
+const type$ = fromEvent(document.querySelector('.type')!, 'change').pipe(
+  map((e) => (e.target as HTMLInputElement).value),
+  startWith('plus')
+)
 
-zip(type$, a$, b$).subscribe(([type, a, b]) => {
+combineLatest({
+  a: a$,
+  b: b$,
+  type: type$,
+}).subscribe(({ a, b, type }) => {
   const result = formulaMap[type as keyof typeof formulaMap](a, b)
   document.querySelector('.result')!.textContent = result.toString()
 })
