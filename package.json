@@ -21,7 +21,8 @@
     "dev:rx": "cd packages/rxjs && npm run dev 8475",
     "dev:rtr": "cd packages/react_rxjs && npm run dev 8527",
     "dev:agh": "cd packages/aliens-go-home && npm run dev 8287",
-    "dev:ta": "cd packages/tlias/frontend && npm run dev 8081"
+    "dev:ta": "cd packages/tlias/frontend && npm run dev 8081",
+    "dev:nest": "cd packages/nest_learn && npm run dev"
   },
   "keywords": [],
   "author": {
