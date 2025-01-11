@@ -1,27 +1,18 @@
 {
   "name": "@practice/z7z8",
-  "version": "1.0.0",
-  "description": "",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
   "scripts": {
-    "dev": "parcel index.html --port",
-    "test:promise": "tsc src/promise.ts -m commonjs && promises-aplus-tests src/promise.js"
+    "dev": "vite --port",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "devDependencies": {
-    "@babel/core": "^7.23.2",
-    "@babel/node": "^7.22.5",
-    "@babel/plugin-proposal-class-properties": "^7.18.6",
-    "@babel/plugin-transform-classes": "^7.22.15",
-    "@babel/plugin-transform-runtime": "^7.16.8",
-    "@babel/preset-env": "^7.16.8",
-    "@types/ramda": "^0.27.65",
-    "promises-aplus-tests": "^2.1.2"
+    "typescript": "~5.6.2",
+    "vite": "^6.0.5"
   },
   "dependencies": {
-    "@babel/runtime": "^7.17.9",
-    "ramda": "^0.28.0",
     "reflect-metadata": "^0.2.0"
   }
 }
