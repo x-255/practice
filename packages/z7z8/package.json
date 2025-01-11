@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.17.9",
-    "ramda": "^0.28.0"
+    "ramda": "^0.28.0",
+    "reflect-metadata": "^0.2.0"
   }
 }

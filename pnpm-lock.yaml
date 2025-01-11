@@ -582,6 +582,9 @@ importers:
       ramda:
         specifier: ^0.28.0
         version: 0.28.0
+      reflect-metadata:
+        specifier: ^0.2.0
+        version: 0.2.2
     devDependencies:
       '@babel/core':
         specifier: ^7.23.2
