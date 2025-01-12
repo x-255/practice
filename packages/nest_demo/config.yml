@@ -1,0 +1,4 @@
+db:
+  type: 'mysql'
+  port: 3307
+  synchronize: false
