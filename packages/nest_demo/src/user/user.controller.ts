@@ -8,7 +8,6 @@ export class UserController {
 
   @Get()
   getUsers() {
-    console.log(this.configService.get('db'))
     return this.userService.getUsers()
   }
 }
