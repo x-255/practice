@@ -2,16 +2,16 @@ import { Module } from '@nestjs/common'
 import { ConfigModule, ConfigService } from '@nestjs/config'
 import { TypeOrmModule } from '@nestjs/typeorm'
 import configuration from 'src/configuration'
-import { UserModule } from './user/user.module'
-import { User } from './user/user.entity'
-import { Profile } from './user/profile.entity'
 import { Log } from './log/log.entity'
+import { LogModule } from './log/log.module'
 import { Role } from './role/role.entity'
+import { Profile } from './user/profile.entity'
+import { User } from './user/user.entity'
+import { UserModule } from './user/user.module'
 
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true, load: [configuration] }),
-    UserModule,
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
@@ -19,11 +19,13 @@ import { Role } from './role/role.entity'
         const dbConfig = configService.get('db')
         return {
           ...dbConfig,
-          logging: ['error'],
+          logging: process.env.NODE_ENV === 'development' ? true : ['error'],
           entities: [User, Profile, Log, Role],
         }
       }
     }),
+    UserModule,
+    LogModule,
   ],
   controllers: [],
   providers: [],
