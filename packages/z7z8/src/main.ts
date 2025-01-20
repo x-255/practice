@@ -1,1 +1,1 @@
-import './metadata'
+import './decorator'
