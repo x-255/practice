@@ -24,7 +24,7 @@ import { HttpExceptionFilter } from './filters/http-exception-filter'
         const dbConfig = configService.get('db')
         return {
           ...dbConfig,
-          logging: process.env.NODE_ENV === 'development' ? true : ['error'],
+          logging: process.env.NODE_ENV === 'development' ? false : ['error'],
           entities: [User, Profile, Log, Role],
         }
       },
