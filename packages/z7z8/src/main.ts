@@ -1,1 +1,1 @@
-import './decorator'
+import './decorator_stage3'
