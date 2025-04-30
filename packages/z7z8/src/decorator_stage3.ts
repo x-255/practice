@@ -6,10 +6,12 @@ class A {
   fn() {}
 }
 
-function clsDec(value: Function, ctx: ClassDecoratorContext) {
-  if (ctx.metadata) {
-    ctx.metadata.m = 123
-  }
+// 确保声明类型正确
+function clsDec(value: any, ctx: ClassDecoratorContext) {
+  ctx.metadata!.mm = 123;
+  console.log(`ctx====`, ctx)
+  return value;
 }
 
-console.log(A[Symbol.metadata])
+const data = A[Symbol.metadata]
+console.log(`data====`, data)

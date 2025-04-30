@@ -1,10 +1,13 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "target": "ESNext",
-    "lib": ["ES2020", "DOM", "DOM.Iterable", "ESNext.Decorators"],
+    "target": "es2022",
+    "lib": ["ESNext"],
+    "module": "ESNext",
+    "experimentalDecorators": false,  // 使用新的 Stage 3 装饰器
     "emitDecoratorMetadata": false,
-    "experimentalDecorators": false,
+    "useDefineForClassFields": true,
+    "jsx": "preserve"
   },
   "include": ["src"]
 }
