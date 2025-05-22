@@ -12,4 +12,8 @@ export class CatsService {
   findAll() {
     return this.cats
   }
+
+  findIndex(i: number) {
+    return this.cats[i]
+  }
 }

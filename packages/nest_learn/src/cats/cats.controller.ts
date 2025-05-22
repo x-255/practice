@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { CatsService } from './cats.service'
 import { Cat } from './cat.interface'
 
@@ -14,5 +14,10 @@ export class CatsController {
   @Post()
   create(@Body() cat: Cat) {
     return this.catsService.create(cat)
+  }
+
+  @Get(':id')
+  findIndex(@Param('id') id: number) {
+    return this.catsService.findIndex(id)
   }
 }
