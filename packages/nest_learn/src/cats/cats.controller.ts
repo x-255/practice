@@ -1,7 +1,6 @@
-import { Body, Controller, ForbiddenException, Get, HttpException, HttpStatus, Param, Post, UseFilters } from '@nestjs/common';
+import { Body, Controller, ForbiddenException, Get, Param, ParseIntPipe, Post } from '@nestjs/common'
+import { CatDTO } from './cats.dto'
 import { CatsService } from './cats.service'
-import { Cat } from './cat.interface'
-import { HttpExceptionFilter } from 'src/filter/http-exception.filter'
 
 @Controller('cats')
 export class CatsController {
@@ -13,7 +12,7 @@ export class CatsController {
   }
 
   @Post()
-  create(@Body() cat: Cat) {
+  create(@Body() cat: CatDTO) {
     return this.catsService.create(cat)
   }
 
@@ -22,8 +21,9 @@ export class CatsController {
     throw new ForbiddenException()
   }
 
-  @Get(':id')
-  findIndex(@Param('id') id: number) {
-    return this.catsService.findIndex(id)
+  @Get(':index')
+  findIndex(@Param('index', ParseIntPipe) index: number) {
+    console.log(typeof index)
+    return this.catsService.findIndex(index)
   }
 }
